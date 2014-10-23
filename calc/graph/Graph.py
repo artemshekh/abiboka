@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from collections import Counter
-from itertools import product
-
+import itertools
+from Vertice import Vertice
+from Edge import Edge
 
 class Graph(object):
 
@@ -46,9 +47,59 @@ class Graph(object):
         """
         return self.is_empty() and not self.vertices
 
+    def max_degree(self):
+        """
+        The minimum degree of the vertices in a graph G is denoted δ(G) (= 0 if there is an isolated
+        vertex in G). Similarly, we write ∆(G) as the maximum degree of vertices in G.
+        :return: int
+        """
+        return max([vertice.degree() for vertice in self.vertices])
+
+    def min_degree(self):
+        """
+        self.max_degree
+        :return: bool
+        """
+        return min([vertice.degree() for vertice in self.vertices])
+
     def is_trivial(self):
         """
         A graph with only one vertex is trivial.
         :return: bool
         """
         return len(self.vertices) == 1
+
+    def is_complex(self):
+        """
+        A simple graph that contains every possible edge between all the vertices is called a complete graph.
+        :return: bool
+        """
+        return self.is_simple() and all([vertices[0].adjacent_to(vertices[1]) for vertices in itertools.combinations(self.vertices, 2)])
+
+
+    def is_subgraph(self, other):
+        """
+        The graph G1 = (V1, E1) is a subgraph of G2 = (V2, E2) if
+        1. V1 ⊆ V2 and
+        2. Every edge of G1 is also an edge of G2.
+        :param other: Graph
+        :return: bool
+        """
+        return self.vertices.issubset(other.vertices) and set(self.edges).issubset(set(other.edges))
+
+    @classmethod
+    def create_from_adjacency_matrix(cls, matrix):
+
+        vertices = []
+        edges = Counter()
+        if not matrix:
+            return cls(vertices, edges)
+        else:
+            pass
+        return cls()
+
+
+if __name__ == '__main__':
+    g = Graph.create_from_adjacency_matrix([])
+    print g.edges
+    print g.edges
