@@ -48,3 +48,6 @@ class Edge():
         :return: bool
         """
         return any([vertice.is_pendant() for vertice in self.vertices])
+
+    def __hash__(self):
+        return hash(self.vertices)

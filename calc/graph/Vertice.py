@@ -29,6 +29,7 @@ class Vertice():
         A pendant vertex is a vertex whose degree is 1
         :return: bool
         """
+        print self.degree()
         return self.degree() == 1
 
     def is_isolated(self):

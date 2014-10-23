@@ -3,6 +3,7 @@ from collections import Counter
 import itertools
 from Vertice import Vertice
 from Edge import Edge
+from utils.matrix import AdjacencyMatrix
 
 class Graph(object):
 
@@ -74,8 +75,9 @@ class Graph(object):
         A simple graph that contains every possible edge between all the vertices is called a complete graph.
         :return: bool
         """
-        return self.is_simple() and all([vertices[0].adjacent_to(vertices[1]) for vertices in itertools.combinations(self.vertices, 2)])
-
+        return self.is_simple()\
+               and\
+               all([vertices[0].adjacent_to(vertices[1]) for vertices in itertools.combinations(self.vertices, 2)])
 
     def is_subgraph(self, other):
         """
@@ -89,17 +91,30 @@ class Graph(object):
 
     @classmethod
     def create_from_adjacency_matrix(cls, matrix):
-
         vertices = []
         edges = Counter()
-        if not matrix:
+        if not matrix.matrix:
             return cls(vertices, edges)
         else:
-            pass
-        return cls()
+            vertices = [Vertice(Counter()) for x in range(matrix.n)]
+            print vertices[0] == vertices[1]
+            edges = Counter()
+            for rownumber, row in enumerate(matrix.matrix):
+                for colnumber, column in enumerate(row):
+                    if column != '0' and (int(rownumber) <= int(colnumber)):
+
+                        column = int(column)
+                        print rownumber, colnumber, column
+                        e = Edge(vertices[rownumber], vertices[colnumber])
+                        edges[e] += column
+
+                        vertices[rownumber].edges[e] +=column
+                        vertices[colnumber].edges[e] +=column
+        return cls(vertices, edges)
 
 
 if __name__ == '__main__':
-    g = Graph.create_from_adjacency_matrix([])
-    print g.edges
-    print g.edges
+    filename = '/home/a.shehovtsov/PycharmProjects/abiboka/fixtures/file_matrix'
+    g = Graph.create_from_adjacency_matrix(AdjacencyMatrix.from_file(open(filename, 'r')))
+    for vertice in g.vertices:
+        print vertice, vertice.is_pendant(), vertice.edges
