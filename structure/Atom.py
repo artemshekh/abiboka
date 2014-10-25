@@ -13,7 +13,7 @@ class Atom(object):
         :return: self
         """
         self.Z = z
-        self.N = n
+        self.N = n or z
         self.charge = 0
         self.bonds = []
         try:
