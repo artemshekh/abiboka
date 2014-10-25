@@ -4,7 +4,7 @@ from collections import Counter
 
 from Vertice import Vertice
 from Edge import Edge
-from utils.matrix import AdjacencyMatrix
+from calc.matrixes.matrix import AdjacencyMatrix
 
 
 class Graph(object):
