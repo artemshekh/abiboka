@@ -117,6 +117,16 @@ class Graph(object):
                         vertices[colnumber].edges[e] += column
         return cls(vertices, edges)
 
+    @classmethod
+    def from_molecule(cls, atoms, bonds):
+        """
+        We do it later
+        :param atoms:
+        :param bonds:
+        :return:
+        """
+        return cls()
+
 
 if __name__ == '__main__':
     filename = '/home/cehmja/PycharmProjects/abiboka/fixtures/file_matrix'
