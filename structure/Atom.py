@@ -37,5 +37,11 @@ class Atom(object):
         """
         return self.properties['relative_atomic_weight']
 
+    def __str__(self):
+        return periodic_table[self.Z]['symbol'] + '-' + str(self.N)
+
+    def __repr__(self):
+        return self.__str__()
+
 if __name__ == '__main__':
     pass
