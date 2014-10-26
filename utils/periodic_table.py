@@ -4,6 +4,12 @@ relative_atomic_weight - http://www.chem.qmul.ac.uk/iupac/AtWt/ (2013)
 """
 
 periodic_table = {
+    '*':{
+    'symbol':'*',
+    'name':'Any Atom',
+    'relative_atomic_weight':0,
+    'isotopes':[],
+    },
     1:{
     'symbol':'H',
     'name':'Hydrogen',
@@ -305,7 +311,7 @@ periodic_table = {
     'isotopes':[],
     },
     51:{
-    'symbol':'Sn',
+    'symbol':'Sb',
     'name':'Antimony',
     'relative_atomic_weight':121.760,
     'isotopes':[],
