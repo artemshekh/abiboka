@@ -5,7 +5,7 @@ First Atom
 """
 
 class Atom(object):
-    def __init__(self, z=None, n=None):
+    def __init__(self, z=None, n=None, aromatic=False):
         """
         Initialize
         :param z: number of protons
@@ -16,6 +16,7 @@ class Atom(object):
         self.N = n or z
         self.charge = 0
         self.bonds = []
+        self.aromatic = aromatic
         try:
             self.properties = periodic_table[z]
         except KeyError:
