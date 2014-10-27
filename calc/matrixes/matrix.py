@@ -15,6 +15,15 @@ class Matrix(object):
                 matrix[row][col] = self.matrix[row][col] + other.matrix[row][col]
         return Matrix(matrix)
 
+    def __mul__(self, other):
+        if not self.cols() == other.rows():
+            raise ArithmeticError('number cols of first matrix = number rows of second matrix')
+        matrix = [[0 for col in range(other.cols())] for row in range(self.rows())]
+        for rowindex, row in enumerate(matrix):
+            for colindex, col in enumerate(row):
+                for l, x in enumerate(self.matrix[rowindex]):
+                    matrix[rowindex][colindex] += x * other.matrix[l][colindex]
+        return Matrix(matrix)
     def rows(self):
         """
         Return number of matrix row
@@ -48,7 +57,7 @@ class Matrix(object):
     @classmethod
     def random_matrix(cls, size):
         import random
-        matrix = [[random.random() for x in range(size)] for x in range(size)]
+        matrix = [[random.randint(1,5) for x in range(size)] for x in range(size)]
         return cls(matrix)
 
     def __str__(self):
@@ -82,11 +91,13 @@ if __name__ == '__main__':
     os.chdir('../../fixtures')
     import time
     start = time.time()
-    for x in range(1):
-        a = Matrix.random_matrix(5)
-        b = Matrix.random_matrix(5)
-        c = a + b
-        print a
-        print b
-        print c
+    #M = Matrix.random_matrix(2)
+    #for x in range(10000):
+    #    M += Matrix.random_matrix(2)
+    a = Matrix.random_matrix(100)
+    b = Matrix.random_matrix(100)
+    c = a*b
+    print(a)
+    print(b)
+    print c
     print time.time() - start
