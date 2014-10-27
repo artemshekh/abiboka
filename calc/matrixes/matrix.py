@@ -89,6 +89,16 @@ class Matrix(object):
                     return False
         return True
 
+    def __eq__(self, other):
+        if not (self.cols_number == other.cols_number and self.rows_number == other.rows_number):
+            return False
+        for row in range(self.rows_number):
+            for col in range(self.cols_number):
+                if not self.matrix[row][col] == other.matrix[row][col]:
+                    return False
+        return True
+
+
     @classmethod
     def from_file(cls, filename):
         matrix = [row.strip('\n').split(' ') for row in filename]
@@ -97,7 +107,7 @@ class Matrix(object):
     @classmethod
     def random_matrix(cls, size):
         import random
-        matrix = [[random.randint(1, 5) for x in range(size)] for x in range(size)]
+        matrix = [[random.randint(-1, 1) for x in range(size)] for x in range(size)]
         return cls(matrix)
 
     def __str__(self):
@@ -117,7 +127,6 @@ class AdjacencyMatrix(Matrix):
     def is_adjacent(self):
         if not self.is_square():
             raise MalformedMatrixException('Adjacency matrix must be square')
-            return False
         for row in xrange(self.rows_number):
             for col in xrange(row, self.cols_number):
                 if not self.matrix[row][col] == self.matrix[col][row]:
@@ -129,9 +138,18 @@ if __name__ == '__main__':
     import os
     os.getcwd()
     os.chdir('../../fixtures')
-    a = Matrix.random_matrix(3)
-    b = Matrix.random_matrix(2)
-    c = a.kroneker_product(b)
-    print a
-    print b
-    print(c)
+    A1 = Matrix.random_matrix(2)
+    matrix_list = [A1]
+    A = A1
+    n =0
+    while True:
+        n +=1
+        AA = A*A
+        matrix_list.append(AA)
+        if A1 == AA:
+
+            break
+        if n == 1000:
+            break
+    for matrix in matrix_list:
+        print  matrix
