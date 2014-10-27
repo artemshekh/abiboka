@@ -2,34 +2,50 @@ from core.exception.exception import MalformedMatrixException
 
 
 class Matrix(object):
-    def __init__(self, matrix=[]):
-        self.matrix = matrix
+    def __init__(self, matrix=None):
+        self.matrix = matrix or []
+        self.rows_number = len(self.matrix)
+        self.cols_number = self.cols()
 
     def __add__(self, other):
-        if not (self.cols() == other.cols() and self.rows() == other.rows()):
+        """
+        Addiction of Matrix
+        :param other: Matrix
+        :return: Matrix
+        """
+        if not (self.cols_number == other.cols_number and self.rows_number == other.rows_number):
             raise ArithmeticError('fail to find sum of various dimension matrix')
-        matrix = [[0 for col in range(self.cols())]for row in range(self.rows())]
+        matrix = [[0 for col in range(self.cols_number)]for row in range(self.rows_number)]
 
-        for row in range(self.rows()):
-            for col in range(self.cols()):
+        for row in range(self.rows_number):
+            for col in range(self.cols_number):
                 matrix[row][col] = self.matrix[row][col] + other.matrix[row][col]
         return Matrix(matrix)
 
+    def direct_sum(self, other):
+        """
+        Direct sum of 2 matrices
+        :param other:
+        :return:
+        """
+        matrix = [[0 for col in range(self.cols_number + other.cols_number)] for row in range(self.rows_number + other.rows_number)]
+        for i, row in enumerate(self.matrix):
+            for j, col in enumerate(row):
+                matrix[i][j] = col
+        for i, row in enumerate(other.matrix):
+            for j, col in enumerate(row):
+                matrix[i + self.rows_number][j + self.cols_number] = col
+        return Matrix(matrix)
+
     def __mul__(self, other):
-        if not self.cols() == other.rows():
+        if not self.cols_number == other.rows_number:
             raise ArithmeticError('number cols of first matrix = number rows of second matrix')
-        matrix = [[0 for col in range(other.cols())] for row in range(self.rows())]
+        matrix = [[0 for col in range(other.cols_number)] for row in range(self.rows_number)]
         for rowindex, row in enumerate(matrix):
             for colindex, col in enumerate(row):
                 for l, x in enumerate(self.matrix[rowindex]):
                     matrix[rowindex][colindex] += x * other.matrix[l][colindex]
         return Matrix(matrix)
-    def rows(self):
-        """
-        Return number of matrix row
-        :return: int
-        """
-        return len(self.matrix)
 
     def cols(self):
         """
@@ -47,17 +63,26 @@ class Matrix(object):
         Matrix is square
         :return: bool
         """
-        return self.rows() == self.cols()
+        return self.rows_number == self.cols_number
+
+    def is_diagonal(self):
+        if not self.is_square():
+            return False
+        for i, row in enumerate(self.matrix):
+            for j, col in enumerate(row):
+                if i != j and self.matrix[i][j] != 0:
+                    return False
+        return True
 
     @classmethod
-    def from_file(cls, file):
-        matrix = [row.strip('\n').split(' ') for row in file]
+    def from_file(cls, filename):
+        matrix = [row.strip('\n').split(' ') for row in filename]
         return cls(matrix)
 
     @classmethod
     def random_matrix(cls, size):
         import random
-        matrix = [[random.randint(1,5) for x in range(size)] for x in range(size)]
+        matrix = [[random.randint(1, 5) for x in range(size)] for x in range(size)]
         return cls(matrix)
 
     def __str__(self):
@@ -78,8 +103,8 @@ class AdjacencyMatrix(Matrix):
         if not self.is_square():
             raise MalformedMatrixException('Adjacency matrix must be square')
             return False
-        for row in xrange(self.rows()):
-            for col in xrange(self.cols()):
+        for row in xrange(self.rows_number):
+            for col in xrange(row, self.cols_number):
                 if not self.matrix[row][col] == self.matrix[col][row]:
                     return False
         return True
@@ -89,15 +114,3 @@ if __name__ == '__main__':
     import os
     os.getcwd()
     os.chdir('../../fixtures')
-    import time
-    start = time.time()
-    #M = Matrix.random_matrix(2)
-    #for x in range(10000):
-    #    M += Matrix.random_matrix(2)
-    a = Matrix.random_matrix(100)
-    b = Matrix.random_matrix(100)
-    c = a*b
-    print(a)
-    print(b)
-    print c
-    print time.time() - start
