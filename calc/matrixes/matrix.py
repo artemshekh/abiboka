@@ -37,6 +37,21 @@ class Matrix(object):
                 matrix[i + self.rows_number][j + self.cols_number] = col
         return Matrix(matrix)
 
+    def kroneker_product(self, other):
+        """
+        Kroneker product of 2 matrix
+        :param other:
+        :return:
+        """
+        matrix = [[0 for x in range(self.cols_number * other.cols_number)] for x in range(self.rows_number * other.rows_number)]
+        for i1, row1 in enumerate(self.matrix):
+            for j1, column1 in enumerate(row1):
+                for i2, row2 in enumerate(other.matrix):
+                    for j2, column2 in enumerate(row2):
+                        print i1, i2, j1, j2, column1, column2, self.rows_number*i1 + i2
+                        matrix[other.rows_number*i1 + i2][other.cols_number*j1 + j2] = column1 * column2
+        return Matrix(matrix)
+
     def __mul__(self, other):
         if not self.cols_number == other.rows_number:
             raise ArithmeticError('number cols of first matrix = number rows of second matrix')
@@ -114,3 +129,9 @@ if __name__ == '__main__':
     import os
     os.getcwd()
     os.chdir('../../fixtures')
+    a = Matrix.random_matrix(3)
+    b = Matrix.random_matrix(2)
+    c = a.kroneker_product(b)
+    print a
+    print b
+    print(c)
