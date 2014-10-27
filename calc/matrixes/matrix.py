@@ -5,6 +5,16 @@ class Matrix(object):
     def __init__(self, matrix=[]):
         self.matrix = matrix
 
+    def __add__(self, other):
+        if not (self.cols() == other.cols() and self.rows() == other.rows()):
+            raise ArithmeticError('fail to find sum of various dimension matrix')
+        matrix = [[0 for col in range(self.cols())]for row in range(self.rows())]
+
+        for row in range(self.rows()):
+            for col in range(self.cols()):
+                matrix[row][col] = self.matrix[row][col] + other.matrix[row][col]
+        return Matrix(matrix)
+
     def rows(self):
         """
         Return number of matrix row
@@ -72,7 +82,11 @@ if __name__ == '__main__':
     os.chdir('../../fixtures')
     import time
     start = time.time()
-    for x in range(100):
+    for x in range(1):
         a = Matrix.random_matrix(5)
-        #print a
+        b = Matrix.random_matrix(5)
+        c = a + b
+        print a
+        print b
+        print c
     print time.time() - start
