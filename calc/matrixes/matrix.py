@@ -35,12 +35,18 @@ class Matrix(object):
         matrix = [row.strip('\n').split(' ') for row in file]
         return cls(matrix)
 
+    @classmethod
+    def random_matrix(cls, size):
+        import random
+        matrix = [[random.random() for x in range(size)] for x in range(size)]
+        return cls(matrix)
+
     def __str__(self):
         """
         Matrix string
-        :return:
+        :return: str
         """
-        return '\n'.join(['|' + ' '.join(row) + '|' for row in self.matrix])
+        return '\n'.join(['|' + ' '.join(map(str, row)) + '|' for row in self.matrix])
 
 
 class AdjacencyMatrix(Matrix):
@@ -64,5 +70,9 @@ if __name__ == '__main__':
     import os
     os.getcwd()
     os.chdir('../../fixtures')
-    a = AdjacencyMatrix.from_file(open('file_matrix', 'r'))
-    print(a.is_adjacent())
+    import time
+    start = time.time()
+    for x in range(100):
+        a = Matrix.random_matrix(5)
+        #print a
+    print time.time() - start
