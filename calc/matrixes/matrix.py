@@ -1,3 +1,6 @@
+import itertools
+import operator
+
 from core.exception.exception import MalformedMatrixException
 
 
@@ -8,20 +11,23 @@ class Matrix(object):
         self.rows_number = len(self.matrix)
         self.cols_number = self.cols()
 
+    ##################### MAIN OPERATIONS ############################
     def __add__(self, other):
         """
         Addiction of Matrix
         :param other: Matrix
         :return: Matrix
         """
+        # We cant add matrices with various dimension
         if not (self.cols_number == other.cols_number and self.rows_number == other.rows_number):
-            raise ArithmeticError('fail to find sum of various dimension matrix')
-        matrix = [[0 for col in range(self.cols_number)]for row in range(self.rows_number)]
-
-        for row in range(self.rows_number):
-            for col in range(self.cols_number):
-                matrix[row][col] = self.matrix[row][col] + other.matrix[row][col]
-        return Matrix(matrix)
+            msg = 'Invalid dimensions. You try to add A {}x{} with B {}x{}'.format(
+                str(self.rows_number),
+                str(self.cols_number),
+                str(other.rows_number),
+                str(other.cols_number)
+            )
+            raise ArithmeticError(msg)
+        return Matrix([map(operator.add, *row) for row in itertools.izip(self.matrix, other.matrix)])
 
     def direct_sum(self, other):
         """
@@ -165,5 +171,10 @@ if __name__ == '__main__':
     import os
     os.getcwd()
     os.chdir('../../fixtures')
-    while True:
-        pass
+    import time
+    s = time.time()
+    for x in range(800):
+        a = Matrix.random_matrix(100)
+        b = Matrix.random_matrix(100)
+        c = a + b
+    print(time.time() - s)
