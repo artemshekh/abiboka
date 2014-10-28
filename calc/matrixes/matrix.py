@@ -142,6 +142,16 @@ class Matrix(object):
         self.matrix[row] = [k*x for x in self.matrix[row]]
         return None
 
+    def add_to_row(self, r1, r2, k=1):
+        """
+        r1 = r1 + k*r2
+        :param r1:
+        :param r2:
+        :param k:
+        :return:
+        """
+        self.matrix[r1] = map(operator.add, self.matrix[r1], [k*x for x in self.matrix[r2]])
+
     def transpose(self):
         """
         Transposition of matrix
