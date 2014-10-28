@@ -120,6 +120,15 @@ class Matrix(object):
     def to_scalar(self, c):
         return Matrix([[x*c for x in row] for row in self.matrix])
 
+    def switch_rows(self, r1, r2):
+        """
+        Switch rows in matrix
+        :param r1:
+        :param r2:
+        :return:
+        """
+        self.matrix[r1], self.matrix[r2] = self.matrix[r2], self.matrix[r1]
+
     def transpose(self):
         """
         Transposition of matrix
@@ -216,4 +225,8 @@ if __name__ == '__main__':
     import os
     os.getcwd()
     os.chdir('../../fixtures')
+    a  = Matrix.random_matrix(2,2)
+    print(a)
+    a.switch_rows(0,1)
+    print a
 
