@@ -109,6 +109,14 @@ class Matrix(object):
     def to_scalar(self, c):
         return Matrix([[x*c for x in row] for row in self.matrix])
 
+    def transpose(self):
+        """
+        Transposition of matrix
+        :return: Matrix
+        """
+        matrix = [list(row) for row in zip(*self.matrix)]
+        print Matrix(matrix)
+
     def cols(self):
         """
         Return number of columns
