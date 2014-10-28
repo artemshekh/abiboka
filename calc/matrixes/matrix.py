@@ -106,6 +106,9 @@ class Matrix(object):
         return self.kroneker_product(Matrix.create_identity(other.rows_number))\
                   + other.kroneker_product(Matrix.create_identity(self.rows_number))
 
+    def to_scalar(self, c):
+        return Matrix([[x*c for x in row] for row in self.matrix])
+
     def cols(self):
         """
         Return number of columns
@@ -194,12 +197,3 @@ if __name__ == '__main__':
     import os
     os.getcwd()
     os.chdir('../../fixtures')
-    import time
-
-    a = Matrix.random_matrix(100, 100)
-    b = Matrix.random_matrix(100, 100)
-    s = time.time()
-    for z in range(800):
-        c = a.direct_sum(b)
-    #print a.direct_sum(b)
-    print(time.time() - s)
