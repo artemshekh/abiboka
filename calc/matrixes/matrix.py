@@ -128,6 +128,19 @@ class Matrix(object):
         :return:
         """
         self.matrix[r1], self.matrix[r2] = self.matrix[r2], self.matrix[r1]
+        return None
+
+    def row_multiplication(self, row, k):
+        """
+        Multiply row on constant
+        :param row:
+        :param k:
+        :return:
+        """
+        if k == 0:
+            raise ArithmeticError("k can't be equal 0")
+        self.matrix[row] = [k*x for x in self.matrix[row]]
+        return None
 
     def transpose(self):
         """
@@ -227,6 +240,6 @@ if __name__ == '__main__':
     os.chdir('../../fixtures')
     a  = Matrix.random_matrix(2,2)
     print(a)
-    a.switch_rows(0,1)
+    a.row_multiplication(0,3)
     print a
 
