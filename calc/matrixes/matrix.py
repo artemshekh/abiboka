@@ -117,6 +117,15 @@ class Matrix(object):
             raise ArithmeticError(msg)
         return Matrix([map(operator.mul, *row) for row in itertools.izip(self.matrix, other.matrix)])
 
+    def trace(self):
+        """
+        Trace of matrix
+        :return:
+        """
+        if not self.is_square():
+            raise ArithmeticError('Trace exists only for square matrix')
+        return sum([self.matrix[row][row] for row, x in enumerate(self.matrix)])
+
     def to_scalar(self, c):
         return Matrix([[x*c for x in row] for row in self.matrix])
 
@@ -252,4 +261,5 @@ if __name__ == '__main__':
     print(a)
     a.row_multiplication(0,3)
     print a
+    print(a.trace())
 
