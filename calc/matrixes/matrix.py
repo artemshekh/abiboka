@@ -46,6 +46,31 @@ class Matrix(object):
             raise ArithmeticError(msg)
         return Matrix([map(operator.sub, *row) for row in itertools.izip(self.matrix, other.matrix)])
 
+    def __mul__(self, other):
+        if not self.cols_number == other.rows_number:
+            msg = 'Invalid dimensions. You try multiply A {}x{} on B {}x{}'.format(
+                str(self.rows_number),
+                str(self.cols_number),
+                str(other.rows_number),
+                str(other.cols_number)
+            )
+            raise ArithmeticError(msg)
+        matrix = [[0 for col in range(other.cols_number)] for row in range(self.rows_number)]
+        for rowindex, row in enumerate(matrix):
+            for colindex, col in enumerate(row):
+                for l, x in enumerate(self.matrix[rowindex]):
+                    matrix[rowindex][colindex] += x * other.matrix[l][colindex]
+        return Matrix(matrix)
+
+    def __eq__(self, other):
+        if not (self.cols_number == other.cols_number and self.rows_number == other.rows_number):
+            return False
+        for row in range(self.rows_number):
+            for col in range(self.cols_number):
+                if not self.matrix[row][col] == other.matrix[row][col]:
+                    return False
+        return True
+
     def direct_sum(self, other):
         """
         Direct sum of 2 matrices
@@ -63,7 +88,8 @@ class Matrix(object):
         :param other:
         :return:
         """
-        matrix = [[0 for x in range(self.cols_number * other.cols_number)] for x in range(self.rows_number * other.rows_number)]
+        matrix = [[0 for x in range(self.cols_number * other.cols_number)]
+                  for x in range(self.rows_number * other.rows_number)]
         for i1, row1 in enumerate(self.matrix):
             for j1, column1 in enumerate(row1):
                 for i2, row2 in enumerate(other.matrix):
@@ -72,19 +98,13 @@ class Matrix(object):
         return Matrix(matrix)
 
     def kroneker_sum(self, other):
-        matrix = self.kroneker_product(Matrix.create_identity(other.rows_number))\
-                 + other.kroneker_product(Matrix.create_identity(self.rows_number))
-        return matrix
-
-    def __mul__(self, other):
-        if not self.cols_number == other.rows_number:
-            raise ArithmeticError('number cols of first matrix = number rows of second matrix')
-        matrix = [[0 for col in range(other.cols_number)] for row in range(self.rows_number)]
-        for rowindex, row in enumerate(matrix):
-            for colindex, col in enumerate(row):
-                for l, x in enumerate(self.matrix[rowindex]):
-                    matrix[rowindex][colindex] += x * other.matrix[l][colindex]
-        return Matrix(matrix)
+        """
+        Kroneker sum
+        :param other:
+        :return: Matrix
+        """
+        return self.kroneker_product(Matrix.create_identity(other.rows_number))\
+                  + other.kroneker_product(Matrix.create_identity(self.rows_number))
 
     def cols(self):
         """
@@ -126,25 +146,15 @@ class Matrix(object):
                         return False
         return True
 
-    def __eq__(self, other):
-        if not (self.cols_number == other.cols_number and self.rows_number == other.rows_number):
-            return False
-        for row in range(self.rows_number):
-            for col in range(self.cols_number):
-                if not self.matrix[row][col] == other.matrix[row][col]:
-                    return False
-        return True
-
-
     @classmethod
     def from_file(cls, filename):
         matrix = [row.strip('\n').split(' ') for row in filename]
         return cls(matrix)
 
     @classmethod
-    def random_matrix(cls, size):
+    def random_matrix(cls, row, col):
         import random
-        matrix = [[random.random() for x in range(size)] for x in range(size)]
+        matrix = [[random.random() for y in range(col)] for x in range(row)]
         return cls(matrix)
 
     @classmethod
@@ -186,10 +196,10 @@ if __name__ == '__main__':
     os.chdir('../../fixtures')
     import time
 
-    a = Matrix.random_matrix(100)
-    b = Matrix.random_matrix(100)
+    a = Matrix.random_matrix(100, 100)
+    b = Matrix.random_matrix(100, 100)
     s = time.time()
-    for x in range(800):
+    for z in range(800):
         c = a.direct_sum(b)
     #print a.direct_sum(b)
     print(time.time() - s)
