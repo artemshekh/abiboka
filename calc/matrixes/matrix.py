@@ -106,6 +106,17 @@ class Matrix(object):
         return self.kroneker_product(Matrix.create_identity(other.rows_number))\
                   + other.kroneker_product(Matrix.create_identity(self.rows_number))
 
+    def hadamard_product(self, other):
+        if not (self.cols_number == other.cols_number and self.rows_number == other.rows_number):
+            msg = 'Invalid dimensions. You try to self.hadamard_product on  A {}x{} with B {}x{}'.format(
+                str(self.rows_number),
+                str(self.cols_number),
+                str(other.rows_number),
+                str(other.cols_number)
+            )
+            raise ArithmeticError(msg)
+        return Matrix([map(operator.mul, *row) for row in itertools.izip(self.matrix, other.matrix)])
+
     def to_scalar(self, c):
         return Matrix([[x*c for x in row] for row in self.matrix])
 
@@ -205,3 +216,4 @@ if __name__ == '__main__':
     import os
     os.getcwd()
     os.chdir('../../fixtures')
+
