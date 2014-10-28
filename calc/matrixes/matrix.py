@@ -29,20 +29,33 @@ class Matrix(object):
             raise ArithmeticError(msg)
         return Matrix([map(operator.add, *row) for row in itertools.izip(self.matrix, other.matrix)])
 
+    def __sub__(self, other):
+        """
+        Substraction of Matrix
+        :param other: Matrix
+        :return: Matrix
+        """
+        # We cant add matrices with various dimension
+        if not (self.cols_number == other.cols_number and self.rows_number == other.rows_number):
+            msg = 'Invalid dimensions. You try to substract A {}x{} with B {}x{}'.format(
+                str(self.rows_number),
+                str(self.cols_number),
+                str(other.rows_number),
+                str(other.cols_number)
+            )
+            raise ArithmeticError(msg)
+        return Matrix([map(operator.sub, *row) for row in itertools.izip(self.matrix, other.matrix)])
+
     def direct_sum(self, other):
         """
         Direct sum of 2 matrices
         :param other:
         :return:
         """
-        matrix = [[0 for col in range(self.cols_number + other.cols_number)] for row in range(self.rows_number + other.rows_number)]
-        for i, row in enumerate(self.matrix):
-            for j, col in enumerate(row):
-                matrix[i][j] = col
-        for i, row in enumerate(other.matrix):
-            for j, col in enumerate(row):
-                matrix[i + self.rows_number][j + self.cols_number] = col
-        return Matrix(matrix)
+        m1 = []
+        [m1.append(row + [0 for x in range(other.cols_number)]) for row in self.matrix]
+        [m1.append([0 for x in range(self.cols_number)] + row) for row in other.matrix]
+        return Matrix(m1)
 
     def kroneker_product(self, other):
         """
@@ -172,9 +185,11 @@ if __name__ == '__main__':
     os.getcwd()
     os.chdir('../../fixtures')
     import time
+
+    a = Matrix.random_matrix(100)
+    b = Matrix.random_matrix(100)
     s = time.time()
     for x in range(800):
-        a = Matrix.random_matrix(100)
-        b = Matrix.random_matrix(100)
-        c = a + b
+        c = a.direct_sum(b)
+    #print a.direct_sum(b)
     print(time.time() - s)
