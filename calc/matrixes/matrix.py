@@ -2,6 +2,7 @@ from core.exception.exception import MalformedMatrixException
 
 
 class Matrix(object):
+
     def __init__(self, matrix=None):
         self.matrix = matrix or []
         self.rows_number = len(self.matrix)
@@ -48,9 +49,13 @@ class Matrix(object):
             for j1, column1 in enumerate(row1):
                 for i2, row2 in enumerate(other.matrix):
                     for j2, column2 in enumerate(row2):
-                        print i1, i2, j1, j2, column1, column2, self.rows_number*i1 + i2
                         matrix[other.rows_number*i1 + i2][other.cols_number*j1 + j2] = column1 * column2
         return Matrix(matrix)
+
+    def kroneker_sum(self, other):
+        matrix = self.kroneker_product(Matrix.create_identity(other.rows_number))\
+                 + other.kroneker_product(Matrix.create_identity(self.rows_number))
+        return matrix
 
     def __mul__(self, other):
         if not self.cols_number == other.rows_number:
@@ -89,6 +94,19 @@ class Matrix(object):
                     return False
         return True
 
+    def is_identity(self):
+        if not self.is_square():
+            return False
+        for i, row in enumerate(self.matrix):
+            for j, column in enumerate(row):
+                if i != j:
+                    if self.matrix[i][j] != 0 or self.matrix[i][j] != self.matrix[j][i]:
+                        return False
+                else:
+                    if self.matrix[i][j] != 1:
+                        return False
+        return True
+
     def __eq__(self, other):
         if not (self.cols_number == other.cols_number and self.rows_number == other.rows_number):
             return False
@@ -107,8 +125,17 @@ class Matrix(object):
     @classmethod
     def random_matrix(cls, size):
         import random
-        matrix = [[random.randint(-1, 1) for x in range(size)] for x in range(size)]
+        matrix = [[random.random() for x in range(size)] for x in range(size)]
         return cls(matrix)
+
+    @classmethod
+    def create_identity(cls, size):
+        matrix = [[0 for x in range(size)] for x in range(size)]
+        for i, row in enumerate(matrix):
+            for j, column in enumerate(row):
+                if i == j:
+                    matrix[i][j] = 1
+        return Matrix(matrix)
 
     def __str__(self):
         """
@@ -138,18 +165,5 @@ if __name__ == '__main__':
     import os
     os.getcwd()
     os.chdir('../../fixtures')
-    A1 = Matrix.random_matrix(2)
-    matrix_list = [A1]
-    A = A1
-    n =0
     while True:
-        n +=1
-        AA = A*A
-        matrix_list.append(AA)
-        if A1 == AA:
-
-            break
-        if n == 1000:
-            break
-    for matrix in matrix_list:
-        print  matrix
+        pass
