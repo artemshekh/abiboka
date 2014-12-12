@@ -43,13 +43,31 @@ class SmilesParser(Parser):
         return True
 
     def decode(self, string=''):
-        self.is_smiles(string)
-        #new_molecule = Molecule()
-        #Find root atom remove it from string with all parameters
-        #find bond find next atom
-        #
+        #self.is_smiles(string)
+        def test_pattern(pattern):
+            RE_STRUCTURE = '^(?P<atom>\[[a-zA-Z0-9\-+@]*\]|O|C|N|Cl|Br|F|I|S|P|B|\*|n|o|c|s|p)(?P<stereo1>/?|\\\\?)(?P<bond1>|=?|\.|#?|/[0-9]*)(?P<number1>[0-9%]*)(?P<branching>[()]*)(?P<stereo2>/?|\\\\?)(?P<number2>[0-9%]*)(?P<bond2>/?|=?|\\\\?|\.|#?|/[0-9]*)$'
+            # Structure (atom,stereo1,bond1,number1,branching,stereo2,bond2,number2)
+            if re.match(RE_STRUCTURE, pattern):
+                return True
+            return False
 
-        print(string)
+
+        smiles_string = string
+        structure_stack = []
+
+        while len(smiles_string) > 0:
+            index = 0
+            atom = ''
+            while index < len(smiles_string):
+                is_atom = test_pattern(smiles_string[0:index+1])
+                if is_atom:
+                    atom, smiles_string = smiles_string[0:index+1], smiles_string[index+1:]
+                    while smiles_string and test_pattern(atom + smiles_string[0]):
+                        atom, smiles_string = atom + smiles_string[0], smiles_string[1:]
+                    structure_stack.append(atom)
+                else:
+                    index += 1
+        #print structure_stack
         return None
 
 
@@ -67,141 +85,12 @@ if __name__ == '__main__':
     from collections import defaultdict
     d = defaultdict(lambda: 0)
     smiles = open(os.getcwd() + '/smiles.txt', 'r')
-    n = 0
-
-    def parse_atom(smile):
-        atomstring = ''
-        if smile[0:2] in ['Br', 'Cl']:
-            atomstring = atomstring + smile[0:2]
-            smile = smile[2:]
-            #print(atom, smile)
-            #atom = Atom(z=periodic_dct[atom])
-        elif smile[0] in ['C', 'N', 'O', 'P', 'S', 'F', 'I', 'B', 'c', 'n', 's', 'o', '*', 'p']:
-            atomstring = atomstring + smile[0]
-            symbol = smile[0]
-            smile = smile[1:]
-            #print(atom, smile)
-            #atom = Atom(z=periodic_dct[symbol.capitalize()])
-        elif smile[0] == '[':
-            atom = re.search(SQUARE_BRACKET, smile).groupdict()
-            atomstring = atomstring + smile[:re.search(SQUARE_BRACKET, smile).end()]
-            smile = smile[re.search(SQUARE_BRACKET, smile).end():]
-            #atom = Atom(z=periodic_dct[atom['symbol'].capitalize()])
-            #print(atom, smile)
-
-        else:
-            raise ParseError
-        return atomstring, smile
-
-    def parse_bond(string):
-        bondstring = ''
-        if string[0] == '/':
-            bondstring += string[0]
-            string = string[1:]
-
-        if string[0] == '\\':
-            bondstring += string[0]
-            string = string[1:]
-            if string[0] == '\\':
-                bondstring += string[0]
-                string = string[1:]
-        if re.search(BONDS_CLOSURE, string):
-            bondstring += string[:re.search(BONDS_CLOSURE, string).end()]
-            string = string[re.search(BONDS_CLOSURE, string).end():]
-        if not string:
-            return bondstring, string
-        if string[0] == ')':
-                bondstring += string[0]
-                branch_stack.pop()
-                string = string[1:]
-        if string[0] == '(':
-                print()
-                bondstring += string[0]
-                branch_stack.append(atom)
-                string = string[1:]
-
-        if string[0] == '/':
-            bondstring += string[0]
-            string = string[1:]
-        if string[0] == '\\':
-            bondstring += string[0]
-            string = string[1:]
-            if string[0] == '\\':
-                bondstring += string[0]
-                string = string[1:]
-        if string[0] == '=':
-            bondstring += string[0]
-            bond = Bond(order=2)
-            string = string[1:]
-        elif string[0] == '#':
-            bondstring += string[0]
-            bond = Bond(order=3)
-            string = string[1:]
-        else:
-            bond = Bond(order=1)
-        if string[0] == '.':
-            bondstring += string[0]
-            string = string[1:]
-        if re.search(BONDS_CLOSURE, string):
-            bondstring += string[:re.search(BONDS_CLOSURE, string).end()]
-            string = string[re.search(BONDS_CLOSURE, string).end():]
-        if string[0] == ')':
-                bondstring += string[0]
-                branch_stack.pop()
-                string = string[1:]
-        if string[0] == '(':
-                print()
-                bondstring += string[0]
-                branch_stack.append(atom)
-                string = string[1:]
-
-        if len(bondstring) >1:
-            print(bondstring)
+    for smile in smiles:
+        l = p.decode(smile.split(' ')[0])
 
 
 
 
-
-
-        return bondstring, string
-    n = 0
-    for line in smiles:
-        n +=1
-        if n <6454701:
-            continue
-        atoms = []
-        branch_stack = []
-        smile = line.split(' ')[0]
-        while smile:
-            print(smile)
-            atom, smile = parse_atom(smile)
-            atoms.append(atom)
-            #print(atom, smile, line)
-            #print(type(atom))
-            if smile:
-                if smile[0] == ')':
-                    branch_stack.pop()
-                    smile = smile[1:]
-                if smile[0] == '(':
-                    branch_stack.append(atom)
-                    smile = smile[1:]
-
-                bond, smile = parse_bond(smile)
-            import string as s_
-            #if smile and smile[0] not in s_.ascii_letters + '[*':
-            #    d[smile[0:20]] += 1
-            #print atom
-            print(atom, bond)
-        print(n)
-
-
-
-
-
-    d = d.items()
-    d.sort(key=lambda x: -x[1])
-    for k,v in d:
-        print(k,v)
 
 
 
