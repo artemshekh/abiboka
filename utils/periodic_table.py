@@ -455,7 +455,7 @@ periodic_table = {
     'isotopes':[],
     },
     75:{
-    'symbol':'Rh',
+    'symbol':'Re',
     'name':'Rhenium',
     'relative_atomic_weight':186.207,
     'isotopes':[],
@@ -491,7 +491,7 @@ periodic_table = {
     'isotopes':[],
     },
     81:{
-    'symbol':'Th',
+    'symbol':'Tl',
     'name':'Thallium',
     'relative_atomic_weight':204.38,
     'isotopes':[],
