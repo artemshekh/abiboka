@@ -611,3 +611,8 @@ periodic_table = {
     'isotopes':[],
     }
 }
+
+periodic_table_by_symbol = {v['symbol']:{'n':k,
+                            'relative_atomic_weight':v['relative_atomic_weight'],
+                            'name':v['name'],
+                            'isotopes':v['isotopes']} for k,v in periodic_table.iteritems()}
