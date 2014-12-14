@@ -11,7 +11,7 @@ atom : '[' <mass> symbol <chiral> <hcount> <sign<charge>> ']'
 """
 import re
 
-from core.exception.exception import BadFormatError, ParseError
+from core.exception.exception import BadFormatError
 from parser import Parser
 from structure.Molecule import Molecule
 from structure.Atom import Atom
@@ -25,8 +25,9 @@ OPEN_BRACKETS = re.compile('^\(+')
 
 class SmilesParser(Parser):
     def __init__(self):
-        self.RE_STRUCTURE = '^(?P<atom>\[[a-zA-Z0-9\-+@]*\]|C|N|O|Cl|Br|F|I|S|P|B|\*|n|o|c|s|p)(?P<stereo1>/?|\\\\?)(?P<bond1>|=?|\.|#?|/[0-9]*)(?P<number1>[0-9%]*)(?P<branching>[()]*)(?P<stereo2>/?|\\\\?)(?P<number2>[0-9%]*)(?P<bond2>/?|=?|\\\\?|\.|#?|/[0-9]*)$'
-        self.SQUARE_BRACKET = '\[(?P<mass>[0-9]{0,2})(?P<symbol>Th|Rh|[a-gi-zA-GI-Z]{1,2}|H|Hf|Ho|Hg)(?P<chiralsign>@{0,2})(?P<chiralclass>(AL|TB|SP|OH)?[0-9]{0,2})(?P<hpresence>h?|H?)(?P<hcount>[0-9]?)(?P<charge>\+?[0-9]*|-?[0-9]*)\]'
+        self.RE_STRUCTURE = re.compile('^(?P<atom>C|\[[a-zA-Z0-9\-+@]*\]|C|N|O|Cl|Br|F|I|S|P|B|\*|n|o|c|s|p)(?P<bonds>[=#%/()0-9\\\\\.]*)$')
+        self.SQUARE_BRACKET = re.compile('\[(?P<mass>[0-9]{0,2})(?P<symbol>Th|Rh|[a-gi-zA-GI-Z]{1,2}|H|Hf|Ho|Hg)(?P<chiralsign>@{0,2})(?P<chiralclass>(AL|TB|SP|OH)?[0-9]{0,2})(?P<hpresence>h?|H?)(?P<hcount>[0-9]?)(?P<charge>\+?[0-9]*|-?[0-9]*)\]')
+        self.stereo_symbols = {'\\': '+', '/': '-'}
 
     def is_smiles(self, string):
         """
@@ -39,41 +40,40 @@ class SmilesParser(Parser):
         return True
 
     def decode(self, string=''):
-        #self.is_smiles(string)
-        def test_pattern(pattern):
-            # Structure (atom,stereo1,bond1,number1,branching,stereo2,bond2,number2)
-            if re.match(self.RE_STRUCTURE, pattern):
-                return True
-            return False
-
-
         smiles_string = string
-        atom_stack = []
         molecule = Molecule()
+        previuos_atom = None
+        previous_bond = None
+        anchor_atom_dct = {}
 
         while len(smiles_string) > 0:
             index = 0
             while index < len(smiles_string):
-                is_atom = test_pattern(smiles_string[0:index+1])
+                is_atom = self.RE_STRUCTURE.match(smiles_string[0:index+1])
                 if is_atom:
                     atom, smiles_string = smiles_string[0:index+1], smiles_string[index+1:]
-                    while smiles_string and test_pattern(atom + smiles_string[0]):
+                    while smiles_string and self.RE_STRUCTURE.match(atom + smiles_string[0]):
                         atom, smiles_string = atom + smiles_string[0], smiles_string[1:]
-                    structure = re.match(self.RE_STRUCTURE, atom)
-                    structure = structure.groupdict()
-                    atom = structure['atom']
+                    structure = re.match(self.RE_STRUCTURE, atom).groupdict()
+                    atom, bond_expression = structure['atom'], structure['bonds']
                     if atom.startswith('['):
-                        atom_in_bracket = re.match(self.SQUARE_BRACKET, atom).groupdict()
-                        if not atom_in_bracket:
-                            print atom
-                        atom = atom_in_bracket['symbol']
+                        # complex atom
+                        bracket_structure = self.SQUARE_BRACKET.match(atom).groupdict()
+                        atom = bracket_structure['symbol']
+                    atom = atom.capitalize()
                     try:
-                        atom = atom.capitalize()
                         atom = Atom(periodic_table_by_symbol[atom]['n'])
-                        molecule.atoms.add(atom)
                     except Exception as err:
                         pass
-                    atom_stack.append(atom)
+                    molecule.atoms.add(atom)
+                    if previuos_atom:
+                        previous_bond.atoms.add(atom)
+                        previous_bond.atoms.add(previuos_atom)
+                        molecule.bonds.add(previous_bond)
+                    previuos_atom = atom
+                    bond = Bond(order=1)
+                    previous_bond = bond
+
                 else:
                     index += 1
         return molecule
@@ -94,28 +94,4 @@ if __name__ == '__main__':
     d = defaultdict(lambda: 0)
     smiles = open(os.getcwd() + '/smiles.txt', 'r')
     for smile in smiles:
-        l = p.decode(smile.split(' ')[0])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        mol = p.decode(smile.split(' ')[0])
