@@ -45,6 +45,9 @@ class SmilesParser(Parser):
         previuos_atom = None
         previous_bond = None
         anchor_atom_dct = {}
+        atom_stack = []
+        after_branch_close = False
+        after_branch_close_open = False
 
         while len(smiles_string) > 0:
             index = 0
@@ -68,10 +71,71 @@ class SmilesParser(Parser):
                     molecule.atoms.add(atom)
                     if previuos_atom:
                         previous_bond.atoms.add(atom)
-                        previous_bond.atoms.add(previuos_atom)
+                        if after_branch_close:
+                            previous_bond.atoms.add(atom_stack.pop())
+                            after_branch_close = False
+                        if after_branch_close_open:
+                            previous_bond.atoms.add(atom_stack[-1])
+                            after_branch_close_open = False
+                        else:
+                            previous_bond.atoms.add(previuos_atom)
                         molecule.bonds.add(previous_bond)
                     previuos_atom = atom
-                    bond = Bond(order=1)
+                    if not bond_expression:
+                        bond = Bond(order=1)
+                    else:
+                        # we have something in bond
+                        # we want splt it on 2 part first part bond with number, other all except it
+                        S = re.compile('^(?P<numbering>.*\d+)(?P<tail>.*)$')
+                        s = S.match(bond_expression)
+                        if s:
+                            s = s.groupdict()
+                            numbering, tail = s['numbering'], s['tail']
+                            if not numbering[0].isdigit():
+                                cis_trans_sign, numbers = numbering[0], numbering[1:]
+                            else:
+                                cis_trans_sign, numbers = None, numbering
+                            numbers_list = []
+                            while numbers:
+                                if not numbers[0] == '%':
+                                    number, numbers = numbers[0], numbers[1:]
+                                else:
+                                    number, numbers = numbers[1:3], numbers[3:]
+                                numbers_list.append(number)
+                            # DO SOMETHING WITH THAT BOND
+                        else:
+                            tail = bond_expression
+
+                        if not tail:
+                            # tail = brancing + bond
+                            bond = Bond(order=1)
+                        else:
+                            T = re.compile('^(?P<branch>[()]{0,2})(?P<cis_trans_sign>[/\\\\]?)(?P<bond_type>.?)$')
+                            t = T.match(tail).groupdict()
+                            branch, cis_trans_sign, bond_type = t['branch'], t['cis_trans_sign'], t['bond_type']
+                            if branch:
+                                if branch == '(':
+                                    atom_stack.append(atom)
+                                elif branch == ')':
+                                    after_branch_close = True
+                                elif branch == ')(':
+                                    after_branch_close_open = True
+                                else:
+                                    print branch
+                            cis_trans_sign = cis_trans_sign or None
+                            if not bond_type:
+                                bond = Bond(order=1)
+                            elif bond_type == '=':
+                                bond = Bond(order=2)
+                            elif bond_type == '#':
+                                bond = Bond(order=3)
+                            elif bond_type == '.':
+                                # ionic character of bond
+                                bond = Bond(order=1)
+                            else:
+                                print bond_type
+
+                                bond = Bond(order=1)
                     previous_bond = bond
 
                 else:
@@ -90,8 +154,13 @@ class SmilesParser(Parser):
 if __name__ == '__main__':
     p = SmilesParser()
     import os
-    from collections import defaultdict
-    d = defaultdict(lambda: 0)
+    import time
+    n = 0
+    s = time.time()
     smiles = open(os.getcwd() + '/smiles.txt', 'r')
     for smile in smiles:
         mol = p.decode(smile.split(' ')[0])
+        n += 1
+        if n % 10000 == 0:
+            print n, (time.time() - s)/n
+
