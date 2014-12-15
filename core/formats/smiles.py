@@ -48,7 +48,7 @@ class SmilesParser(Parser):
         atom_stack = []
         after_branch_close = False
         after_branch_close_open = False
-
+        numbering_stack = {}
         while len(smiles_string) > 0:
             index = 0
             while index < len(smiles_string):
@@ -102,7 +102,17 @@ class SmilesParser(Parser):
                                 else:
                                     number, numbers = numbers[1:3], numbers[3:]
                                 numbers_list.append(number)
-                            # DO SOMETHING WITH THAT BOND
+
+                            for number in numbers_list:
+                                if not number in numbering_stack:
+                                    numbering_stack[number] = atom
+                                else:
+                                    numbering_bond = Bond(order=1, cis_trans=cis_trans_sign)
+                                    numbering_bond.atoms.add(numbering_stack[number])
+                                    numbering_bond.atoms.add(atom)
+                                    molecule.bonds.add(numbering_bond)
+                                    del(numbering_stack[number])
+
                         else:
                             tail = bond_expression
 
