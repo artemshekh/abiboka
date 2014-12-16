@@ -5,7 +5,7 @@ First Atom
 """
 
 class Atom(object):
-    def __init__(self, z=None, n=None, aromatic=False):
+    def __init__(self, z=None, n=None, charge=0, aromatic=False, chiral=False):
         """
         Initialize
         :param z: number of protons
@@ -14,7 +14,8 @@ class Atom(object):
         """
         self.Z = z
         self.N = n or z
-        self.charge = 0
+        self.charge = charge
+        self.chiral = chiral
         self.bonds = []
         self.aromatic = aromatic
         try:
