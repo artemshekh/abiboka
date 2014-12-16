@@ -17,6 +17,7 @@ from structure.Molecule import Molecule
 from structure.Atom import Atom
 from structure.Bond import Bond
 from utils.periodic_table import periodic_table_by_symbol
+from collections import Counter
 
 SMILES_STRUCTURE = re.compile('^[A-Za-z0-9\[\]\-\=\#\:]*$')
 BONDS_CLOSURE = re.compile('^[0-9%]+')
@@ -26,7 +27,7 @@ OPEN_BRACKETS = re.compile('^\(+')
 class SmilesParser(Parser):
     def __init__(self):
         self.RE_STRUCTURE = re.compile('^(?P<atom>C|\[[a-zA-Z0-9\-+@]*\]|C|N|O|Cl|Br|F|I|S|P|B|\*|n|o|c|s|p)(?P<bonds>[=#%/()0-9\\\\\.]*)$')
-        self.SQUARE_BRACKET = re.compile('\[(?P<mass>[0-9]{0,2})(?P<symbol>Th|Rh|[a-gi-zA-GI-Z]{1,2}|H|Hf|Ho|Hg)(?P<chiralsign>@{0,2})(?P<chiralclass>(AL|TB|SP|OH)?[0-9]{0,2})(?P<hpresence>h?|H?)(?P<hcount>[0-9]?)(?P<charge>\+?[0-9]*|-?[0-9]*)\]')
+        self.SQUARE_BRACKET = re.compile('\[(?P<mass>[0-9]{0,3})(?P<symbol>Th|Rh|[a-gi-zA-GI-Z]{1,2}|H|Hf|Ho|Hg)(?P<chiralsign>@{0,2})(?P<chiralclass>(AL|TB|SP|OH)?[0-9]{0,2})(?P<hpresence>h?|H?)(?P<hcount>[0-9]?)(?P<charge>\+?[0-9]*|-?[0-9]*)\]')
         self.stereo_symbols = {'\\': '+', '/': '-'}
 
     def is_smiles(self, string):
@@ -49,6 +50,7 @@ class SmilesParser(Parser):
         after_branch_close = False
         after_branch_close_open = False
         numbering_stack = {}
+        cnt = Counter()
         while len(smiles_string) > 0:
             index = 0
             while index < len(smiles_string):
@@ -59,14 +61,50 @@ class SmilesParser(Parser):
                         atom, smiles_string = atom + smiles_string[0], smiles_string[1:]
                     structure = re.match(self.RE_STRUCTURE, atom).groupdict()
                     atom, bond_expression = structure['atom'], structure['bonds']
+                    charge = 0
+                    chiral = False
+                    hcount = 0
+                    n = None
                     if atom.startswith('['):
-                        # complex atom
-                        bracket_structure = self.SQUARE_BRACKET.match(atom).groupdict()
-                        atom = bracket_structure['symbol']
+
+                        bracket_atom = self.SQUARE_BRACKET.match(atom).groupdict()
+                        atom = bracket_atom['symbol']
+                        if bracket_atom['charge']:
+                            charge = bracket_atom['charge']
+                        if bracket_atom['chiralsign']:
+                            chiral = bracket_atom['chiralsign']
+                        if bracket_atom['hpresence']:
+                            if not bracket_atom['hcount']:
+                                hcount = 1
+                            else:
+                                hcount = int(bracket_atom['hcount'])
+                        if bracket_atom['mass']:
+                            n = int(bracket_atom['mass'])
+                    if charge == '+':
+                        charge = 1
+                    elif charge == '-':
+                        charge = -1
+                    else:
+                        charge = int(charge)
+                    if atom.islower():
+                        aromatic = True
+                    else:
+                        aromatic = False
                     atom = atom.capitalize()
                     try:
-                        atom = Atom(periodic_table_by_symbol[atom]['n'])
+                        z = periodic_table_by_symbol[atom]['z']
+                        atom = Atom(z=z, n=n, charge=charge, aromatic=aromatic, chiral=chiral)
+
+                        if hcount:
+                            for x in range(hcount):
+                                h = Atom(1)
+                                molecule.atoms.add(h)
+                                bond_h = Bond(order=1)
+                                molecule.bonds.add(bond_h)
+                                bond_h.atoms.add(h)
+                                bond_h.atoms.add(atom)
                     except Exception as err:
+                        print err
                         pass
                     molecule.atoms.add(atom)
                     if previuos_atom:
@@ -134,18 +172,15 @@ class SmilesParser(Parser):
                                     print branch
                             cis_trans_sign = cis_trans_sign or None
                             if not bond_type:
-                                bond = Bond(order=1)
+                                bond = Bond(order=1, cis_trans=cis_trans_sign)
                             elif bond_type == '=':
-                                bond = Bond(order=2)
+                                bond = Bond(order=2, cis_trans=cis_trans_sign)
                             elif bond_type == '#':
-                                bond = Bond(order=3)
+                                bond = Bond(order=3, cis_trans=cis_trans_sign)
                             elif bond_type == '.':
                                 # ionic character of bond
-                                bond = Bond(order=1)
-                            else:
-                                print bond_type
+                                bond = Bond(order=1, cis_trans=cis_trans_sign)
 
-                                bond = Bond(order=1)
                     previous_bond = bond
 
                 else:
@@ -165,12 +200,13 @@ if __name__ == '__main__':
     p = SmilesParser()
     import os
     import time
-    n = 0
     s = time.time()
     smiles = open(os.getcwd() + '/smiles.txt', 'r')
+    n = 0
+    s = time.time()
     for smile in smiles:
-        mol = p.decode(smile.split(' ')[0])
-        n += 1
+        n +=1
         if n % 10000 == 0:
             print n, (time.time() - s)/n
+        mol = p.decode(smile.split(' ')[0])
 
