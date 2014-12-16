@@ -103,20 +103,27 @@ class SmilesParser(Parser):
                                 molecule.bonds.add(bond_h)
                                 bond_h.atoms.add(h)
                                 bond_h.atoms.add(atom)
+                                h.bonds.append(bond_h)
+                                atom.bonds.append(bond_h)
                     except Exception as err:
                         print err
                         pass
                     molecule.atoms.add(atom)
                     if previuos_atom:
                         previous_bond.atoms.add(atom)
+                        atom.bonds.append(previous_bond)
                         if after_branch_close:
-                            previous_bond.atoms.add(atom_stack.pop())
+                            atom_pop = atom_stack.pop()
+                            previous_bond.atoms.add(atom_pop)
+                            atom_pop.bonds.append(previous_bond)
                             after_branch_close = False
                         if after_branch_close_open:
                             previous_bond.atoms.add(atom_stack[-1])
+                            atom_stack[-1].bonds.append(previous_bond)
                             after_branch_close_open = False
                         else:
                             previous_bond.atoms.add(previuos_atom)
+                            previuos_atom.bonds.append(previous_bond)
                         molecule.bonds.add(previous_bond)
                     previuos_atom = atom
                     if not bond_expression:
@@ -185,6 +192,7 @@ class SmilesParser(Parser):
 
                 else:
                     index += 1
+                    
         return molecule
 
 
