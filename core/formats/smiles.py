@@ -8,6 +8,10 @@ hydrogen-supressed graph
 hydrogen-complete graph
 atom : '[' <mass> symbol <chiral> <hcount> <sign<charge>> ']'
 
+parser.decode(SMILES_STRING) --> molecule internal representation
+# TODO! aromacity order of bond
+# add more simplicity
+
 """
 import re
 
@@ -17,18 +21,22 @@ from structure.Molecule import Molecule
 from structure.Atom import Atom
 from structure.Bond import Bond
 from utils.periodic_table import periodic_table_by_symbol, periodic_table
-from collections import Counter
-
-SMILES_STRUCTURE = re.compile('^[A-Za-z0-9\[\]\-\=\#\:]*$')
-BONDS_CLOSURE = re.compile('^[0-9%]+')
-OPEN_BRACKETS = re.compile('^\(+')
 
 
 class SmilesParser(Parser):
     def __init__(self):
-        self.RE_STRUCTURE = re.compile('^(?P<atom>C|\[[a-zA-Z0-9\-+@]*\]|C|N|O|Cl|Br|F|I|S|P|B|\*|n|o|c|s|p)(?P<bonds>[=#%/()0-9\\\\\.]*)$')
-        self.SQUARE_BRACKET = re.compile('\[(?P<mass>[0-9]{0,3})(?P<symbol>Th|Rh|[a-gi-zA-GI-Z]{1,2}|H|Hf|Ho|Hg)(?P<chiralsign>@{0,2})(?P<chiralclass>(AL|TB|SP|OH)?[0-9]{0,2})(?P<hpresence>h?|H?)(?P<hcount>[0-9]?)(?P<charge>\+?[0-9]*|-?[0-9]*)\]')
-        self.stereo_symbols = {'\\': '+', '/': '-'}
+        self.SMILES_STING = re.compile('^[A-Za-z0-9\[\]\-=#:\\\\/().\+@%\*]*$')
+        self.RE_STRUCTURE = re.compile('^(?P<atom>C|\[[a-zA-Z0-9\-+@]*\]'
+                                       '|C|N|O|Cl|Br|F|I|S|P|B|\*|n|o|c|s|p)'
+                                       '(?P<bonds>[=#%/()0-9\\\\\.]*)$')
+        self.SQUARE_BRACKET = re.compile('\[(?P<mass>[0-9]{0,3})'
+                                         '(?P<symbol>Th|Rh|[a-gi-zA-GI-Z]{1,2}|H|Hf|Ho|Hg)'
+                                         '(?P<chiralsign>@{0,2})'
+                                         '(?P<chiralclass>(AL|TB|SP|OH)?[0-9]{0,2})'
+                                         '(?P<hpresence>h?|H?)(?P<hcount>[0-9]?)'
+                                         '(?P<charge>\+?[0-9]*|-?[0-9]*)\]')
+        self.BREAKING_BOND = re.compile('^(?P<breaking_bond>.*\d+)(?P<tail>.*)$')
+        self.TAIL = re.compile('^(?P<branch>[()]{0,2})(?P<cis_trans_sign>[/\\\\]?)(?P<bond_type>.?)$')
 
     def is_smiles(self, string):
         """
@@ -36,21 +44,20 @@ class SmilesParser(Parser):
         :param string:
         :return:
         """
-        if not re.match(SMILES_STRUCTURE, string):
+        if not self.SMILES_STING.match(string):
             raise BadFormatError
         return True
 
     def decode(self, string=''):
+        self.is_smiles(string)
         smiles_string = string
         molecule = Molecule()
         previuos_atom = None
         previous_bond = None
-        anchor_atom_dct = {}
         atom_stack = []
         after_branch_close = False
         after_branch_close_open = False
         numbering_stack = {}
-        cnt = Counter()
         while len(smiles_string) > 0:
             index = 0
             while index < len(smiles_string):
@@ -131,15 +138,15 @@ class SmilesParser(Parser):
                     else:
                         # we have something in bond
                         # we want splt it on 2 part first part bond with number, other all except it
-                        S = re.compile('^(?P<numbering>.*\d+)(?P<tail>.*)$')
-                        s = S.match(bond_expression)
-                        if s:
-                            s = s.groupdict()
-                            numbering, tail = s['numbering'], s['tail']
-                            if not numbering[0].isdigit():
-                                cis_trans_sign, numbers = numbering[0], numbering[1:]
+
+                        breaking_bond = self.BREAKING_BOND.match(bond_expression)
+                        if breaking_bond:
+                            breaking_bond = breaking_bond.groupdict()
+                            breaking_bond, tail = breaking_bond['breaking_bond'], breaking_bond['tail']
+                            if not breaking_bond[0].isdigit():
+                                cis_trans_sign, numbers = breaking_bond[0], breaking_bond[1:]
                             else:
-                                cis_trans_sign, numbers = None, numbering
+                                cis_trans_sign, numbers = None, breaking_bond
                             numbers_list = []
                             while numbers:
                                 if not numbers[0] == '%':
@@ -162,11 +169,9 @@ class SmilesParser(Parser):
                             tail = bond_expression
 
                         if not tail:
-                            # tail = brancing + bond
                             bond = Bond(order=1)
                         else:
-                            T = re.compile('^(?P<branch>[()]{0,2})(?P<cis_trans_sign>[/\\\\]?)(?P<bond_type>.?)$')
-                            t = T.match(tail).groupdict()
+                            t = self.TAIL.match(tail).groupdict()
                             branch, cis_trans_sign, bond_type = t['branch'], t['cis_trans_sign'], t['bond_type']
                             if branch:
                                 if branch == '(':
@@ -225,16 +230,9 @@ class SmilesParser(Parser):
 
 
 if __name__ == '__main__':
-    p = SmilesParser()
     import os
-    import time
-    s = time.time()
+    p = SmilesParser()
     smiles = open(os.getcwd() + '/smiles.txt', 'r')
-    n = 0
-    s = time.time()
     for smile in smiles:
-        n += 1
-        if n % 10000 == 0:
-            print n, (time.time() - s)/n
         mol = p.decode(smile.split(' ')[0])
 
