@@ -16,7 +16,7 @@ from parser import Parser
 from structure.Molecule import Molecule
 from structure.Atom import Atom
 from structure.Bond import Bond
-from utils.periodic_table import periodic_table_by_symbol
+from utils.periodic_table import periodic_table_by_symbol, periodic_table
 from collections import Counter
 
 SMILES_STRUCTURE = re.compile('^[A-Za-z0-9\[\]\-\=\#\:]*$')
@@ -192,7 +192,27 @@ class SmilesParser(Parser):
 
                 else:
                     index += 1
-                    
+        # add atoms h on unocuppy atoms
+        free_atoms = {}
+        for index, atom in enumerate(molecule.atoms):
+            if periodic_table[atom.Z]['symbol'] == 'C':
+                free_bond = 4 - sum([bond.order for bond in atom.bonds]) - atom.charge
+                if free_bond:
+                    free_atoms[atom] = free_bond
+            elif periodic_table[atom.Z]['symbol'] == 'O':
+                free_bond = 2 - sum([bond.order for bond in atom.bonds]) - atom.charge
+                if free_bond:
+                    free_atoms[atom] = free_bond
+        for atom, h_number in free_atoms.iteritems():
+            for x in range(h_number):
+                h = Atom(1)
+                molecule.atoms.add(h)
+                b = Bond(order=1)
+                b.atoms.add(h)
+                b.atoms.add(atom)
+                h.bonds.append(b)
+                atom.bonds.append(b)
+
         return molecule
 
 
@@ -213,7 +233,7 @@ if __name__ == '__main__':
     n = 0
     s = time.time()
     for smile in smiles:
-        n +=1
+        n += 1
         if n % 10000 == 0:
             print n, (time.time() - s)/n
         mol = p.decode(smile.split(' ')[0])
