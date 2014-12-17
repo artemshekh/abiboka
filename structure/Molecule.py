@@ -1,9 +1,9 @@
 from calc.graph import Graph
-
+# TODO! Think about consistency of atom, molecule, and bond class
 class Molecule():
     def __init__(self):
-        self.atoms = set()
-        self.bonds = set()
+        self.atoms = []
+        self.bonds = []
 
     def add_atom(self, atom):
         self.atoms.add(atom)
