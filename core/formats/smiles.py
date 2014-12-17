@@ -73,7 +73,6 @@ class SmilesParser(Parser):
                     hcount = 0
                     n = None
                     if atom.startswith('['):
-
                         bracket_atom = self.SQUARE_BRACKET.match(atom).groupdict()
                         atom = bracket_atom['symbol']
                         if bracket_atom['charge']:
@@ -105,33 +104,28 @@ class SmilesParser(Parser):
                         if hcount:
                             for x in range(hcount):
                                 h = Atom(1)
-                                molecule.atoms.add(h)
+                                molecule.atoms.append(h)
                                 bond_h = Bond(order=1)
-                                molecule.bonds.add(bond_h)
-                                bond_h.atoms.add(h)
-                                bond_h.atoms.add(atom)
-                                h.bonds.append(bond_h)
-                                atom.bonds.append(bond_h)
+                                molecule.bonds.append(bond_h)
+                                bond_h.add_atom(h)
+                                bond_h.add_atom(atom)
                     except Exception as err:
                         print err
                         pass
-                    molecule.atoms.add(atom)
+                        raise
+                    molecule.atoms.append(atom)
                     if previuos_atom:
-                        previous_bond.atoms.add(atom)
-                        atom.bonds.append(previous_bond)
+                        previous_bond.add_atom(atom)
                         if after_branch_close:
                             atom_pop = atom_stack.pop()
-                            previous_bond.atoms.add(atom_pop)
-                            atom_pop.bonds.append(previous_bond)
+                            previous_bond.add_atom(atom_pop)
                             after_branch_close = False
                         if after_branch_close_open:
-                            previous_bond.atoms.add(atom_stack[-1])
-                            atom_stack[-1].bonds.append(previous_bond)
+                            previous_bond.add_atom(atom_stack[-1])
                             after_branch_close_open = False
                         else:
-                            previous_bond.atoms.add(previuos_atom)
-                            previuos_atom.bonds.append(previous_bond)
-                        molecule.bonds.add(previous_bond)
+                            previous_bond.add_atom(previuos_atom)
+                        molecule.bonds.append(previous_bond)
                     previuos_atom = atom
                     if not bond_expression:
                         bond = Bond(order=1)
@@ -160,9 +154,9 @@ class SmilesParser(Parser):
                                     numbering_stack[number] = atom
                                 else:
                                     numbering_bond = Bond(order=1, cis_trans=cis_trans_sign)
-                                    numbering_bond.atoms.add(numbering_stack[number])
-                                    numbering_bond.atoms.add(atom)
-                                    molecule.bonds.add(numbering_bond)
+                                    numbering_bond.add_atom(numbering_stack[number])
+                                    numbering_bond.add_atom(atom)
+                                    molecule.bonds.append(numbering_bond)
                                     del(numbering_stack[number])
 
                         else:
@@ -211,12 +205,11 @@ class SmilesParser(Parser):
         for atom, h_number in free_atoms.iteritems():
             for x in range(h_number):
                 h = Atom(1)
-                molecule.atoms.add(h)
-                b = Bond(order=1)
-                b.atoms.add(h)
-                b.atoms.add(atom)
-                h.bonds.append(b)
-                atom.bonds.append(b)
+                molecule.atoms.append(h)
+                b = Bond(order=1, atom1=atom, atom2=h)
+                molecule.bonds.append(b)
+                b.add_atom(h)
+                b.add_atom(atom)
 
         return molecule
 
@@ -233,6 +226,16 @@ if __name__ == '__main__':
     import os
     p = SmilesParser()
     smiles = open(os.getcwd() + '/smiles.txt', 'r')
+    n = 0
+    import time
+    s = time.time()
+    import sys
+    m = p.decode('[7C+]C')
+    print m.atoms
+    sys.exit(1)
     for smile in smiles:
+        n += 1
+        if n % 10000 == 0:
+            print n, (time.time() - s)/n
         mol = p.decode(smile.split(' ')[0])
 
