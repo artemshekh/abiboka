@@ -72,7 +72,9 @@ class SmilesParser(Parser):
                     chiral = False
                     hcount = 0
                     n = None
+                    bracket = False
                     if atom.startswith('['):
+                        bracket = True
                         bracket_atom = self.SQUARE_BRACKET.match(atom).groupdict()
                         atom = bracket_atom['symbol']
                         if bracket_atom['charge']:
@@ -99,7 +101,7 @@ class SmilesParser(Parser):
                     atom = atom.capitalize()
                     try:
                         z = periodic_table_by_symbol[atom]['z']
-                        atom = Atom(z=z, n=n, charge=charge, aromatic=aromatic, chiral=chiral)
+                        atom = Atom(z=z, n=n, charge=charge, aromatic=aromatic, chiral=chiral, bracket=bracket)
 
                         if hcount:
                             for x in range(hcount):
@@ -137,7 +139,7 @@ class SmilesParser(Parser):
                         if breaking_bond:
                             breaking_bond = breaking_bond.groupdict()
                             breaking_bond, tail = breaking_bond['breaking_bond'], breaking_bond['tail']
-                            if not breaking_bond[0].isdigit():
+                            if not breaking_bond[0].isdigit() and breaking_bond[0] != '%':
                                 cis_trans_sign, numbers = breaking_bond[0], breaking_bond[1:]
                             else:
                                 cis_trans_sign, numbers = None, breaking_bond
@@ -194,14 +196,17 @@ class SmilesParser(Parser):
         # add atoms h on unocuppy atoms
         free_atoms = {}
         for index, atom in enumerate(molecule.atoms):
+            if atom.bracket:
+                continue
             aromatic = 1 if atom.aromatic else 0
             if periodic_table[atom.Z]['symbol'] == 'C':
-                free_bond = 4 - sum([bond.order for bond in atom.bonds]) - atom.charge - aromatic
-                if free_bond:
+                free_bond = 4 - sum([bond.order for bond in atom.bonds])
+                if free_bond > 0:
+                    free_bond -= aromatic
                     free_atoms[atom] = free_bond
             elif periodic_table[atom.Z]['symbol'] == 'O':
-                free_bond = 2 - sum([bond.order for bond in atom.bonds]) - atom.charge
-                if free_bond:
+                free_bond = 2 - sum([bond.order for bond in atom.bonds])
+                if free_bond > 0:
                     free_atoms[atom] = free_bond
             elif periodic_table[atom.Z]['symbol'] == 'N':
                 if sum([bond.order for bond in atom.bonds]) <= 3:
