@@ -252,6 +252,19 @@ class AdjacencyMatrix(Matrix):
                     return False
         return True
 
+    @classmethod
+    def from_molecule(cls, molecule):
+        n = len(molecule.atoms)
+        matrix = [[0 for x in range(n)] for y in range(n)]
+        d = {}
+        for index, atom in enumerate(molecule.atoms):
+            d[atom] = index
+        for bond in molecule.bonds:
+            _ = list(bond)
+            i, j = d[_[0]], d[_[1]]
+            matrix[i][j], matrix[j][i] = 1, 1
+
+        return cls(matrix)
 
 if __name__ == '__main__':
     import os
