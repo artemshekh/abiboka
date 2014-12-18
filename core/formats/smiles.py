@@ -194,14 +194,39 @@ class SmilesParser(Parser):
         # add atoms h on unocuppy atoms
         free_atoms = {}
         for index, atom in enumerate(molecule.atoms):
+            aromatic = 1 if atom.aromatic else 0
             if periodic_table[atom.Z]['symbol'] == 'C':
-                free_bond = 4 - sum([bond.order for bond in atom.bonds]) - atom.charge
+                free_bond = 4 - sum([bond.order for bond in atom.bonds]) - atom.charge - aromatic
                 if free_bond:
                     free_atoms[atom] = free_bond
             elif periodic_table[atom.Z]['symbol'] == 'O':
                 free_bond = 2 - sum([bond.order for bond in atom.bonds]) - atom.charge
                 if free_bond:
                     free_atoms[atom] = free_bond
+            elif periodic_table[atom.Z]['symbol'] == 'N':
+                if sum([bond.order for bond in atom.bonds]) <= 3:
+                    free_bond = 3 - sum([bond.order for bond in atom.bonds]) - atom.charge - aromatic
+                else:
+                    free_bond = 5 - sum([bond.order for bond in atom.bonds]) - atom.charge
+                if free_bond:
+                    free_atoms[atom] = free_bond
+            elif periodic_table[atom.Z]['symbol'] == 'P':
+                if sum([bond.order for bond in atom.bonds]) <= 3:
+                    free_bond = 3 - sum([bond.order for bond in atom.bonds]) - atom.charge
+                else:
+                    free_bond = 5 - sum([bond.order for bond in atom.bonds]) - atom.charge
+                if free_bond:
+                    free_atoms[atom] = free_bond
+            elif periodic_table[atom.Z]['symbol'] == 'S':
+                if sum([bond.order for bond in atom.bonds]) <= 2:
+                    free_bond = 2 - sum([bond.order for bond in atom.bonds]) - atom.charge
+                elif sum([bond.order for bond in atom.bonds]) <= 4:
+                    free_bond = 4 - sum([bond.order for bond in atom.bonds]) - atom.charge
+                else:
+                    free_bond = 6 - sum([bond.order for bond in atom.bonds]) - atom.charge
+                if free_bond:
+                    free_atoms[atom] = free_bond
+
         for atom, h_number in free_atoms.iteritems():
             for x in range(h_number):
                 h = Atom(1)
@@ -226,16 +251,6 @@ if __name__ == '__main__':
     import os
     p = SmilesParser()
     smiles = open(os.getcwd() + '/smiles.txt', 'r')
-    n = 0
-    import time
-    s = time.time()
-    import sys
-    m = p.decode('[7C+]C')
-    print m.atoms
-    sys.exit(1)
     for smile in smiles:
-        n += 1
-        if n % 10000 == 0:
-            print n, (time.time() - s)/n
         mol = p.decode(smile.split(' ')[0])
 
