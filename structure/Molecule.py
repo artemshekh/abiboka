@@ -1,4 +1,5 @@
 from calc.graph import Graph
+from utils.periodic_table import periodic_table
 # TODO! Think about consistency of atom, molecule, and bond class
 class Molecule():
     def __init__(self):
@@ -24,6 +25,24 @@ class Molecule():
 
     def molecular_graph(self):
         return Graph.Graph.from_molecule(self.atoms, self.bonds)
+
+    def hydrogen_suppressed(self):
+        atoms = []
+        bonds = []
+        for atom in self.atoms:
+            if periodic_table[atom.Z]['symbol'] != 'H':
+                atoms.append(atom)
+        for bond in self.bonds:
+            h_in_bond = False
+            for atom in bond:
+                if periodic_table[atom.Z]['symbol'] == 'H':
+                    h_in_bond = True
+            if not h_in_bond:
+                bonds.append(bond)
+        molecule = Molecule()
+        molecule.atoms = atoms
+        molecule.bonds = bonds
+        return molecule
 
 if __name__ == '__main__':
     print Molecule()
