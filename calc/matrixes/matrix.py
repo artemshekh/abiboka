@@ -8,7 +8,8 @@ class Matrix(object):
 
     def __init__(self, matrix=None):
         self.matrix = matrix or []
-        self.rows_number = len(self.matrix)
+        #print self.matrix
+        self.rows_number = self.rows()
         self.cols_number = self.cols()
 
     ##################### MAIN OPERATIONS ############################
@@ -167,7 +168,7 @@ class Matrix(object):
         :return: Matrix
         """
         matrix = [list(row) for row in zip(*self.matrix)]
-        print Matrix(matrix)
+        return Matrix(matrix)
 
     def cols(self):
         """
@@ -179,6 +180,13 @@ class Matrix(object):
             return min(var)
         else:
             raise MalformedMatrixException
+
+    def rows(self):
+        """
+        Return number of columns
+        :return: int
+        """
+        return len(self.matrix)
 
     def is_square(self):
         """
