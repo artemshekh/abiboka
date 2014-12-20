@@ -56,3 +56,5 @@ target/
 *~
 .idea*
 Theory
+TODO
+test.py
