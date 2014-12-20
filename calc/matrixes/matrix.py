@@ -274,6 +274,15 @@ class AdjacencyMatrix(Matrix):
 
         return cls(matrix)
 
+class IdentityMatrix(Matrix):
+
+    @classmethod
+    def n(cls, n):
+        matrix = [[0 for x in range(n)] for x in range(n)]
+        for x in range(n):
+            matrix[x][x] = 1
+        return cls(matrix)
+
 if __name__ == '__main__':
     import os
     os.getcwd()
