@@ -32,6 +32,15 @@ class Molecule():
         for atom in self.atoms:
             if periodic_table[atom.Z]['symbol'] != 'H':
                 atoms.append(atom)
+                bonds_list = []
+                for bond in atom.bonds:
+                    h_in_bond_ = False
+                    for atom_ in bond:
+                        if periodic_table[atom_.Z]['symbol'] == 'H':
+                            h_in_bond_ = True
+                    if not h_in_bond_:
+                        bonds_list.append(bond)
+                atom.bonds = bonds_list
         for bond in self.bonds:
             h_in_bond = False
             for atom in bond:
