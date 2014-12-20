@@ -9,14 +9,14 @@ periodic_table = {
     'name':'Any Atom',
     'relative_atomic_weight':0,
     'isotopes': [],
-    'vdw_radius': None,
+    'vdw_radius': 0,
     },
     1:{
     'symbol':'H',
     'name':'Hydrogen',
     'relative_atomic_weight':1.008,
     'isotopes': [],
-    'vdw_radius': 1.2,
+    'vdw_radius': 1.1,
     },
     2:{
     'symbol':'He',
