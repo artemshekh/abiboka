@@ -10,6 +10,7 @@ from utils.periodic_table import periodic_table
 def find_eigenvalue(matrix):
     pass
 
+
 def jacobi(matrix):
 
     def max_(matrix):
@@ -65,6 +66,7 @@ def jacobi(matrix):
             return matrix
         rotate(matrix, p, k, l)
 
+
 def p2_matrix(molecule):
     matrix = [[0 for y in range(len(molecule.atoms))] for x in range(len(molecule.atoms))]
     d = {}
@@ -88,6 +90,7 @@ def p2_matrix(molecule):
             j = d[atom]
             matrix[i][j], matrix[j][i] = 2, 2
     return Matrix(matrix)
+
 
 def p3_matrix(molecule):
     matrix = [[0 for y in range(len(molecule.atoms))] for x in range(len(molecule.atoms))]
@@ -120,6 +123,7 @@ def p3_matrix(molecule):
             matrix[i][j], matrix[j][i] = 3, 3
     return Matrix(matrix)
 
+
 def ax1(molecule):
     p1 = AdjacencyMatrix.from_molecule(molecule)
     for x in range(len(molecule.atoms)):
@@ -129,6 +133,7 @@ def ax1(molecule):
     _ = jacobi(matrix)
     return max([_.matrix[x][x]for x in range(_.rows())])/2
 
+
 def ax2(molecule):
     p2 = p2_matrix(molecule)
     for x in range(len(molecule.atoms)):
@@ -137,6 +142,7 @@ def ax2(molecule):
     matrix = p2plus * p2plus.transpose()
     _ = jacobi(matrix)
     return max([_.matrix[x][x]for x in range(_.rows())])/2
+
 
 def ax3(molecule):
     p3 = p3_matrix(molecule)
