@@ -11,6 +11,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 0,
     'pauling_electronegativity': None,
+    'ar_electronegativity': None,
     },
     1:{
     'symbol':'H',
@@ -19,6 +20,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.1,
     'pauling_electronegativity': 2.20,
+    'ar_electronegativity': 2.20,
     },
     2:{
     'symbol':'He',
@@ -27,6 +29,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.4,
     'pauling_electronegativity': None,
+    'ar_electronegativity': None,
     },
     3:{
     'symbol':'Li',
@@ -35,6 +38,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.82,
     'pauling_electronegativity': 0.98,
+    'ar_electronegativity': 0.97,
     },
     4:{
     'symbol':'Be',
@@ -43,6 +47,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.53,
     'pauling_electronegativity': 1.57,
+    'ar_electronegativity': 1.47,
     },
     5:{
     'symbol':'B',
@@ -51,6 +56,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.92,
     'pauling_electronegativity': 2.04,
+    'ar_electronegativity': 2.01,
     },
     6:{
     'symbol':'C',
@@ -59,6 +65,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.7,
     'pauling_electronegativity': 2.55,
+    'ar_electronegativity': 2.50,
     },
     7:{
     'symbol':'N',
@@ -67,6 +74,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.55,
     'pauling_electronegativity': 3.04,
+    'ar_electronegativity': 3.07,
     },
     8:{
     'symbol':'O',
@@ -75,6 +83,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.52,
     'pauling_electronegativity': 3.44,
+    'ar_electronegativity': 3.50,
     },
     9:{
     'symbol':'F',
@@ -83,6 +92,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.47,
     'pauling_electronegativity': 3.98,
+    'ar_electronegativity': 4.10,
     },
     10:{
     'symbol':'Ne',
@@ -91,6 +101,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.54,
     'pauling_electronegativity': None,
+    'ar_electronegativity': None,
     },
     11:{
     'symbol':'Na',
@@ -99,6 +110,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.27,
     'pauling_electronegativity': 0.93,
+    'ar_electronegativity': 1.01,
     },
     12:{
     'symbol':'Mg',
@@ -107,6 +119,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.73,
     'pauling_electronegativity': 1.31,
+    'ar_electronegativity': 1.23,
     },
     13:{
     'symbol':'Al',
@@ -115,6 +128,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.84,
     'pauling_electronegativity': 1.61,
+    'ar_electronegativity': 1.47,
     },
     14:{
     'symbol':'Si',
@@ -123,6 +137,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.10,
     'pauling_electronegativity': 1.90,
+    'ar_electronegativity': 1.74,
     },
     15:{
     'symbol':'P',
@@ -131,6 +146,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.80,
     'pauling_electronegativity': 2.19,
+    'ar_electronegativity': 2.06,
     },
     16:{
     'symbol':'S',
@@ -139,6 +155,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.80,
     'pauling_electronegativity': 2.58,
+    'ar_electronegativity': 2.44,
     },
     17:{
     'symbol':'Cl',
@@ -147,6 +164,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.75,
     'pauling_electronegativity': 3.16,
+    'ar_electronegativity': 2.83,
     },
     18:{
     'symbol':'Ar',
@@ -155,6 +173,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.88,
     'pauling_electronegativity': None,
+    'ar_electronegativity': None,
     },
     19:{
     'symbol':'K',
@@ -163,6 +182,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.71,
     'pauling_electronegativity': 0.82,
+    'ar_electronegativity': 0.91,
     },
     20:{
     'symbol':'Ca',
@@ -171,6 +191,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.31,
     'pauling_electronegativity': 1.0,
+    'ar_electronegativity': 1.04,
     },
     21:{
     'symbol':'Sc',
@@ -179,14 +200,16 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.11,
     'pauling_electronegativity': 1.36,
+    'ar_electronegativity': 1.20,
     },
     22:{
     'symbol':'Ti',
     'name':'Titanium',
     'relative_atomic_weight':47.867,
     'isotopes': [],
-    'vdw_radius': 2.15
+    'vdw_radius': 2.15,
     'pauling_electronegativity': 1.54,
+    'ar_electronegativity': 1.32,
     },
     23:{
     'symbol':'V',
@@ -195,6 +218,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.05,
     'pauling_electronegativity': 1.63,
+    'ar_electronegativity': 1.45,
     },
     24:{
     'symbol':'Cr',
@@ -203,6 +227,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.05,
     'pauling_electronegativity': 1.66,
+    'ar_electronegativity': 1.56,
     },
     25:{
     'symbol':'Mn',
@@ -211,6 +236,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.05,
     'pauling_electronegativity': 1.55,
+    'ar_electronegativity': 1.60,
     },
     26:{
     'symbol':'Fe',
@@ -219,6 +245,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.05,
     'pauling_electronegativity': 1.83,
+    'ar_electronegativity': 1.64,
     },
     27:{
     'symbol':'Co',
@@ -227,6 +254,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.0,
     'pauling_electronegativity': 1.88,
+    'ar_electronegativity': 1.70,
     },
     28:{
     'symbol':'Ni',
@@ -235,6 +263,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.0,
     'pauling_electronegativity': 1.91,
+    'ar_electronegativity': 1.75,
     },
     29:{
     'symbol':'Cu',
@@ -243,6 +272,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.0,
     'pauling_electronegativity': 1.90,
+    'ar_electronegativity': 1.75,
     },
     30:{
     'symbol':'Zn',
@@ -251,6 +281,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.1,
     'pauling_electronegativity': 1.65,
+    'ar_electronegativity': 1.66,
     },
     31:{
     'symbol':'Ga',
@@ -259,6 +290,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.1,
     'pauling_electronegativity': 1.81,
+    'ar_electronegativity': 1.82,
     },
     32:{
     'symbol':'Ge',
@@ -267,6 +299,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.1,
     'pauling_electronegativity': 2.01,
+    'ar_electronegativity': 2.02,
     },
     33:{
     'symbol':'As',
@@ -275,6 +308,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.05,
     'pauling_electronegativity': 2.18,
+    'ar_electronegativity': 2.20,
     },
     34:{
     'symbol':'Se',
@@ -283,6 +317,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.9,
     'pauling_electronegativity': 2.55,
+    'ar_electronegativity': 2.48,
     },
     35:{
     'symbol':'Br',
@@ -291,6 +326,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 1.9,
     'pauling_electronegativity': 2.96,
+    'ar_electronegativity': 2.74,
     },
     36:{
     'symbol':'Kr',
@@ -299,6 +335,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.02,
     'pauling_electronegativity': 3.0,
+    'ar_electronegativity': 2.94,
     },
     37:{
     'symbol':'Rb',
@@ -307,6 +344,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.9,
     'pauling_electronegativity': 0.82,
+    'ar_electronegativity': 0.89,
     },
     38:{
     'symbol':'Sr',
@@ -315,6 +353,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.55,
     'pauling_electronegativity': 0.95,
+    'ar_electronegativity': 0.99,
     },
     39:{
     'symbol':'Y',
@@ -323,6 +362,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.4,
     'pauling_electronegativity': 1.22,
+    'ar_electronegativity': 1.11,
     },
     40:{
     'symbol':'Zr',
@@ -331,6 +371,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.3,
     'pauling_electronegativity': 1.33,
+    'ar_electronegativity': 1.22,
     },
     41:{
     'symbol':'Nb',
@@ -339,6 +380,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.15,
     'pauling_electronegativity': 1.6,
+    'ar_electronegativity': 1.23,
     },
     42:{
     'symbol':'Mo',
@@ -347,6 +389,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.1,
     'pauling_electronegativity': 2.16,
+    'ar_electronegativity': 1.30,
     },
     43:{
     'symbol':'Tc',
@@ -355,6 +398,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.05,
     'pauling_electronegativity': 1.9,
+    'ar_electronegativity': 1.36,
     },
     44:{
     'symbol':'Ru',
@@ -363,6 +407,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.05,
     'pauling_electronegativity': 2.2,
+    'ar_electronegativity': 1.42,
     },
     45:{
     'symbol':'Rh',
@@ -371,6 +416,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.0,
     'pauling_electronegativity': 2.28,
+    'ar_electronegativity': 1.45,
     },
     46:{
     'symbol':'Pd',
@@ -379,6 +425,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.05,
     'pauling_electronegativity': 2.2,
+    'ar_electronegativity': 1.35,
     },
     47:{
     'symbol':'Ag',
@@ -387,6 +434,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.1,
     'pauling_electronegativity': 1.93,
+    'ar_electronegativity': 1.42,
     },
     48:{
     'symbol':'Cd',
@@ -395,6 +443,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.2,
     'pauling_electronegativity': 1.69,
+    'ar_electronegativity': 1.46,
     },
     49:{
     'symbol':'In',
@@ -403,6 +452,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.2,
     'pauling_electronegativity': 1.78,
+    'ar_electronegativity': 1.49,
     },
     50:{
     'symbol':'Sn',
@@ -411,6 +461,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.25,
     'pauling_electronegativity': 1.96,
+    'ar_electronegativity': 1.72,
     },
     51:{
     'symbol':'Sb',
@@ -419,6 +470,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.2,
     'pauling_electronegativity': 2.05,
+    'ar_electronegativity': 1.82,
     },
     52:{
     'symbol':'Te',
@@ -427,6 +479,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.1,
     'pauling_electronegativity': 2.1,
+    'ar_electronegativity': 2.01,
     },
     53:{
     'symbol':'I',
@@ -435,6 +488,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.1,
     'pauling_electronegativity': 2.66,
+    'ar_electronegativity': 2.21,
     },
     54:{
     'symbol':'Xe',
@@ -443,6 +497,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.16,
     'pauling_electronegativity': 2.6,
+    'ar_electronegativity': 2.40,
     },
     55:{
     'symbol':'Cs',
@@ -451,6 +506,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 3.0,
     'pauling_electronegativity': 0.79,
+    'ar_electronegativity': 0.86,
     },
     56:{
     'symbol':'Ba',
@@ -459,6 +515,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.7,
     'pauling_electronegativity': 0.89,
+    'ar_electronegativity': 0.97,
     },
     57:{
     'symbol':'La',
@@ -467,6 +524,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.5,
     'pauling_electronegativity': 1.10,
+    'ar_electronegativity': 1.08,
     },
     58:{
     'symbol':'Ce',
@@ -475,6 +533,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.12,
+    'ar_electronegativity': 1.08,
     },
     59:{
     'symbol':'Pr',
@@ -483,6 +542,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.13,
+    'ar_electronegativity': 1.07,
     },
     60:{
     'symbol':'Nd',
@@ -491,6 +551,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.14,
+    'ar_electronegativity': 1.07,
     },
     61:{
     'symbol':'Pm',
@@ -499,6 +560,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': None,
+    'ar_electronegativity': 1.07,
     },
     62:{
     'symbol':'Sm',
@@ -507,6 +569,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.17,
+    'ar_electronegativity': 1.07,
     },
     63:{
     'symbol':'Eu',
@@ -515,6 +578,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': None,
+    'ar_electronegativity': 1.01,
     },
     64:{
     'symbol':'Gd',
@@ -523,6 +587,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.20,
+    'ar_electronegativity': 1.11,
     },
     65:{
     'symbol':'Tb',
@@ -531,6 +596,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': None,
+    'ar_electronegativity': 1.10,
     },
     66:{
     'symbol':'Dy',
@@ -539,6 +605,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.22,
+    'ar_electronegativity': 1.10,
     },
     67:{
     'symbol':'Ho',
@@ -547,6 +614,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.23,
+    'ar_electronegativity': 1.10,
     },
     68:{
     'symbol':'Er',
@@ -555,6 +623,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.24,
+    'ar_electronegativity': 1.11,
     },
     69:{
     'symbol':'Tm',
@@ -563,6 +632,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.25,
+    'ar_electronegativity': 1.11,
     },
     70:{
     'symbol':'Yb',
@@ -571,6 +641,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': None,
+    'ar_electronegativity': 1.06,
     },
     71:{
     'symbol':'Lu',
@@ -579,6 +650,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.27,
+    'ar_electronegativity': 1.14,
     },
     72:{
     'symbol':'Hf',
@@ -587,6 +659,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.25,
     'pauling_electronegativity': 1.3,
+    'ar_electronegativity': 1.23,
     },
     73:{
     'symbol':'Ta',
@@ -595,6 +668,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.2,
     'pauling_electronegativity': 1.5,
+    'ar_electronegativity': 1.33,
     },
     74:{
     'symbol':'W',
@@ -603,6 +677,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.1,
     'pauling_electronegativity': 2.36,
+    'ar_electronegativity': 1.40,
     },
     75:{
     'symbol':'Re',
@@ -611,6 +686,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.05,
     'pauling_electronegativity': 1.9,
+    'ar_electronegativity': 1.46,
     },
     76:{
     'symbol':'Os',
@@ -619,6 +695,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.0,
     'pauling_electronegativity': 2.2,
+    'ar_electronegativity': 1.52,
     },
     77:{
     'symbol':'Ir',
@@ -627,6 +704,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.0,
     'pauling_electronegativity': 2.2,
+    'ar_electronegativity': 1.55,
     },
     78:{
     'symbol':'Pt',
@@ -635,6 +713,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.05,
     'pauling_electronegativity': 2.28,
+    'ar_electronegativity': 1.44,
     },
     79:{
     'symbol':'Au',
@@ -643,6 +722,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.1,
     'pauling_electronegativity': 2.54,
+    'ar_electronegativity': 1.42,
     },
     80:{
     'symbol':'Hg',
@@ -651,6 +731,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.05,
     'pauling_electronegativity': 2.0,
+    'ar_electronegativity': 1.44,
     },
     81:{
     'symbol':'Tl',
@@ -659,6 +740,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.2,
     'pauling_electronegativity': 1.62,
+    'ar_electronegativity': 1.44,
     },
     82:{
     'symbol':'Pb',
@@ -667,6 +749,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.3,
     'pauling_electronegativity': 2.33,
+    'ar_electronegativity': 1.55,
     },
     83:{
     'symbol':'Bi',
@@ -675,6 +758,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.3,
     'pauling_electronegativity': 2.02,
+    'ar_electronegativity': 1.67,
     },
     84:{
     'symbol':'Po',
@@ -683,6 +767,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 2.0,
+    'ar_electronegativity': 1.76,
     },
     85:{
     'symbol':'At',
@@ -691,6 +776,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 2.2,
+    'ar_electronegativity': 1.90,
     },
     86:{
     'symbol':'Rn',
@@ -699,6 +785,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': None,
+    'ar_electronegativity': 2.06,
     },
     87:{
     'symbol':'Fr',
@@ -707,6 +794,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 0.7,
+    'ar_electronegativity': 0.86,
     },
     88:{
     'symbol':'Ra',
@@ -715,6 +803,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 0.9,
+    'ar_electronegativity': 0.97,
     },
     89:{
     'symbol':'Ac',
@@ -723,6 +812,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.1,
+    'ar_electronegativity': 1.0,
     },
     90:{
     'symbol':'Th',
@@ -731,6 +821,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.4,
     'pauling_electronegativity': 1.3,
+    'ar_electronegativity': 1.11,
     },
     91:{
     'symbol':'Pa',
@@ -739,6 +830,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.5,
+    'ar_electronegativity': 1.14,
     },
     92:{
     'symbol':'U',
@@ -747,6 +839,7 @@ periodic_table = {
     'isotopes': [],
     'vdw_radius': 2.3,
     'pauling_electronegativity': 1.38,
+    'ar_electronegativity': 1.22,
     },
     93:{
     'symbol':'Np',
@@ -755,6 +848,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.36,
+    'ar_electronegativity': 1.22,
     },
     94:{
     'symbol':'Pu',
@@ -763,6 +857,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.28,
+    'ar_electronegativity': 1.22,
     },
     95:{
     'symbol':'Am',
@@ -771,6 +866,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.3,
+    'ar_electronegativity': 1.2,
     },
     96:{
     'symbol':'Cm',
@@ -779,6 +875,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.3,
+    'ar_electronegativity': 1.2,
     },
     97:{
     'symbol':'Bk',
@@ -787,6 +884,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.3,
+    'ar_electronegativity': 1.2,
     },
     98:{
     'symbol':'Cf',
@@ -795,6 +893,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.3,
+    'ar_electronegativity': 1.2,
     },
     99:{
     'symbol':'En',
@@ -803,6 +902,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.3,
+    'ar_electronegativity': 1.2,
     },
     100:{
     'symbol':'Fm',
@@ -811,6 +911,7 @@ periodic_table = {
     'isotopes':[],
     'vdw_radius': 0,
     'pauling_electronegativity': 1.3,
+    'ar_electronegativity': 1.2,
     }
 }
 
