@@ -8,3 +8,7 @@ class ParseError(Exception):
 
 class MalformedMatrixException(Exception):
     pass
+
+
+class TabularDataAbsenceException(Exception):
+    pass
