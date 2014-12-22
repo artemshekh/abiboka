@@ -1,5 +1,6 @@
 """
 relative_atomic_weight - http://www.chem.qmul.ac.uk/iupac/AtWt/ (2013)
+atomic polarizability - http://ctcp.massey.ac.nz/Tablepol2014.pdf (2014/12/22) 
 
 """
 
@@ -12,6 +13,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': None,
     'ar_electronegativity': None,
+    'atomic_polarizability': None,
     },
     1:{
     'symbol':'H',
@@ -21,6 +23,7 @@ periodic_table = {
     'vdw_radius': 1.1,
     'pauling_electronegativity': 2.20,
     'ar_electronegativity': 2.20,
+    'atomic_polarizability': 4.5,
     },
     2:{
     'symbol':'He',
@@ -30,6 +33,7 @@ periodic_table = {
     'vdw_radius': 1.4,
     'pauling_electronegativity': None,
     'ar_electronegativity': None,
+    'atomic_polarizability': 1.383,
     },
     3:{
     'symbol':'Li',
@@ -39,6 +43,7 @@ periodic_table = {
     'vdw_radius': 1.82,
     'pauling_electronegativity': 0.98,
     'ar_electronegativity': 0.97,
+    'atomic_polarizability': 164.05,
     },
     4:{
     'symbol':'Be',
@@ -48,6 +53,7 @@ periodic_table = {
     'vdw_radius': 1.53,
     'pauling_electronegativity': 1.57,
     'ar_electronegativity': 1.47,
+    'atomic_polarizability': 37.775,
     },
     5:{
     'symbol':'B',
@@ -57,6 +63,7 @@ periodic_table = {
     'vdw_radius': 1.92,
     'pauling_electronegativity': 2.04,
     'ar_electronegativity': 2.01,
+    'atomic_polarizability': 20.5,
     },
     6:{
     'symbol':'C',
@@ -66,6 +73,7 @@ periodic_table = {
     'vdw_radius': 1.7,
     'pauling_electronegativity': 2.55,
     'ar_electronegativity': 2.50,
+    'atomic_polarizability': 11.0,
     },
     7:{
     'symbol':'N',
@@ -75,6 +83,7 @@ periodic_table = {
     'vdw_radius': 1.55,
     'pauling_electronegativity': 3.04,
     'ar_electronegativity': 3.07,
+    'atomic_polarizability': 7.43,
     },
     8:{
     'symbol':'O',
@@ -84,6 +93,7 @@ periodic_table = {
     'vdw_radius': 1.52,
     'pauling_electronegativity': 3.44,
     'ar_electronegativity': 3.50,
+    'atomic_polarizability': 6.04,
     },
     9:{
     'symbol':'F',
@@ -93,6 +103,7 @@ periodic_table = {
     'vdw_radius': 1.47,
     'pauling_electronegativity': 3.98,
     'ar_electronegativity': 4.10,
+    'atomic_polarizability': 3.76,
     },
     10:{
     'symbol':'Ne',
@@ -102,6 +113,7 @@ periodic_table = {
     'vdw_radius': 1.54,
     'pauling_electronegativity': None,
     'ar_electronegativity': None,
+    'atomic_polarizability': 2.68,
     },
     11:{
     'symbol':'Na',
@@ -111,6 +123,7 @@ periodic_table = {
     'vdw_radius': 2.27,
     'pauling_electronegativity': 0.93,
     'ar_electronegativity': 1.01,
+    'atomic_polarizability': 162.6,
     },
     12:{
     'symbol':'Mg',
@@ -120,6 +133,7 @@ periodic_table = {
     'vdw_radius': 1.73,
     'pauling_electronegativity': 1.31,
     'ar_electronegativity': 1.23,
+    'atomic_polarizability': 71.7,
     },
     13:{
     'symbol':'Al',
@@ -129,6 +143,7 @@ periodic_table = {
     'vdw_radius': 1.84,
     'pauling_electronegativity': 1.61,
     'ar_electronegativity': 1.47,
+    'atomic_polarizability': 56.3,
     },
     14:{
     'symbol':'Si',
@@ -138,6 +153,7 @@ periodic_table = {
     'vdw_radius': 2.10,
     'pauling_electronegativity': 1.90,
     'ar_electronegativity': 1.74,
+    'atomic_polarizability': 36.7,
     },
     15:{
     'symbol':'P',
@@ -147,6 +163,7 @@ periodic_table = {
     'vdw_radius': 1.80,
     'pauling_electronegativity': 2.19,
     'ar_electronegativity': 2.06,
+    'atomic_polarizability': 24.7,
     },
     16:{
     'symbol':'S',
@@ -156,6 +173,7 @@ periodic_table = {
     'vdw_radius': 1.80,
     'pauling_electronegativity': 2.58,
     'ar_electronegativity': 2.44,
+    'atomic_polarizability': 19.6,
     },
     17:{
     'symbol':'Cl',
@@ -165,6 +183,7 @@ periodic_table = {
     'vdw_radius': 1.75,
     'pauling_electronegativity': 3.16,
     'ar_electronegativity': 2.83,
+    'atomic_polarizability': 14.7,
     },
     18:{
     'symbol':'Ar',
@@ -174,6 +193,7 @@ periodic_table = {
     'vdw_radius': 1.88,
     'pauling_electronegativity': None,
     'ar_electronegativity': None,
+    'atomic_polarizability': 11.10,
     },
     19:{
     'symbol':'K',
@@ -183,6 +203,7 @@ periodic_table = {
     'vdw_radius': 2.71,
     'pauling_electronegativity': 0.82,
     'ar_electronegativity': 0.91,
+    'atomic_polarizability': 298.1,
     },
     20:{
     'symbol':'Ca',
@@ -192,6 +213,7 @@ periodic_table = {
     'vdw_radius': 2.31,
     'pauling_electronegativity': 1.0,
     'ar_electronegativity': 1.04,
+    'atomic_polarizability': 160,
     },
     21:{
     'symbol':'Sc',
@@ -201,6 +223,7 @@ periodic_table = {
     'vdw_radius': 2.11,
     'pauling_electronegativity': 1.36,
     'ar_electronegativity': 1.20,
+    'atomic_polarizability': 120,
     },
     22:{
     'symbol':'Ti',
@@ -210,6 +233,7 @@ periodic_table = {
     'vdw_radius': 2.15,
     'pauling_electronegativity': 1.54,
     'ar_electronegativity': 1.32,
+    'atomic_polarizability': 99,
     },
     23:{
     'symbol':'V',
@@ -219,6 +243,7 @@ periodic_table = {
     'vdw_radius': 2.05,
     'pauling_electronegativity': 1.63,
     'ar_electronegativity': 1.45,
+    'atomic_polarizability': 84,
     },
     24:{
     'symbol':'Cr',
@@ -228,6 +253,7 @@ periodic_table = {
     'vdw_radius': 2.05,
     'pauling_electronegativity': 1.66,
     'ar_electronegativity': 1.56,
+    'atomic_polarizability': 78,
     },
     25:{
     'symbol':'Mn',
@@ -237,6 +263,7 @@ periodic_table = {
     'vdw_radius': 2.05,
     'pauling_electronegativity': 1.55,
     'ar_electronegativity': 1.60,
+    'atomic_polarizability': 63,
     },
     26:{
     'symbol':'Fe',
@@ -246,6 +273,7 @@ periodic_table = {
     'vdw_radius': 2.05,
     'pauling_electronegativity': 1.83,
     'ar_electronegativity': 1.64,
+    'atomic_polarizability': 57,
     },
     27:{
     'symbol':'Co',
@@ -255,6 +283,7 @@ periodic_table = {
     'vdw_radius': 2.0,
     'pauling_electronegativity': 1.88,
     'ar_electronegativity': 1.70,
+    'atomic_polarizability': 51,
     },
     28:{
     'symbol':'Ni',
@@ -264,6 +293,7 @@ periodic_table = {
     'vdw_radius': 2.0,
     'pauling_electronegativity': 1.91,
     'ar_electronegativity': 1.75,
+    'atomic_polarizability': 46,
     },
     29:{
     'symbol':'Cu',
@@ -273,6 +303,7 @@ periodic_table = {
     'vdw_radius': 2.0,
     'pauling_electronegativity': 1.90,
     'ar_electronegativity': 1.75,
+    'atomic_polarizability': 53.44,
     },
     30:{
     'symbol':'Zn',
@@ -282,6 +313,7 @@ periodic_table = {
     'vdw_radius': 2.1,
     'pauling_electronegativity': 1.65,
     'ar_electronegativity': 1.66,
+    'atomic_polarizability': 39.2,
     },
     31:{
     'symbol':'Ga',
@@ -291,6 +323,7 @@ periodic_table = {
     'vdw_radius': 2.1,
     'pauling_electronegativity': 1.81,
     'ar_electronegativity': 1.82,
+    'atomic_polarizability': 54.9,
     },
     32:{
     'symbol':'Ge',
@@ -300,6 +333,7 @@ periodic_table = {
     'vdw_radius': 2.1,
     'pauling_electronegativity': 2.01,
     'ar_electronegativity': 2.02,
+    'atomic_polarizability': 41.0,
     },
     33:{
     'symbol':'As',
@@ -309,6 +343,7 @@ periodic_table = {
     'vdw_radius': 2.05,
     'pauling_electronegativity': 2.18,
     'ar_electronegativity': 2.20,
+    'atomic_polarizability': 29.1,
     },
     34:{
     'symbol':'Se',
@@ -318,6 +353,7 @@ periodic_table = {
     'vdw_radius': 1.9,
     'pauling_electronegativity': 2.55,
     'ar_electronegativity': 2.48,
+    'atomic_polarizability': 26.24,
     },
     35:{
     'symbol':'Br',
@@ -327,6 +363,7 @@ periodic_table = {
     'vdw_radius': 1.9,
     'pauling_electronegativity': 2.96,
     'ar_electronegativity': 2.74,
+    'atomic_polarizability': 21.9,
     },
     36:{
     'symbol':'Kr',
@@ -336,6 +373,7 @@ periodic_table = {
     'vdw_radius': 2.02,
     'pauling_electronegativity': 3.0,
     'ar_electronegativity': 2.94,
+    'atomic_polarizability': 16.8,
     },
     37:{
     'symbol':'Rb',
@@ -345,6 +383,7 @@ periodic_table = {
     'vdw_radius': 2.9,
     'pauling_electronegativity': 0.82,
     'ar_electronegativity': 0.89,
+    'atomic_polarizability': 318.6,
     },
     38:{
     'symbol':'Sr',
@@ -354,6 +393,7 @@ periodic_table = {
     'vdw_radius': 2.55,
     'pauling_electronegativity': 0.95,
     'ar_electronegativity': 0.99,
+    'atomic_polarizability': 199,
     },
     39:{
     'symbol':'Y',
@@ -363,6 +403,7 @@ periodic_table = {
     'vdw_radius': 2.4,
     'pauling_electronegativity': 1.22,
     'ar_electronegativity': 1.11,
+    'atomic_polarizability': 153,
     },
     40:{
     'symbol':'Zr',
@@ -372,6 +413,7 @@ periodic_table = {
     'vdw_radius': 2.3,
     'pauling_electronegativity': 1.33,
     'ar_electronegativity': 1.22,
+    'atomic_polarizability': 121,
     },
     41:{
     'symbol':'Nb',
@@ -381,6 +423,7 @@ periodic_table = {
     'vdw_radius': 2.15,
     'pauling_electronegativity': 1.6,
     'ar_electronegativity': 1.23,
+    'atomic_polarizability': 106,
     },
     42:{
     'symbol':'Mo',
@@ -390,6 +433,7 @@ periodic_table = {
     'vdw_radius': 2.1,
     'pauling_electronegativity': 2.16,
     'ar_electronegativity': 1.30,
+    'atomic_polarizability': 86,
     },
     43:{
     'symbol':'Tc',
@@ -399,6 +443,7 @@ periodic_table = {
     'vdw_radius': 2.05,
     'pauling_electronegativity': 1.9,
     'ar_electronegativity': 1.36,
+    'atomic_polarizability': 77,
     },
     44:{
     'symbol':'Ru',
@@ -408,6 +453,7 @@ periodic_table = {
     'vdw_radius': 2.05,
     'pauling_electronegativity': 2.2,
     'ar_electronegativity': 1.42,
+    'atomic_polarizability': 65,
     },
     45:{
     'symbol':'Rh',
@@ -417,6 +463,7 @@ periodic_table = {
     'vdw_radius': 2.0,
     'pauling_electronegativity': 2.28,
     'ar_electronegativity': 1.45,
+    'atomic_polarizability': 58,
     },
     46:{
     'symbol':'Pd',
@@ -426,6 +473,7 @@ periodic_table = {
     'vdw_radius': 2.05,
     'pauling_electronegativity': 2.2,
     'ar_electronegativity': 1.35,
+    'atomic_polarizability': 32,
     },
     47:{
     'symbol':'Ag',
@@ -435,6 +483,7 @@ periodic_table = {
     'vdw_radius': 2.1,
     'pauling_electronegativity': 1.93,
     'ar_electronegativity': 1.42,
+    'atomic_polarizability': 52.2,
     },
     48:{
     'symbol':'Cd',
@@ -444,6 +493,7 @@ periodic_table = {
     'vdw_radius': 2.2,
     'pauling_electronegativity': 1.69,
     'ar_electronegativity': 1.46,
+    'atomic_polarizability': 46.3,
     },
     49:{
     'symbol':'In',
@@ -453,6 +503,7 @@ periodic_table = {
     'vdw_radius': 2.2,
     'pauling_electronegativity': 1.78,
     'ar_electronegativity': 1.49,
+    'atomic_polarizability': 65.2,
     },
     50:{
     'symbol':'Sn',
@@ -462,6 +513,7 @@ periodic_table = {
     'vdw_radius': 2.25,
     'pauling_electronegativity': 1.96,
     'ar_electronegativity': 1.72,
+    'atomic_polarizability': 52,
     },
     51:{
     'symbol':'Sb',
@@ -471,6 +523,7 @@ periodic_table = {
     'vdw_radius': 2.2,
     'pauling_electronegativity': 2.05,
     'ar_electronegativity': 1.82,
+    'atomic_polarizability': 45,
     },
     52:{
     'symbol':'Te',
@@ -480,6 +533,7 @@ periodic_table = {
     'vdw_radius': 2.1,
     'pauling_electronegativity': 2.1,
     'ar_electronegativity': 2.01,
+    'atomic_polarizability': 37,
     },
     53:{
     'symbol':'I',
@@ -489,6 +543,7 @@ periodic_table = {
     'vdw_radius': 2.1,
     'pauling_electronegativity': 2.66,
     'ar_electronegativity': 2.21,
+    'atomic_polarizability': 35.1,
     },
     54:{
     'symbol':'Xe',
@@ -498,6 +553,7 @@ periodic_table = {
     'vdw_radius': 2.16,
     'pauling_electronegativity': 2.6,
     'ar_electronegativity': 2.40,
+    'atomic_polarizability': 27.06,
     },
     55:{
     'symbol':'Cs',
@@ -507,6 +563,7 @@ periodic_table = {
     'vdw_radius': 3.0,
     'pauling_electronegativity': 0.79,
     'ar_electronegativity': 0.86,
+    'atomic_polarizability': 399,
     },
     56:{
     'symbol':'Ba',
@@ -516,6 +573,7 @@ periodic_table = {
     'vdw_radius': 2.7,
     'pauling_electronegativity': 0.89,
     'ar_electronegativity': 0.97,
+    'atomic_polarizability': 262.2,
     },
     57:{
     'symbol':'La',
@@ -525,6 +583,7 @@ periodic_table = {
     'vdw_radius': 2.5,
     'pauling_electronegativity': 1.10,
     'ar_electronegativity': 1.08,
+    'atomic_polarizability': 210,
     },
     58:{
     'symbol':'Ce',
@@ -534,6 +593,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.12,
     'ar_electronegativity': 1.08,
+    'atomic_polarizability': 200,
     },
     59:{
     'symbol':'Pr',
@@ -543,6 +603,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.13,
     'ar_electronegativity': 1.07,
+    'atomic_polarizability': 190,
     },
     60:{
     'symbol':'Nd',
@@ -552,6 +613,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.14,
     'ar_electronegativity': 1.07,
+    'atomic_polarizability': 212,
     },
     61:{
     'symbol':'Pm',
@@ -561,6 +623,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': None,
     'ar_electronegativity': 1.07,
+    'atomic_polarizability': 203,
     },
     62:{
     'symbol':'Sm',
@@ -570,6 +633,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.17,
     'ar_electronegativity': 1.07,
+    'atomic_polarizability': 194,
     },
     63:{
     'symbol':'Eu',
@@ -579,6 +643,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': None,
     'ar_electronegativity': 1.01,
+    'atomic_polarizability': 187,
     },
     64:{
     'symbol':'Gd',
@@ -588,6 +653,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.20,
     'ar_electronegativity': 1.11,
+    'atomic_polarizability': 159,
     },
     65:{
     'symbol':'Tb',
@@ -597,6 +663,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': None,
     'ar_electronegativity': 1.10,
+    'atomic_polarizability': 172,
     },
     66:{
     'symbol':'Dy',
@@ -606,6 +673,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.22,
     'ar_electronegativity': 1.10,
+    'atomic_polarizability': 165,
     },
     67:{
     'symbol':'Ho',
@@ -615,6 +683,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.23,
     'ar_electronegativity': 1.10,
+    'atomic_polarizability': 159,
     },
     68:{
     'symbol':'Er',
@@ -624,6 +693,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.24,
     'ar_electronegativity': 1.11,
+    'atomic_polarizability': 153,
     },
     69:{
     'symbol':'Tm',
@@ -633,6 +703,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.25,
     'ar_electronegativity': 1.11,
+    'atomic_polarizability': 147,
     },
     70:{
     'symbol':'Yb',
@@ -642,6 +713,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': None,
     'ar_electronegativity': 1.06,
+    'atomic_polarizability': 142,
     },
     71:{
     'symbol':'Lu',
@@ -651,6 +723,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.27,
     'ar_electronegativity': 1.14,
+    'atomic_polarizability': 148,
     },
     72:{
     'symbol':'Hf',
@@ -660,6 +733,7 @@ periodic_table = {
     'vdw_radius': 2.25,
     'pauling_electronegativity': 1.3,
     'ar_electronegativity': 1.23,
+    'atomic_polarizability': 109,
     },
     73:{
     'symbol':'Ta',
@@ -669,6 +743,7 @@ periodic_table = {
     'vdw_radius': 2.2,
     'pauling_electronegativity': 1.5,
     'ar_electronegativity': 1.33,
+    'atomic_polarizability': 88,
     },
     74:{
     'symbol':'W',
@@ -678,6 +753,7 @@ periodic_table = {
     'vdw_radius': 2.1,
     'pauling_electronegativity': 2.36,
     'ar_electronegativity': 1.40,
+    'atomic_polarizability': 75,
     },
     75:{
     'symbol':'Re',
@@ -687,6 +763,7 @@ periodic_table = {
     'vdw_radius': 2.05,
     'pauling_electronegativity': 1.9,
     'ar_electronegativity': 1.46,
+    'atomic_polarizability': 65,
     },
     76:{
     'symbol':'Os',
@@ -696,6 +773,7 @@ periodic_table = {
     'vdw_radius': 2.0,
     'pauling_electronegativity': 2.2,
     'ar_electronegativity': 1.52,
+    'atomic_polarizability': 57,
     },
     77:{
     'symbol':'Ir',
@@ -705,6 +783,7 @@ periodic_table = {
     'vdw_radius': 2.0,
     'pauling_electronegativity': 2.2,
     'ar_electronegativity': 1.55,
+    'atomic_polarizability': 51,
     },
     78:{
     'symbol':'Pt',
@@ -714,6 +793,7 @@ periodic_table = {
     'vdw_radius': 2.05,
     'pauling_electronegativity': 2.28,
     'ar_electronegativity': 1.44,
+    'atomic_polarizability': 44,
     },
     79:{
     'symbol':'Au',
@@ -723,6 +803,7 @@ periodic_table = {
     'vdw_radius': 2.1,
     'pauling_electronegativity': 2.54,
     'ar_electronegativity': 1.42,
+    'atomic_polarizability': 35.1,
     },
     80:{
     'symbol':'Hg',
@@ -732,6 +813,7 @@ periodic_table = {
     'vdw_radius': 2.05,
     'pauling_electronegativity': 2.0,
     'ar_electronegativity': 1.44,
+    'atomic_polarizability': 34.4,
     },
     81:{
     'symbol':'Tl',
@@ -741,6 +823,7 @@ periodic_table = {
     'vdw_radius': 2.2,
     'pauling_electronegativity': 1.62,
     'ar_electronegativity': 1.44,
+    'atomic_polarizability': 70.0,
     },
     82:{
     'symbol':'Pb',
@@ -750,6 +833,7 @@ periodic_table = {
     'vdw_radius': 2.3,
     'pauling_electronegativity': 2.33,
     'ar_electronegativity': 1.55,
+    'atomic_polarizability': 46,
     },
     83:{
     'symbol':'Bi',
@@ -759,6 +843,7 @@ periodic_table = {
     'vdw_radius': 2.3,
     'pauling_electronegativity': 2.02,
     'ar_electronegativity': 1.67,
+    'atomic_polarizability': 50,
     },
     84:{
     'symbol':'Po',
@@ -768,6 +853,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 2.0,
     'ar_electronegativity': 1.76,
+    'atomic_polarizability': 46,
     },
     85:{
     'symbol':'At',
@@ -777,6 +863,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 2.2,
     'ar_electronegativity': 1.90,
+    'atomic_polarizability': 45.6,
     },
     86:{
     'symbol':'Rn',
@@ -786,6 +873,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': None,
     'ar_electronegativity': 2.06,
+    'atomic_polarizability': 33.18,
     },
     87:{
     'symbol':'Fr',
@@ -795,6 +883,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 0.7,
     'ar_electronegativity': 0.86,
+    'atomic_polarizability': 317.8,
     },
     88:{
     'symbol':'Ra',
@@ -804,6 +893,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 0.9,
     'ar_electronegativity': 0.97,
+    'atomic_polarizability': 246.2,
     },
     89:{
     'symbol':'Ac',
@@ -813,6 +903,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.1,
     'ar_electronegativity': 1.0,
+    'atomic_polarizability': 217,
     },
     90:{
     'symbol':'Th',
@@ -822,6 +913,7 @@ periodic_table = {
     'vdw_radius': 2.4,
     'pauling_electronegativity': 1.3,
     'ar_electronegativity': 1.11,
+    'atomic_polarizability': 217,
     },
     91:{
     'symbol':'Pa',
@@ -831,6 +923,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.5,
     'ar_electronegativity': 1.14,
+    'atomic_polarizability': 171,
     },
     92:{
     'symbol':'U',
@@ -840,6 +933,7 @@ periodic_table = {
     'vdw_radius': 2.3,
     'pauling_electronegativity': 1.38,
     'ar_electronegativity': 1.22,
+    'atomic_polarizability': 152.7,
     },
     93:{
     'symbol':'Np',
@@ -849,6 +943,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.36,
     'ar_electronegativity': 1.22,
+    'atomic_polarizability': 167,
     },
     94:{
     'symbol':'Pu',
@@ -858,6 +953,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.28,
     'ar_electronegativity': 1.22,
+    'atomic_polarizability': 165,
     },
     95:{
     'symbol':'Am',
@@ -867,6 +963,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.3,
     'ar_electronegativity': 1.2,
+    'atomic_polarizability': 157,
     },
     96:{
     'symbol':'Cm',
@@ -876,6 +973,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.3,
     'ar_electronegativity': 1.2,
+    'atomic_polarizability': 155,
     },
     97:{
     'symbol':'Bk',
@@ -885,6 +983,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.3,
     'ar_electronegativity': 1.2,
+    'atomic_polarizability': 153,
     },
     98:{
     'symbol':'Cf',
@@ -894,6 +993,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.3,
     'ar_electronegativity': 1.2,
+    'atomic_polarizability': 138,
     },
     99:{
     'symbol':'En',
@@ -903,6 +1003,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.3,
     'ar_electronegativity': 1.2,
+    'atomic_polarizability': 133,
     },
     100:{
     'symbol':'Fm',
@@ -912,6 +1013,7 @@ periodic_table = {
     'vdw_radius': 0,
     'pauling_electronegativity': 1.3,
     'ar_electronegativity': 1.2,
+    'atomic_polarizability': 161,
     }
 }
 
