@@ -13,6 +13,9 @@ def sv(molecule):
 def sp(molecule):
     return sum([periodic_table[atom.Z]['atomic_polarizability'] for atom in molecule.atoms])/periodic_table[6]['atomic_polarizability']
 
+def mp(molecule):
+    return sp(molecule)/len(molecule.atoms)
+
 _ = {
 
     #molecular weight
@@ -23,5 +26,7 @@ _ = {
 
     "SV": sv,
 
-    "SP": sp
+    "SP": sp,
+
+    "MP": mp
 }
