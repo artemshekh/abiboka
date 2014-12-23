@@ -43,5 +43,9 @@ _ = {
 
     "SI": si,
 
-    "MI": mi
+    "MI": mi,
+
+    # number of atoms
+    "nAT": lambda x: len(x.atoms),
+
 }
