@@ -36,6 +36,15 @@ def nbo(molecule):
             nbo_ += 1
     return nbo_
 
+def scbo(molecule):
+    scbo_ = 0
+    for bond in molecule.bonds:
+        if bond.is_aromatic():
+            scbo_ += 1.5
+        else:
+            scbo_ += bond.order
+    return scbo_
+
 _ = {
 
     #molecular weight
@@ -67,5 +76,7 @@ _ = {
 
     # number of multiple bonds (2 or 3) aromatic bonds is not multiple. Good question?
     "nBM": lambda x: len(filter( lambda x: x.order !=1 ,x.bonds)),
+
+    "SCBO": scbo,
 
 }
