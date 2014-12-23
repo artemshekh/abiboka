@@ -22,6 +22,9 @@ def mp(molecule):
 def si(molecule):
     return sum([periodic_table[atom.Z]['1st_ionization_energy'] for atom in molecule.atoms])/periodic_table[6]['1st_ionization_energy']
 
+def mi(molecule):
+    return si(molecule)/len(molecule.atoms)
+
 _ = {
 
     #molecular weight
@@ -38,5 +41,7 @@ _ = {
 
     "MP": mp,
 
-    "SI": si
+    "SI": si,
+
+    "MI": mi
 }
