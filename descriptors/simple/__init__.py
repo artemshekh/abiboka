@@ -25,6 +25,17 @@ def si(molecule):
 def mi(molecule):
     return si(molecule)/len(molecule.atoms)
 
+def nbo(molecule):
+    nbo_ = 0
+    for bond in molecule.bonds:
+        h_in_bond = False
+        for atom in bond:
+            if atom.Z == 1:
+                h_in_bond = True
+        if not h_in_bond:
+            nbo_ += 1
+    return nbo_
+
 _ = {
 
     #molecular weight
@@ -50,6 +61,8 @@ _ = {
 
     "nSK": lambda x: len(filter( lambda x: x.Z !=1 ,x.atoms)),
 
-    "nBT": lambda x: len(x.bonds)
+    "nBT": lambda x: len(x.bonds),
+
+    "nBO": nbo,
 
 }
