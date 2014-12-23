@@ -48,6 +48,8 @@ _ = {
     # number of atoms
     "nAT": lambda x: len(x.atoms),
 
-    "nSK": lambda x: len(filter( lambda x: x.Z !=1 ,x.atoms))
+    "nSK": lambda x: len(filter( lambda x: x.Z !=1 ,x.atoms)),
+
+    "nBT": lambda x: len(x.bonds)
 
 }
