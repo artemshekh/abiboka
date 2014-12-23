@@ -38,7 +38,7 @@ def nbo(molecule):
 
 def scbo(molecule):
     scbo_ = 0
-    for bond in molecule.bonds:
+    for bond in molecule.hydrogen_suppressed().bonds:
         if bond.is_aromatic():
             scbo_ += 1.5
         else:
