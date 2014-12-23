@@ -1,4 +1,4 @@
 abiboka
 =======
 
-Chemistry package for calculation
+Chemoinformatic tool package
