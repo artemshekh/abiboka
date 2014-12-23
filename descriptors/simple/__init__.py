@@ -65,4 +65,7 @@ _ = {
 
     "nBO": nbo,
 
+    # number of multiple bonds (2 or 3) aromatic bonds is not multiple. Good question?
+    "nBM": lambda x: len(filter( lambda x: x.order !=1 ,x.bonds)),
+
 }
