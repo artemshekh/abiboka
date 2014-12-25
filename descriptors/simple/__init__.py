@@ -5,6 +5,7 @@ Simple descriptor of molecule
 """
 from utils.periodic_table import periodic_table
 import math
+from calc.graph import check_cycle
 
 
 def sv(molecule):
@@ -45,6 +46,26 @@ def scbo(molecule):
             scbo_ += bond.order
     return scbo_
 
+def rbn(molecule):
+    rbn_ = 0
+    molecule = molecule.hydrogen_suppressed()
+    cycle_atoms = check_cycle(molecule)
+    for bond in molecule.bonds:
+        rotatable = True
+        if bond.order > 1:
+            rotatable = False
+        atoms = [atom for atom in bond]
+
+        if atoms[0] in cycle_atoms and atoms[1] in cycle_atoms:
+            rotatable = False
+        elif atoms[0].Z == 7 or atoms[1].Z == 7:
+            rotatable = False
+        elif len(atoms[0].bonds) == 1 or len(atoms[1].bonds) == 1:
+            rotatable = False
+        if rotatable:
+            rbn_ += 1
+    return rbn_
+
 _ = {
 
     #molecular weight
@@ -78,5 +99,7 @@ _ = {
     "nBM": lambda x: len(filter( lambda x: x.order !=1 ,x.bonds)),
 
     "SCBO": scbo,
+
+    "RBN": rbn,
 
 }
