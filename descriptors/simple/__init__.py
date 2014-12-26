@@ -157,4 +157,7 @@ _ = {
 
     "RBF": rbf,
 
+    # number of double bonds
+    "NDB": lambda x: len([bond.order for bond in x.bonds if bond.order==2]),
+
 }
