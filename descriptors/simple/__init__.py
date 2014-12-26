@@ -66,6 +66,9 @@ def rbn(molecule):
             rbn_ += 1
     return rbn_
 
+def rbf(molecule):
+    return float(rbn(molecule))/len(molecule.bonds)
+
 _ = {
 
     #molecular weight
@@ -101,5 +104,7 @@ _ = {
     "SCBO": scbo,
 
     "RBN": rbn,
+
+    "RBF": rbf,
 
 }
