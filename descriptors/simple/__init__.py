@@ -9,24 +9,59 @@ from calc.graph import check_cycle
 
 
 def sv(molecule):
+    """
+    Sum of Van der Waals volume
+    :param molecule:
+    :return:
+    """
     return sum([(4 * math.pi * periodic_table[atom.Z]['vdw_radius']**3)/3 for atom in molecule.atoms])/((4 * math.pi * periodic_table[6]['vdw_radius']**3)/3)
 
 def mv(molecule):
+    """
+    Mean of Van der Waals volume
+    :param molecule:
+    :return:
+    """
     return sv(molecule)/len(molecule.atoms)
 
 def sp(molecule):
+    """
+    sum of atomic polarizabilities (scaled on Carbon atom)
+    :param molecule:
+    :return:
+    """
     return sum([periodic_table[atom.Z]['atomic_polarizability'] for atom in molecule.atoms])/periodic_table[6]['atomic_polarizability']
 
 def mp(molecule):
+    """
+    mean atomic polarizability (scaled on Carbon atom)
+    :param molecule:
+    :return:
+    """
     return sp(molecule)/len(molecule.atoms)
 
 def si(molecule):
+    """
+    sum of first ionization potentials (scaled on Carbon atom)
+    :param molecule:
+    :return:
+    """
     return sum([periodic_table[atom.Z]['1st_ionization_energy'] for atom in molecule.atoms])/periodic_table[6]['1st_ionization_energy']
 
 def mi(molecule):
+    """
+    mean first ionization potential (scaled on Carbon atom)
+    :param molecule:
+    :return:
+    """
     return si(molecule)/len(molecule.atoms)
 
 def nbo(molecule):
+    """
+    number of non-H bonds
+    :param molecule:
+    :return:
+    """
     nbo_ = 0
     for bond in molecule.bonds:
         h_in_bond = False
@@ -38,6 +73,11 @@ def nbo(molecule):
     return nbo_
 
 def scbo(molecule):
+    """
+    sum of conventional bond orders (H-depleted)
+    :param molecule:
+    :return:
+    """
     scbo_ = 0
     for bond in molecule.hydrogen_suppressed().bonds:
         if bond.is_aromatic():
@@ -47,6 +87,11 @@ def scbo(molecule):
     return scbo_
 
 def rbn(molecule):
+    """
+    number of rotatable bonds
+    :param molecule:
+    :return:
+    """
     rbn_ = 0
     molecule = molecule.hydrogen_suppressed()
     cycle_atoms = check_cycle(molecule)
@@ -67,6 +112,11 @@ def rbn(molecule):
     return rbn_
 
 def rbf(molecule):
+    """
+    rotatable bond fraction
+    :param molecule:
+    :return:
+    """
     return float(rbn(molecule))/len(molecule.bonds)
 
 _ = {
