@@ -160,4 +160,7 @@ _ = {
     # number of double bonds
     "NDB": lambda x: len([bond.order for bond in x.bonds if bond.order==2]),
 
+    # number of triple bonds
+    "NTB": lambda x: len([bond.order for bond in x.bonds if bond.order==3]),
+
 }
