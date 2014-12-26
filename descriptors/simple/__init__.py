@@ -119,6 +119,13 @@ def rbf(molecule):
     """
     return float(rbn(molecule))/len(molecule.bonds)
 
+def nab(molecule):
+    _ = 0
+    for bond in molecule.bonds:
+        _ += 1 if all([atom.aromatic for atom in bond]) else 0
+    return _
+
+
 _ = {
 
     #molecular weight
@@ -162,5 +169,7 @@ _ = {
 
     # number of triple bonds
     "NTB": lambda x: len([bond.order for bond in x.bonds if bond.order==3]),
+
+    "NAB": nab,
 
 }
