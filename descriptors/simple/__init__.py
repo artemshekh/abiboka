@@ -125,6 +125,39 @@ def nab(molecule):
         _ += 1 if bond.is_aromatic() else 0
     return _
 
+def ncsp3(molecule):
+    _ = 0
+    for atom in molecule.atoms:
+        if atom.Z != 6 or atom.aromatic:
+            continue
+        bad = False
+        for bond in atom.bonds:
+            if bond.order != 1:
+                bad = True
+                break
+        _ += 1 if not bad else 0
+    return _
+
+def ncsp2(molecule):
+    _ = 0
+    for atom in molecule.atoms:
+        if atom.Z != 6:
+            continue
+        if atom.aromatic:
+            _ += 1
+            continue
+        if any([bond.order == 2 for bond in atom.bonds]):
+            _ += 1
+    return _
+
+def ncsp(molecule):
+    _ = 0
+    for atom in molecule.atoms:
+        if atom.Z != 6 or atom.aromatic:
+            continue
+        if any([bond.order == 3 for bond in atom.bonds]):
+            _ += 1
+    return _
 
 _ = {
 
@@ -229,5 +262,14 @@ _ = {
 
     # percentage of halogen atoms
     "X%": lambda x: 100*float(len(filter( lambda x: x.Z in [9,17,35,53] ,x.atoms)))/len(x.atoms),
+
+    # number of Csp3 Carbon atoms
+    "nCsp3": ncsp3,
+
+    # number of Csp2 Carbon atoms
+    "nCsp2": ncsp2,
+
+    # number of Csp Carbon atoms
+    "nCsp": ncsp,
 
 }
