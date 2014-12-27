@@ -172,4 +172,37 @@ _ = {
 
     "NAB": nab,
 
+    # number of Hydrogen atoms
+    "nH": lambda x: len(filter( lambda x: x.Z ==1 ,x.atoms)),
+
+    # number of Carbon atoms
+    "nC": lambda x: len(filter( lambda x: x.Z ==6 ,x.atoms)),
+
+    # number of Nytrogen atoms
+    "nN": lambda x: len(filter( lambda x: x.Z ==7 ,x.atoms)),
+
+    # number of Oxygen atoms
+    "nO": lambda x: len(filter( lambda x: x.Z ==8 ,x.atoms)),
+
+    # number of Posphorus atoms
+    "nP": lambda x: len(filter( lambda x: x.Z ==15 ,x.atoms)),
+
+    # number of Sulfur atoms
+    "NS": lambda x: len(filter( lambda x: x.Z ==16 ,x.atoms)),
+
+    # number of Fluorine atoms
+    "nF": lambda x: len(filter( lambda x: x.Z ==9 ,x.atoms)),
+
+    # number of Chlorine atoms
+    "nCL": lambda x: len(filter( lambda x: x.Z ==17 ,x.atoms)),
+
+    # number of Bromine atoms
+    "nBR": lambda x: len(filter( lambda x: x.Z ==35 ,x.atoms)),
+
+    # number of Iodine atoms
+    "nI": lambda x: len(filter( lambda x: x.Z ==53 ,x.atoms)),
+
+    # number of Boron atoms
+    "nB": lambda x: len(filter( lambda x: x.Z ==5 ,x.atoms)),
+
 }
