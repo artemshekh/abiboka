@@ -149,6 +149,7 @@ _ = {
     # number of atoms
     "nAT": lambda x: len(x.atoms),
 
+    # number of non-H atoms
     "nSK": lambda x: len(filter( lambda x: x.Z !=1 ,x.atoms)),
 
     "nBT": lambda x: len(x.bonds),
@@ -204,5 +205,29 @@ _ = {
 
     # number of Boron atoms
     "nB": lambda x: len(filter( lambda x: x.Z ==5 ,x.atoms)),
+
+    # number of heavy atom ( see nSK)
+    "nHM": lambda x: len(filter( lambda x: x.Z !=1 ,x.atoms)),
+
+    # number of heteroatoms
+    "nHet": lambda x: len(filter(lambda x: x.Z not in [1,6], x.atoms)),
+
+    # number of halogen atoms
+    "nX": lambda x: len(filter(lambda x: x.Z  in [9,17,35,53], x.atoms)),
+
+    # percentage of H atoms
+    "H%": lambda x: 100*float(len(filter( lambda x: x.Z ==1 ,x.atoms)))/len(x.atoms),
+
+    # percentage of C atoms
+    "C%": lambda x: 100*float(len(filter( lambda x: x.Z ==6 ,x.atoms)))/len(x.atoms),
+
+    # percentage of N atoms
+    "N%": lambda x: 100*float(len(filter( lambda x: x.Z ==7 ,x.atoms)))/len(x.atoms),
+
+    # percentage of O atoms
+    "O%": lambda x: 100*float(len(filter( lambda x: x.Z ==8 ,x.atoms)))/len(x.atoms),
+
+    # percentage of halogen atoms
+    "X%": lambda x: 100*float(len(filter( lambda x: x.Z in [9,17,35,53] ,x.atoms)))/len(x.atoms),
 
 }
