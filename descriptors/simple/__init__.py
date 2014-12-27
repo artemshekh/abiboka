@@ -5,7 +5,7 @@ Simple descriptor of molecule
 """
 from utils.periodic_table import periodic_table
 import math
-from calc.graph import check_cycle
+from calc.graph import check_cycle, dfs
 
 
 def sv(molecule):
@@ -159,6 +159,17 @@ def ncsp(molecule):
             _ += 1
     return _
 
+
+def cyclomatic_number(molecule):
+    connectivity = 0
+    used = set()
+    for atom in molecule.atoms:
+        if atom not in used:
+            dfs(atom, used)
+            connectivity += 1
+    c = len(molecule.bonds) - len(molecule.atoms) + connectivity
+    return c
+
 _ = {
 
     #molecular weight
@@ -271,5 +282,8 @@ _ = {
 
     # number of Csp Carbon atoms
     "nCsp": ncsp,
+
+    # cyclomatic number
+    "nCIC": cyclomatic_number,
 
 }
