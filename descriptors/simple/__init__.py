@@ -122,7 +122,7 @@ def rbf(molecule):
 def nab(molecule):
     _ = 0
     for bond in molecule.bonds:
-        _ += 1 if all([atom.aromatic for atom in bond]) else 0
+        _ += 1 if bond.is_aromatic() else 0
     return _
 
 
