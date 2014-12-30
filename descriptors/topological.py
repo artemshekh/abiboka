@@ -2,6 +2,7 @@
 """
 Topological descriptors
 """
+import operator
 from utils.periodic_table import periodic_table
 
 
@@ -61,3 +62,15 @@ def madan_degree(atom):
 
 def zm1mad(molecule):
     return sum([madan_degree(atom) ** 2 for atom in molecule.atoms])
+
+def permutation_additive(atom, perm_coefficient):
+    return valence_degree(atom) + sum([perm_coefficient * valence_degree(atom) for _ in atom.connected_with()])
+
+def permutation_multiplicative(atom, perm_coefficient):
+    return valence_degree(atom) + reduce(operator.mul, [perm_coefficient * valence_degree(atom) for _ in atom.connected_with()])
+
+def zm1per(molecule, permutation_coefficient):
+    return sum([permutation_additive(atom, permutation_coefficient) ** 2 for atom in molecule.atoms])
+
+def zm1mulper(molecule, permutation_coefficient):
+    return sum([permutation_multiplicative(atom, permutation_coefficient) ** 2 for atom in molecule.atoms])
