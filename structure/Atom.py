@@ -39,6 +39,14 @@ class Atom(object):
         """
         return self.properties['relative_atomic_weight']
 
+    def connected_with(self):
+        _ = []
+        for bond in self.bonds:
+            for atom in bond:
+                if atom is not self:
+                    _.append(atom)
+        return _
+
     def __str__(self):
         return periodic_table[self.Z]['symbol'] + '-' + str(self.N)
 
