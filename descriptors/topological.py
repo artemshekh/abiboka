@@ -74,3 +74,10 @@ def zm1per(molecule, permutation_coefficient):
 
 def zm1mulper(molecule, permutation_coefficient):
     return sum([permutation_multiplicative(atom, permutation_coefficient) ** 2 for atom in molecule.atoms])
+
+def zm2(molecule):
+    _ = []
+    for bond in molecule.hydrogen_suppressed().bonds:
+        atoms = [atom for atom in bond]
+        _.append(len(atoms[0].bonds)*len(atoms[1].bonds))
+    return sum(_)
