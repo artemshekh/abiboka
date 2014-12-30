@@ -2,6 +2,8 @@
 """
 Topological descriptors
 """
+from utils.periodic_table import periodic_table
+
 
 def zm1(molecule):
     return sum([len(atom.bonds)**2 for atom in molecule.hydrogen_suppressed().atoms])
@@ -49,3 +51,9 @@ def zm1v_(molecule):
     return sum([valence_degree(atom)**2 for atom in molecule.hydrogen_suppressed().atoms])
 
 
+
+def kupchik_degree(atom):
+    return  (float(periodic_table[6]['covalent_radius'])/periodic_table[atom.Z]["covalent_radius"])* valence_degree(atom)
+
+def zm1kup(molecule):
+    return sum([kupchik_degree(atom)**2 for atom in molecule.atoms])
