@@ -15,6 +15,7 @@ periodic_table = {
     'ar_electronegativity': None,
     'atomic_polarizability': 0,
     '1st_ionization_energy': 0,
+    'covalent_radius': None,
     },
     1:{
     'symbol':'H',
@@ -26,6 +27,7 @@ periodic_table = {
     'ar_electronegativity': 2.20,
     'atomic_polarizability': 4.5,
     '1st_ionization_energy': 1312.0,
+    'covalent_radius': 31,
     },
     2:{
     'symbol':'He',
@@ -37,6 +39,7 @@ periodic_table = {
     'ar_electronegativity': None,
     'atomic_polarizability': 1.383,
     '1st_ionization_energy': 2372.3,
+    'covalent_radius': 28,
     },
     3:{
     'symbol':'Li',
@@ -48,6 +51,7 @@ periodic_table = {
     'ar_electronegativity': 0.97,
     'atomic_polarizability': 164.05,
     '1st_ionization_energy': 520.2,
+    'covalent_radius': 128,
     },
     4:{
     'symbol':'Be',
@@ -59,6 +63,7 @@ periodic_table = {
     'ar_electronegativity': 1.47,
     'atomic_polarizability': 37.775,
     '1st_ionization_energy': 899.5,
+    'covalent_radius': 96,
     },
     5:{
     'symbol':'B',
@@ -70,6 +75,7 @@ periodic_table = {
     'ar_electronegativity': 2.01,
     'atomic_polarizability': 20.5,
     '1st_ionization_energy': 800.6,
+    'covalent_radius': 84,
     },
     6:{
     'symbol':'C',
@@ -81,6 +87,7 @@ periodic_table = {
     'ar_electronegativity': 2.50,
     'atomic_polarizability': 11.0,
     '1st_ionization_energy': 1086.5,
+    'covalent_radius': 76,
     },
     7:{
     'symbol':'N',
@@ -92,6 +99,7 @@ periodic_table = {
     'ar_electronegativity': 3.07,
     'atomic_polarizability': 7.43,
     '1st_ionization_energy': 1402.3,
+    'covalent_radius': 71,
     },
     8:{
     'symbol':'O',
@@ -103,6 +111,7 @@ periodic_table = {
     'ar_electronegativity': 3.50,
     'atomic_polarizability': 6.04,
     '1st_ionization_energy': 1313.9,
+    'covalent_radius': 66,
     },
     9:{
     'symbol':'F',
@@ -114,6 +123,7 @@ periodic_table = {
     'ar_electronegativity': 4.10,
     'atomic_polarizability': 3.76,
     '1st_ionization_energy': 1681.0,
+    'covalent_radius': 57,
     },
     10:{
     'symbol':'Ne',
@@ -125,6 +135,7 @@ periodic_table = {
     'ar_electronegativity': None,
     'atomic_polarizability': 2.68,
     '1st_ionization_energy': 2080.7,
+    'covalent_radius': 58,
     },
     11:{
     'symbol':'Na',
@@ -136,6 +147,7 @@ periodic_table = {
     'ar_electronegativity': 1.01,
     'atomic_polarizability': 162.6,
     '1st_ionization_energy': 495.8,
+    'covalent_radius': 166,
     },
     12:{
     'symbol':'Mg',
@@ -147,6 +159,7 @@ periodic_table = {
     'ar_electronegativity': 1.23,
     'atomic_polarizability': 71.7,
     '1st_ionization_energy': 737.7,
+    'covalent_radius': 141,
     },
     13:{
     'symbol':'Al',
@@ -158,6 +171,7 @@ periodic_table = {
     'ar_electronegativity': 1.47,
     'atomic_polarizability': 56.3,
     '1st_ionization_energy': 577.5,
+    'covalent_radius': 121,
     },
     14:{
     'symbol':'Si',
@@ -169,6 +183,7 @@ periodic_table = {
     'ar_electronegativity': 1.74,
     'atomic_polarizability': 36.7,
     '1st_ionization_energy': 786.5,
+    'covalent_radius': 111,
     },
     15:{
     'symbol':'P',
@@ -180,6 +195,7 @@ periodic_table = {
     'ar_electronegativity': 2.06,
     'atomic_polarizability': 24.7,
     '1st_ionization_energy': 1011.8,
+    'covalent_radius': 107,
     },
     16:{
     'symbol':'S',
@@ -191,6 +207,7 @@ periodic_table = {
     'ar_electronegativity': 2.44,
     'atomic_polarizability': 19.6,
     '1st_ionization_energy': 999.6,
+    'covalent_radius': 105,
     },
     17:{
     'symbol':'Cl',
@@ -202,6 +219,7 @@ periodic_table = {
     'ar_electronegativity': 2.83,
     'atomic_polarizability': 14.7,
     '1st_ionization_energy': 1251.2,
+    'covalent_radius': 102,
     },
     18:{
     'symbol':'Ar',
@@ -213,6 +231,7 @@ periodic_table = {
     'ar_electronegativity': None,
     'atomic_polarizability': 11.10,
     '1st_ionization_energy': 1520.6,
+    'covalent_radius': 106,
     },
     19:{
     'symbol':'K',
@@ -224,6 +243,7 @@ periodic_table = {
     'ar_electronegativity': 0.91,
     'atomic_polarizability': 298.1,
     '1st_ionization_energy': 418.8,
+    'covalent_radius': 203,
     },
     20:{
     'symbol':'Ca',
@@ -235,6 +255,7 @@ periodic_table = {
     'ar_electronegativity': 1.04,
     'atomic_polarizability': 160,
     '1st_ionization_energy': 589.8,
+    'covalent_radius': 176,
     },
     21:{
     'symbol':'Sc',
@@ -246,6 +267,7 @@ periodic_table = {
     'ar_electronegativity': 1.20,
     'atomic_polarizability': 120,
     '1st_ionization_energy': 633.1,
+    'covalent_radius': 170,
     },
     22:{
     'symbol':'Ti',
@@ -257,6 +279,7 @@ periodic_table = {
     'ar_electronegativity': 1.32,
     'atomic_polarizability': 99,
     '1st_ionization_energy': 658.8,
+    'covalent_radius': 160,
     },
     23:{
     'symbol':'V',
@@ -268,6 +291,7 @@ periodic_table = {
     'ar_electronegativity': 1.45,
     'atomic_polarizability': 84,
     '1st_ionization_energy': 650.9,
+    'covalent_radius': 153,
     },
     24:{
     'symbol':'Cr',
@@ -279,6 +303,7 @@ periodic_table = {
     'ar_electronegativity': 1.56,
     'atomic_polarizability': 78,
     '1st_ionization_energy': 652.9,
+    'covalent_radius': 139,
     },
     25:{
     'symbol':'Mn',
@@ -290,6 +315,7 @@ periodic_table = {
     'ar_electronegativity': 1.60,
     'atomic_polarizability': 63,
     '1st_ionization_energy': 717.3,
+    'covalent_radius': 139,
     },
     26:{
     'symbol':'Fe',
@@ -301,6 +327,7 @@ periodic_table = {
     'ar_electronegativity': 1.64,
     'atomic_polarizability': 57,
     '1st_ionization_energy': 762.5,
+    'covalent_radius': 132,
     },
     27:{
     'symbol':'Co',
@@ -312,6 +339,7 @@ periodic_table = {
     'ar_electronegativity': 1.70,
     'atomic_polarizability': 51,
     '1st_ionization_energy': 760.4,
+    'covalent_radius': 126,
     },
     28:{
     'symbol':'Ni',
@@ -323,6 +351,7 @@ periodic_table = {
     'ar_electronegativity': 1.75,
     'atomic_polarizability': 46,
     '1st_ionization_energy': 737.1,
+    'covalent_radius': 124,
     },
     29:{
     'symbol':'Cu',
@@ -334,6 +363,7 @@ periodic_table = {
     'ar_electronegativity': 1.75,
     'atomic_polarizability': 53.44,
     '1st_ionization_energy': 745.5,
+    'covalent_radius': 132,
     },
     30:{
     'symbol':'Zn',
@@ -345,6 +375,7 @@ periodic_table = {
     'ar_electronegativity': 1.66,
     'atomic_polarizability': 39.2,
     '1st_ionization_energy': 906.4,
+    'covalent_radius': 122,
     },
     31:{
     'symbol':'Ga',
@@ -356,6 +387,7 @@ periodic_table = {
     'ar_electronegativity': 1.82,
     'atomic_polarizability': 54.9,
     '1st_ionization_energy': 578.8,
+    'covalent_radius': 122,
     },
     32:{
     'symbol':'Ge',
@@ -367,6 +399,7 @@ periodic_table = {
     'ar_electronegativity': 2.02,
     'atomic_polarizability': 41.0,
     '1st_ionization_energy': 762,
+    'covalent_radius': 120,
     },
     33:{
     'symbol':'As',
@@ -378,6 +411,7 @@ periodic_table = {
     'ar_electronegativity': 2.20,
     'atomic_polarizability': 29.1,
     '1st_ionization_energy': 947,
+    'covalent_radius': 119,
     },
     34:{
     'symbol':'Se',
@@ -389,6 +423,7 @@ periodic_table = {
     'ar_electronegativity': 2.48,
     'atomic_polarizability': 26.24,
     '1st_ionization_energy': 941,
+    'covalent_radius': 120,
     },
     35:{
     'symbol':'Br',
@@ -400,6 +435,7 @@ periodic_table = {
     'ar_electronegativity': 2.74,
     'atomic_polarizability': 21.9,
     '1st_ionization_energy': 1139.9,
+    'covalent_radius': 120,
     },
     36:{
     'symbol':'Kr',
@@ -411,6 +447,7 @@ periodic_table = {
     'ar_electronegativity': 2.94,
     'atomic_polarizability': 16.8,
     '1st_ionization_energy': 1350.8,
+    'covalent_radius': 116,
     },
     37:{
     'symbol':'Rb',
@@ -422,6 +459,7 @@ periodic_table = {
     'ar_electronegativity': 0.89,
     'atomic_polarizability': 318.6,
     '1st_ionization_energy': 403,
+    'covalent_radius': 220,
     },
     38:{
     'symbol':'Sr',
@@ -433,6 +471,7 @@ periodic_table = {
     'ar_electronegativity': 0.99,
     'atomic_polarizability': 199,
     '1st_ionization_energy': 549.5,
+    'covalent_radius': 195,
     },
     39:{
     'symbol':'Y',
@@ -444,6 +483,7 @@ periodic_table = {
     'ar_electronegativity': 1.11,
     'atomic_polarizability': 153,
     '1st_ionization_energy': 600,
+    'covalent_radius': 190,
     },
     40:{
     'symbol':'Zr',
@@ -455,6 +495,7 @@ periodic_table = {
     'ar_electronegativity': 1.22,
     'atomic_polarizability': 121,
     '1st_ionization_energy': 640.1,
+    'covalent_radius': 175,
     },
     41:{
     'symbol':'Nb',
@@ -466,6 +507,7 @@ periodic_table = {
     'ar_electronegativity': 1.23,
     'atomic_polarizability': 106,
     '1st_ionization_energy': 652.1,
+    'covalent_radius': 164,
     },
     42:{
     'symbol':'Mo',
@@ -477,6 +519,7 @@ periodic_table = {
     'ar_electronegativity': 1.30,
     'atomic_polarizability': 86,
     '1st_ionization_energy': 684.3,
+    'covalent_radius': 154,
     },
     43:{
     'symbol':'Tc',
@@ -488,6 +531,7 @@ periodic_table = {
     'ar_electronegativity': 1.36,
     'atomic_polarizability': 77,
     '1st_ionization_energy': 702,
+    'covalent_radius': 147,
     },
     44:{
     'symbol':'Ru',
@@ -499,6 +543,7 @@ periodic_table = {
     'ar_electronegativity': 1.42,
     'atomic_polarizability': 65,
     '1st_ionization_energy': 710.2,
+    'covalent_radius': 146,
     },
     45:{
     'symbol':'Rh',
@@ -510,6 +555,7 @@ periodic_table = {
     'ar_electronegativity': 1.45,
     'atomic_polarizability': 58,
     '1st_ionization_energy': 719.7,
+    'covalent_radius': 142,
     },
     46:{
     'symbol':'Pd',
@@ -521,6 +567,7 @@ periodic_table = {
     'ar_electronegativity': 1.35,
     'atomic_polarizability': 32,
     '1st_ionization_energy': 804.4,
+    'covalent_radius': 139,
     },
     47:{
     'symbol':'Ag',
@@ -532,6 +579,7 @@ periodic_table = {
     'ar_electronegativity': 1.42,
     'atomic_polarizability': 52.2,
     '1st_ionization_energy': 731,
+    'covalent_radius': 145,
     },
     48:{
     'symbol':'Cd',
@@ -543,6 +591,7 @@ periodic_table = {
     'ar_electronegativity': 1.46,
     'atomic_polarizability': 46.3,
     '1st_ionization_energy': 867.8,
+    'covalent_radius': 144,
     },
     49:{
     'symbol':'In',
@@ -554,6 +603,7 @@ periodic_table = {
     'ar_electronegativity': 1.49,
     'atomic_polarizability': 65.2,
     '1st_ionization_energy': 558.3,
+    'covalent_radius': 142,
     },
     50:{
     'symbol':'Sn',
@@ -565,6 +615,7 @@ periodic_table = {
     'ar_electronegativity': 1.72,
     'atomic_polarizability': 52,
     '1st_ionization_energy': 708.6,
+    'covalent_radius': 139,
     },
     51:{
     'symbol':'Sb',
@@ -576,6 +627,7 @@ periodic_table = {
     'ar_electronegativity': 1.82,
     'atomic_polarizability': 45,
     '1st_ionization_energy': 834,
+    'covalent_radius': 139,
     },
     52:{
     'symbol':'Te',
@@ -587,6 +639,7 @@ periodic_table = {
     'ar_electronegativity': 2.01,
     'atomic_polarizability': 37,
     '1st_ionization_energy': 869.3,
+    'covalent_radius': 138,
     },
     53:{
     'symbol':'I',
@@ -598,6 +651,7 @@ periodic_table = {
     'ar_electronegativity': 2.21,
     'atomic_polarizability': 35.1,
     '1st_ionization_energy': 1008.4,
+    'covalent_radius': 139,
     },
     54:{
     'symbol':'Xe',
@@ -609,6 +663,7 @@ periodic_table = {
     'ar_electronegativity': 2.40,
     'atomic_polarizability': 27.06,
     '1st_ionization_energy': 1170.4,
+    'covalent_radius': 140,
     },
     55:{
     'symbol':'Cs',
@@ -620,6 +675,7 @@ periodic_table = {
     'ar_electronegativity': 0.86,
     'atomic_polarizability': 399,
     '1st_ionization_energy': 375.7,
+    'covalent_radius': 244,
     },
     56:{
     'symbol':'Ba',
@@ -631,6 +687,7 @@ periodic_table = {
     'ar_electronegativity': 0.97,
     'atomic_polarizability': 262.2,
     '1st_ionization_energy': 502.9,
+    'covalent_radius': 215,
     },
     57:{
     'symbol':'La',
@@ -642,6 +699,7 @@ periodic_table = {
     'ar_electronegativity': 1.08,
     'atomic_polarizability': 210,
     '1st_ionization_energy': 538.1,
+    'covalent_radius': 207,
     },
     58:{
     'symbol':'Ce',
@@ -653,6 +711,7 @@ periodic_table = {
     'ar_electronegativity': 1.08,
     'atomic_polarizability': 200,
     '1st_ionization_energy': 534.4,
+    'covalent_radius': 204,
     },
     59:{
     'symbol':'Pr',
@@ -664,6 +723,7 @@ periodic_table = {
     'ar_electronegativity': 1.07,
     'atomic_polarizability': 190,
     '1st_ionization_energy': 527,
+    'covalent_radius': 203,
     },
     60:{
     'symbol':'Nd',
@@ -675,6 +735,7 @@ periodic_table = {
     'ar_electronegativity': 1.07,
     'atomic_polarizability': 212,
     '1st_ionization_energy': 533.1,
+    'covalent_radius': 201,
     },
     61:{
     'symbol':'Pm',
@@ -686,6 +747,7 @@ periodic_table = {
     'ar_electronegativity': 1.07,
     'atomic_polarizability': 203,
     '1st_ionization_energy': 540,
+    'covalent_radius': 199,
     },
     62:{
     'symbol':'Sm',
@@ -697,6 +759,7 @@ periodic_table = {
     'ar_electronegativity': 1.07,
     'atomic_polarizability': 194,
     '1st_ionization_energy': 544.5,
+    'covalent_radius': 198,
     },
     63:{
     'symbol':'Eu',
@@ -708,6 +771,7 @@ periodic_table = {
     'ar_electronegativity': 1.01,
     'atomic_polarizability': 187,
     '1st_ionization_energy': 547.1,
+    'covalent_radius': 198,
     },
     64:{
     'symbol':'Gd',
@@ -719,6 +783,7 @@ periodic_table = {
     'ar_electronegativity': 1.11,
     'atomic_polarizability': 159,
     '1st_ionization_energy': 593.4,
+    'covalent_radius': 196,
     },
     65:{
     'symbol':'Tb',
@@ -730,6 +795,7 @@ periodic_table = {
     'ar_electronegativity': 1.10,
     'atomic_polarizability': 172,
     '1st_ionization_energy': 565.8,
+    'covalent_radius': 194,
     },
     66:{
     'symbol':'Dy',
@@ -741,6 +807,7 @@ periodic_table = {
     'ar_electronegativity': 1.10,
     'atomic_polarizability': 165,
     '1st_ionization_energy': 573.0,
+    'covalent_radius': 192,
     },
     67:{
     'symbol':'Ho',
@@ -752,6 +819,7 @@ periodic_table = {
     'ar_electronegativity': 1.10,
     'atomic_polarizability': 159,
     '1st_ionization_energy': 581.0,
+    'covalent_radius': 192,
     },
     68:{
     'symbol':'Er',
@@ -763,6 +831,7 @@ periodic_table = {
     'ar_electronegativity': 1.11,
     'atomic_polarizability': 153,
     '1st_ionization_energy': 589.3,
+    'covalent_radius': 189,
     },
     69:{
     'symbol':'Tm',
@@ -774,6 +843,7 @@ periodic_table = {
     'ar_electronegativity': 1.11,
     'atomic_polarizability': 147,
     '1st_ionization_energy': 596.7,
+    'covalent_radius': 190,
     },
     70:{
     'symbol':'Yb',
@@ -785,6 +855,7 @@ periodic_table = {
     'ar_electronegativity': 1.06,
     'atomic_polarizability': 142,
     '1st_ionization_energy': 603.4,
+    'covalent_radius': 187,
     },
     71:{
     'symbol':'Lu',
@@ -796,6 +867,7 @@ periodic_table = {
     'ar_electronegativity': 1.14,
     'atomic_polarizability': 148,
     '1st_ionization_energy': 523.5,
+    'covalent_radius': 187,
     },
     72:{
     'symbol':'Hf',
@@ -807,6 +879,7 @@ periodic_table = {
     'ar_electronegativity': 1.23,
     'atomic_polarizability': 109,
     '1st_ionization_energy': 658.5,
+    'covalent_radius': 175,
     },
     73:{
     'symbol':'Ta',
@@ -818,6 +891,7 @@ periodic_table = {
     'ar_electronegativity': 1.33,
     'atomic_polarizability': 88,
     '1st_ionization_energy': 761,
+    'covalent_radius': 170,
     },
     74:{
     'symbol':'W',
@@ -829,6 +903,7 @@ periodic_table = {
     'ar_electronegativity': 1.40,
     'atomic_polarizability': 75,
     '1st_ionization_energy': 770,
+    'covalent_radius': 162,
     },
     75:{
     'symbol':'Re',
@@ -840,6 +915,7 @@ periodic_table = {
     'ar_electronegativity': 1.46,
     'atomic_polarizability': 65,
     '1st_ionization_energy': 760,
+    'covalent_radius': 151,
     },
     76:{
     'symbol':'Os',
@@ -851,6 +927,7 @@ periodic_table = {
     'ar_electronegativity': 1.52,
     'atomic_polarizability': 57,
     '1st_ionization_energy': 840,
+    'covalent_radius': 144,
     },
     77:{
     'symbol':'Ir',
@@ -862,6 +939,7 @@ periodic_table = {
     'ar_electronegativity': 1.55,
     'atomic_polarizability': 51,
     '1st_ionization_energy': 880,
+    'covalent_radius': 141,
     },
     78:{
     'symbol':'Pt',
@@ -873,6 +951,7 @@ periodic_table = {
     'ar_electronegativity': 1.44,
     'atomic_polarizability': 44,
     '1st_ionization_energy': 870,
+    'covalent_radius': 136,
     },
     79:{
     'symbol':'Au',
@@ -884,6 +963,7 @@ periodic_table = {
     'ar_electronegativity': 1.42,
     'atomic_polarizability': 35.1,
     '1st_ionization_energy': 890.1,
+    'covalent_radius': 136,
     },
     80:{
     'symbol':'Hg',
@@ -895,6 +975,7 @@ periodic_table = {
     'ar_electronegativity': 1.44,
     'atomic_polarizability': 34.4,
     '1st_ionization_energy': 1007.1,
+    'covalent_radius': 132,
     },
     81:{
     'symbol':'Tl',
@@ -906,6 +987,7 @@ periodic_table = {
     'ar_electronegativity': 1.44,
     'atomic_polarizability': 70.0,
     '1st_ionization_energy': 589.4,
+    'covalent_radius': 145,
     },
     82:{
     'symbol':'Pb',
@@ -917,6 +999,7 @@ periodic_table = {
     'ar_electronegativity': 1.55,
     'atomic_polarizability': 46,
     '1st_ionization_energy': 715.6,
+    'covalent_radius': 146,
     },
     83:{
     'symbol':'Bi',
@@ -928,6 +1011,7 @@ periodic_table = {
     'ar_electronegativity': 1.67,
     'atomic_polarizability': 50,
     '1st_ionization_energy': 703,
+    'covalent_radius': 148,
     },
     84:{
     'symbol':'Po',
@@ -939,6 +1023,7 @@ periodic_table = {
     'ar_electronegativity': 1.76,
     'atomic_polarizability': 46,
     '1st_ionization_energy': 812.1,
+    'covalent_radius': 140,
     },
     85:{
     'symbol':'At',
@@ -950,6 +1035,7 @@ periodic_table = {
     'ar_electronegativity': 1.90,
     'atomic_polarizability': 45.6,
     '1st_ionization_energy': 899.003,
+    'covalent_radius': 150,
     },
     86:{
     'symbol':'Rn',
@@ -961,6 +1047,7 @@ periodic_table = {
     'ar_electronegativity': 2.06,
     'atomic_polarizability': 33.18,
     '1st_ionization_energy': 1037,
+    'covalent_radius': 150,
     },
     87:{
     'symbol':'Fr',
@@ -972,6 +1059,7 @@ periodic_table = {
     'ar_electronegativity': 0.86,
     'atomic_polarizability': 317.8,
     '1st_ionization_energy': 380,
+    'covalent_radius': 260,
     },
     88:{
     'symbol':'Ra',
@@ -983,6 +1071,7 @@ periodic_table = {
     'ar_electronegativity': 0.97,
     'atomic_polarizability': 246.2,
     '1st_ionization_energy': 509.3,
+    'covalent_radius': 221,
     },
     89:{
     'symbol':'Ac',
@@ -994,6 +1083,7 @@ periodic_table = {
     'ar_electronegativity': 1.0,
     'atomic_polarizability': 217,
     '1st_ionization_energy': 499,
+    'covalent_radius': 215,
     },
     90:{
     'symbol':'Th',
@@ -1005,6 +1095,7 @@ periodic_table = {
     'ar_electronegativity': 1.11,
     'atomic_polarizability': 217,
     '1st_ionization_energy': 587,
+    'covalent_radius': 206,
     },
     91:{
     'symbol':'Pa',
@@ -1016,6 +1107,7 @@ periodic_table = {
     'ar_electronegativity': 1.14,
     'atomic_polarizability': 171,
     '1st_ionization_energy': 568,
+    'covalent_radius': 200,
     },
     92:{
     'symbol':'U',
@@ -1027,6 +1119,7 @@ periodic_table = {
     'ar_electronegativity': 1.22,
     'atomic_polarizability': 152.7,
     '1st_ionization_energy': 597.6,
+    'covalent_radius': 196,
     },
     93:{
     'symbol':'Np',
@@ -1038,6 +1131,7 @@ periodic_table = {
     'ar_electronegativity': 1.22,
     'atomic_polarizability': 167,
     '1st_ionization_energy': 604.5,
+    'covalent_radius': 190,
     },
     94:{
     'symbol':'Pu',
@@ -1049,6 +1143,7 @@ periodic_table = {
     'ar_electronegativity': 1.22,
     'atomic_polarizability': 165,
     '1st_ionization_energy': 584.7,
+    'covalent_radius': 187,
     },
     95:{
     'symbol':'Am',
@@ -1060,6 +1155,7 @@ periodic_table = {
     'ar_electronegativity': 1.2,
     'atomic_polarizability': 157,
     '1st_ionization_energy': 578,
+    'covalent_radius': 180,
     },
     96:{
     'symbol':'Cm',
@@ -1071,6 +1167,7 @@ periodic_table = {
     'ar_electronegativity': 1.2,
     'atomic_polarizability': 155,
     '1st_ionization_energy': 581,
+    'covalent_radius': 169,
     },
     97:{
     'symbol':'Bk',
@@ -1082,6 +1179,7 @@ periodic_table = {
     'ar_electronegativity': 1.2,
     'atomic_polarizability': 153,
     '1st_ionization_energy': 601,
+    'covalent_radius': 168,
     },
     98:{
     'symbol':'Cf',
@@ -1093,6 +1191,7 @@ periodic_table = {
     'ar_electronegativity': 1.2,
     'atomic_polarizability': 138,
     '1st_ionization_energy': 608,
+    'covalent_radius': 168,
     },
     99:{
     'symbol':'En',
@@ -1104,6 +1203,7 @@ periodic_table = {
     'ar_electronegativity': 1.2,
     'atomic_polarizability': 133,
     '1st_ionization_energy': 619,
+    'covalent_radius': 165,
     },
     100:{
     'symbol':'Fm',
@@ -1115,6 +1215,7 @@ periodic_table = {
     'ar_electronegativity': 1.2,
     'atomic_polarizability': 161,
     '1st_ionization_energy': 627,
+    'covalent_radius': 167,
     }
 }
 
