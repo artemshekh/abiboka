@@ -50,10 +50,14 @@ def zm1v_(molecule):
     # depends from core electrons
     return sum([valence_degree(atom)**2 for atom in molecule.hydrogen_suppressed().atoms])
 
-
-
 def kupchik_degree(atom):
     return  (float(periodic_table[6]['covalent_radius'])/periodic_table[atom.Z]["covalent_radius"])* valence_degree(atom)
 
 def zm1kup(molecule):
     return sum([kupchik_degree(atom)**2 for atom in molecule.atoms])
+
+def madan_degree(atom):
+    return sum([periodic_table[atom1.Z]["relative_atomic_weight"]/periodic_table[6]["relative_atomic_weight"] for atom1 in atom.connected_with()])
+
+def zm1mad(molecule):
+    return sum([madan_degree(atom) ** 2 for atom in molecule.atoms])
