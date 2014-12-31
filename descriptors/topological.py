@@ -168,6 +168,7 @@ def xt(molecule):
 
 def dz(molecule):
     _ = []
+    p = 2
     for atom in molecule.atoms:
         for period,n in enumerate(close_shell):
             if atom.Z < n:
@@ -176,6 +177,12 @@ def dz(molecule):
         _.append(valence_degree(atom)/float(p))
     return sum(_)
 
+def ram(molecule):
+    s = 0
+    for atom in molecule.hydrogen_suppressed().atoms:
+        if len(atom.bonds) > 2:
+            s += (len(atom.bonds) -2)
+    return s
 
 
 
