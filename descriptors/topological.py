@@ -314,6 +314,10 @@ def mddd(molecule):
     agdd_ = sum([sum(row) for row in m])/float(len(molecule.atoms))
     return sum([abs(sum(row) - agdd_) for row in m])/float(len(molecule.atoms))
 
+def unip(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    m = distance_matrix(molecule)
+    return min([sum(row) for row in m])
 
 
 
