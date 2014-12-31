@@ -396,6 +396,12 @@ def xu(molecule):
         denumerator += v * distance_degree[i]
     return a *  math.log(float(numerator)/denumerator)
 
+def csi(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    vertex_degree = [len(atom.bonds) for atom in molecule.atoms]
+    m = distance_matrix(molecule)
+    max_distance = [max(row) for row in m]
+    return sum([x[0]*x[1] for x in zip(vertex_degree, max_distance)])
 
 
 
