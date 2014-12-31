@@ -118,6 +118,16 @@ def zm2mulper(molecule, permutative_coefficent):
         _.append(permutation_multiplicative(atoms[0], permutative_coefficent)*permutation_multiplicative(atoms[1], permutative_coefficent))
     return sum(_)
 
+def on0(molecule):
+    return sum([1.0/len(atom.bonds) for atom in molecule.hydrogen_suppressed().atoms])
+
+def on0v(molecule):
+    _ = []
+    for atom in molecule.atoms:
+        v = valence_degree(atom)
+        if v:
+            _.append(1.0/v)
+    return sum(_)
 
 
 
