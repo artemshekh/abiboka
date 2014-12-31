@@ -88,3 +88,35 @@ def zm2v(molecule):
         atoms = [atom for atom in bond]
         _.append(valence_degree(atoms[0])*valence_degree(atoms[1]))
     return sum(_)
+
+def zm2kup(molecule):
+    _ = []
+    for bond in molecule.bonds:
+        atoms = [atom for atom in bond]
+        _.append(kupchik_degree(atoms[0])*kupchik_degree(atoms[1]))
+    return sum(_)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
