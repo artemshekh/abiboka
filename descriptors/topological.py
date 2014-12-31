@@ -166,6 +166,15 @@ def xt(molecule):
     molecule = molecule.hydrogen_suppressed()
     return 1.0/math.sqrt(snar(molecule))
 
+def dz(molecule):
+    _ = []
+    for atom in molecule.atoms:
+        for period,n in enumerate(close_shell):
+            if atom.Z < n:
+                p = period
+                break
+        _.append(valence_degree(atom)/float(p))
+    return sum(_)
 
 
 
