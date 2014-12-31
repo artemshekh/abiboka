@@ -213,6 +213,11 @@ def pol(molecule):
                 p+=1
     return p/2
 
+def prs(molecule):
+    return reduce(operator.mul, [len(atom.bonds) for atom in molecule.atoms])
+
+def lprs(molecule):
+    return math.log(prs(molecule))
 
 
 
