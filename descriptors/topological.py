@@ -364,6 +364,25 @@ def smtiv(molecule):
         descriptor += sum(row)
     return descriptor
 
+def gmti(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    m = distance_matrix(molecule)
+    vertex_degree = [len(atom.bonds) for atom in molecule.atoms]
+    descriptor = 0
+    for i, row in enumerate(m):
+        for j, value in enumerate(row):
+            descriptor += value * vertex_degree[i]*vertex_degree[j]
+    return descriptor
+
+def gmtiv(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    m = distance_matrix(molecule)
+    vertex_degree = [valence_degree(atom) for atom in molecule.atoms]
+    descriptor = 0
+    for i, row in enumerate(m):
+        for j, value in enumerate(row):
+            descriptor += value * vertex_degree[i]*vertex_degree[j]
+    return descriptor
 
 
 
