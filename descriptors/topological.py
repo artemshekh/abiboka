@@ -261,7 +261,31 @@ def spi(molecule):
     descriptor = math.sqrt(descriptor)
     return descriptor
 
+def distance_matrix(molecule):
+    matrix = AdjacencyMatrix.from_molecule(molecule)
+    m = matrix.matrix
+    for i, row in enumerate(m):
+        for j, value in enumerate(row):
+            if i!=j and value == 0:
+                m[i][j] = 1000
+    for k in range(matrix.rows()):
+        for i in range(matrix.rows()):
+            for j in range(matrix.rows()):
+                m[i][j] = min(m[i][j], m[i][k] + m[k][j])
+    return m
 
+
+def pji2(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    m = distance_matrix(molecule)
+    diametr, radius = 0, 100000
+    for row in m:
+        _ = max(row)
+        if _ > diametr:
+            diametr = _
+        if _ < radius:
+            radius = _
+    return (diametr - radius)/float(diametr)
 
 
 
