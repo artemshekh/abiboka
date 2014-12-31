@@ -319,6 +319,12 @@ def unip(molecule):
     m = distance_matrix(molecule)
     return min([sum(row) for row in m])
 
+def cent(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    m = distance_matrix(molecule)
+    unip_ = min([sum(row) for row in m])
+    return sum([sum(row) for row in m]) - (len(molecule.atoms) * unip_)
+
 
 
 
