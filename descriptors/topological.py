@@ -97,7 +97,12 @@ def zm2kup(molecule):
     return sum(_)
 
 
-
+def zm2mad(molecule):
+    _ = []
+    for bond in molecule.bonds:
+        atoms = [atom for atom in bond]
+        _.append(madan_degree(atoms[0])*madan_degree(atoms[1]))
+    return sum(_)
 
 
 
