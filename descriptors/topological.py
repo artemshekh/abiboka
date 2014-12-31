@@ -303,6 +303,17 @@ def decc(molecule):
     aecc_ = sum([max(row) for row in m])/float(len(molecule.atoms))
     return sum([abs(max(row) - aecc_) for row in m])/float(len(molecule.atoms))
 
+def agdd(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    m = distance_matrix(molecule)
+    return sum([sum(row) for row in m])/float(len(molecule.atoms))
+
+def mddd(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    m = distance_matrix(molecule)
+    agdd_ = sum([sum(row) for row in m])/float(len(molecule.atoms))
+    return sum([abs(sum(row) - agdd_) for row in m])/float(len(molecule.atoms))
+
 
 
 
