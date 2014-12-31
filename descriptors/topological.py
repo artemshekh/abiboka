@@ -3,6 +3,7 @@
 Topological descriptors
 """
 import operator
+from collections import Counter
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix
 import math
@@ -331,6 +332,17 @@ def var(molecule):
     unip_ = min([sum(row) for row in m])
     return max([sum(row) - unip_ for row in m])
 
+def icr(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    m = distance_matrix(molecule)
+    c = Counter()
+    for row in m:
+        c[max(row)] += 1
+    descriptor = 0
+    for k, v in c.iteritems():
+        ng = float(v)/len(molecule.atoms)
+        descriptor += ng * (math.log(ng, 2))
+    return -1 * descriptor
 
 
 
