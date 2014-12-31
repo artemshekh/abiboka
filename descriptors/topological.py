@@ -81,3 +81,10 @@ def zm2(molecule):
         atoms = [atom for atom in bond]
         _.append(len(atoms[0].bonds)*len(atoms[1].bonds))
     return sum(_)
+
+def zm2v(molecule):
+    _ = []
+    for bond in molecule.bonds:
+        atoms = [atom for atom in bond]
+        _.append(valence_degree(atoms[0])*valence_degree(atoms[1]))
+    return sum(_)
