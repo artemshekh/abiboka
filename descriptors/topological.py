@@ -147,6 +147,9 @@ def qindex(molecule):
     molecule = molecule.hydrogen_suppressed()
     return 3 -  2* len(molecule.atoms) + zm1(molecule)/2.0
 
+def bbi(molecule):
+    return sum([len(atom.bonds)*(len(atom.bonds) - 1) for atom in molecule.hydrogen_suppressed().atoms])/2.0
+
 
 
 
