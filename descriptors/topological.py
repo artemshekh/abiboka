@@ -184,6 +184,14 @@ def ram(molecule):
             s += (len(atom.bonds) -2)
     return s
 
+def bli(molecule):
+    _ = []
+    molecule = molecule.hydrogen_suppressed()
+    for bond in molecule.bonds:
+        atoms = [atom for atom in bond]
+        _.append(1/math.sqrt(valence_degree(atoms[0])*valence_degree(atoms[1])))
+    return sum(_)/6
+
 
 
 
