@@ -287,6 +287,22 @@ def pji2(molecule):
             radius = _
     return (diametr - radius)/float(diametr)
 
+def ecc(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    m = distance_matrix(molecule)
+    return sum([max(row) for row in m])
+
+def aecc(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    m = distance_matrix(molecule)
+    return sum([max(row) for row in m])/float(len(molecule.atoms))
+
+def decc(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    m = distance_matrix(molecule)
+    aecc_ = sum([max(row) for row in m])/float(len(molecule.atoms))
+    return sum([abs(max(row) - aecc_) for row in m])/float(len(molecule.atoms))
+
 
 
 
