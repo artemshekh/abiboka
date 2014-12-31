@@ -143,6 +143,10 @@ def on1v(molecule):
         _.append(1.0/valence_degree(atoms[0])*1.0/valence_degree(atoms[1]))
     return sum(_)
 
+def qindex(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    return 3 -  2* len(molecule.atoms) + zm1(molecule)/2.0
+
 
 
 
