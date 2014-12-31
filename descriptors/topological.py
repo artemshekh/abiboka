@@ -129,8 +129,19 @@ def on0v(molecule):
             _.append(1.0/v)
     return sum(_)
 
+def on1(molecule):
+    _ = []
+    for bond in molecule.hydrogen_suppressed().bonds:
+        atoms = [atom for atom in bond]
+        _.append(1.0/len(atoms[0].bonds)*1.0/len(atoms[1].bonds))
+    return sum(_)
 
-
+def on1v(molecule):
+    _ = []
+    for bond in molecule.hydrogen_suppressed().bonds:
+        atoms = [atom for atom in bond]
+        _.append(1.0/valence_degree(atoms[0])*1.0/valence_degree(atoms[1]))
+    return sum(_)
 
 
 
