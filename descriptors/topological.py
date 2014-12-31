@@ -5,7 +5,7 @@ Topological descriptors
 import operator
 from collections import Counter
 from utils.periodic_table import periodic_table
-from calc.matrixes.matrix import AdjacencyMatrix
+from calc.matrixes.matrix import AdjacencyMatrix, Matrix
 import math
 
 
@@ -343,6 +343,27 @@ def icr(molecule):
         ng = float(v)/len(molecule.atoms)
         descriptor += ng * (math.log(ng, 2))
     return -1 * descriptor
+
+def smti(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    ad = AdjacencyMatrix.from_molecule(molecule) + Matrix(distance_matrix(molecule))
+    vertex_degree = Matrix([[x] for x in [len(atom.bonds) for atom in molecule.atoms]])
+    descriptor = 0
+    _ = ad * vertex_degree
+    for row in _.matrix:
+        descriptor += sum(row)
+    return descriptor
+
+def smtiv(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    ad = AdjacencyMatrix.from_molecule(molecule) + Matrix(distance_matrix(molecule))
+    vertex_degree = Matrix([[x] for x in [valence_degree(atom) for atom in molecule.atoms]])
+    descriptor = 0
+    _ = ad * vertex_degree
+    for row in _.matrix:
+        descriptor += sum(row)
+    return descriptor
+
 
 
 
