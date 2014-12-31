@@ -4,6 +4,7 @@ Topological descriptors
 """
 import operator
 from utils.periodic_table import periodic_table
+from calc.matrixes.matrix import AdjacencyMatrix
 import math
 
 
@@ -16,7 +17,7 @@ def zm1_H(molecule):
 close_shell = [1, 3, 11, 19, 37, 55, 87]
 
 def valence_electrones(atom):
-
+    valence_e = 4
     for period,n in enumerate(close_shell):
         if atom.Z < n:
             core_e, valence_e = close_shell[period-1]-1, atom.Z - close_shell[period-1] + 1
@@ -191,6 +192,62 @@ def bli(molecule):
         atoms = [atom for atom in bond]
         _.append(1/math.sqrt(valence_degree(atoms[0])*valence_degree(atoms[1])))
     return sum(_)/6
+
+def pol(molecule):
+    # Wiener polarity number - polarity index
+    molecule = molecule.hydrogen_suppressed()
+    matrix = AdjacencyMatrix.from_molecule(molecule)
+    m = matrix.matrix
+    for i, row in enumerate(m):
+        for j, value in enumerate(row):
+            if i!=j and value == 0:
+                m[i][j] = 1000
+    for k in range(matrix.rows()):
+        for i in range(matrix.rows()):
+            for j in range(matrix.rows()):
+                m[i][j] = min(m[i][j], m[i][k] + m[k][j])
+    p = 0
+    for row in m:
+        for v in row:
+            if v == 3:
+                p+=1
+    return p/2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
