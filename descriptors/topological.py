@@ -384,6 +384,20 @@ def gmtiv(molecule):
             descriptor += value * vertex_degree[i]*vertex_degree[j]
     return descriptor
 
+def xu(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    a = math.sqrt(len(molecule.atoms))
+    vertex_degree = [len(atom.bonds) for atom in molecule.atoms]
+    m = distance_matrix(molecule)
+    distance_degree = [sum(row) for row in m]
+    numerator, denumerator = 0, 0
+    for i, v in enumerate(vertex_degree):
+        numerator += v * distance_degree[i]**2
+        denumerator += v * distance_degree[i]
+    return a *  math.log(float(numerator)/denumerator)
+
+
+
 
 
 
