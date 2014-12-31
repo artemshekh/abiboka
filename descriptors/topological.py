@@ -162,6 +162,10 @@ def gnar(molecule):
     molecule = molecule.hydrogen_suppressed()
     return math.pow(snar(molecule), 1.0/len(molecule.atoms))
 
+def xt(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    return 1.0/math.sqrt(snar(molecule))
+
 
 
 
