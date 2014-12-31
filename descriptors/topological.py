@@ -219,6 +219,24 @@ def prs(molecule):
 def lprs(molecule):
     return math.log(prs(molecule))
 
+def msd(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    matrix = AdjacencyMatrix.from_molecule(molecule)
+    m = matrix.matrix
+    for i, row in enumerate(m):
+        for j, value in enumerate(row):
+            if i!=j and value == 0:
+                m[i][j] = 1000
+    for k in range(matrix.rows()):
+        for i in range(matrix.rows()):
+            for j in range(matrix.rows()):
+                m[i][j] = min(m[i][j], m[i][k] + m[k][j])
+    _ = 0
+    for row in m:
+        for v in row:
+            _ += v*v
+    return math.sqrt(float(_)/(len(molecule.atoms)*(len(molecule.atoms) - 1)))
+
 
 
 
