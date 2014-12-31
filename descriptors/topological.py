@@ -104,6 +104,19 @@ def zm2mad(molecule):
         _.append(madan_degree(atoms[0])*madan_degree(atoms[1]))
     return sum(_)
 
+def zm2per(molecule, permutative_coefficent):
+    _ = []
+    for bond in molecule.bonds:
+        atoms = [atom for atom in bond]
+        _.append(permutation_additive(atoms[0], permutative_coefficent)*permutation_additive(atoms[1], permutative_coefficent))
+    return sum(_)
+
+def zm2mulper(molecule, permutative_coefficent):
+    _ = []
+    for bond in molecule.bonds:
+        atoms = [atom for atom in bond]
+        _.append(permutation_multiplicative(atoms[0], permutative_coefficent)*permutation_multiplicative(atoms[1], permutative_coefficent))
+    return sum(_)
 
 
 
