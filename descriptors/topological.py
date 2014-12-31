@@ -4,6 +4,7 @@ Topological descriptors
 """
 import operator
 from utils.periodic_table import periodic_table
+import math
 
 
 def zm1(molecule):
@@ -149,6 +150,17 @@ def qindex(molecule):
 
 def bbi(molecule):
     return sum([len(atom.bonds)*(len(atom.bonds) - 1) for atom in molecule.hydrogen_suppressed().atoms])/2.0
+
+def snar(molecule):
+    return reduce(operator.mul, [len(atom.bonds) for atom in molecule.hydrogen_suppressed().atoms])
+
+def hnar(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    return len(molecule.atoms)/sum([1.0/len(atom.bonds) for atom in molecule.hydrogen_suppressed().atoms])
+
+def gnar(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    return math.pow(snar(molecule), 1.0/len(molecule.atoms))
 
 
 
