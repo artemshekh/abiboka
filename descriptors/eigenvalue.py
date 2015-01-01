@@ -5,10 +5,8 @@ Eigenvalue-based descriptors
 """
 import math
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix, IdentityMatrix
+from descriptors.descriptor_utils import p3_matrix, p2_matrix
 from utils.periodic_table import periodic_table
-
-def find_eigenvalue(matrix):
-    pass
 
 
 def jacobi(matrix):
@@ -65,63 +63,6 @@ def jacobi(matrix):
         if aMax < 1.0e-3:
             return matrix
         rotate(matrix, p, k, l)
-
-
-def p2_matrix(molecule):
-    matrix = [[0 for y in range(len(molecule.atoms))] for x in range(len(molecule.atoms))]
-    d = {}
-    for i, _ in enumerate(molecule.atoms):
-        d[_] = i
-    for i, startatom in enumerate(molecule.atoms):
-        walked_atom = set([startatom])
-        second_iter_atom = set()
-        final_atom = set()
-        for bond in startatom.bonds:
-            for atom in bond:
-                if atom not in walked_atom:
-                    second_iter_atom.add(atom)
-        for second_atom in second_iter_atom:
-            walked_atom.add(second_atom)
-            for bond in second_atom.bonds:
-                for atom in bond:
-                    if atom not in walked_atom:
-                        final_atom.add(atom)
-        for atom in final_atom:
-            j = d[atom]
-            matrix[i][j], matrix[j][i] = 2, 2
-    return Matrix(matrix)
-
-
-def p3_matrix(molecule):
-    matrix = [[0 for y in range(len(molecule.atoms))] for x in range(len(molecule.atoms))]
-    d = {}
-    for i, _ in enumerate(molecule.atoms):
-        d[_] = i
-    for i, startatom in enumerate(molecule.atoms):
-        walked_atom = set([startatom])
-        second_iter_atom = set()
-        third_iter_atom = set()
-        final_atom = set()
-        for bond in startatom.bonds:
-            for atom in bond:
-                if atom not in walked_atom:
-                    second_iter_atom.add(atom)
-        for second_atom in second_iter_atom:
-            walked_atom.add(second_atom)
-            for bond in second_atom.bonds:
-                for atom in bond:
-                    if atom not in walked_atom:
-                        third_iter_atom.add(atom)
-        for third_atom in third_iter_atom:
-            walked_atom.add(third_atom)
-            for bond in third_atom.bonds:
-                for atom in bond:
-                    if atom not in walked_atom:
-                        final_atom.add(atom)
-        for atom in final_atom:
-            j = d[atom]
-            matrix[i][j], matrix[j][i] = 3, 3
-    return Matrix(matrix)
 
 
 def ax1(molecule):
