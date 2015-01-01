@@ -465,8 +465,9 @@ def intrinsic_state_sum(molecule):
             s += intrinsic_state(atom)
     return s
 
-def bac(molecule):
+def partition(molecule):
     if cyclomatic_number(molecule) > 0:
+        print "It's not acyclic graph"
         return None
     molecule = molecule.hydrogen_suppressed()
     p = []
@@ -495,4 +496,13 @@ def bac(molecule):
             p[-1] += len(molecule.atoms)
         else:
             p.append(1)
+    return p
+
+def bac(molecule):
+    p = partition(molecule)
     return sum([x*x for x in p])
+
+def loc(molecule):
+    a = len(molecule.atoms)
+    p = partition(molecule)
+    return -1 * sum([(float(nk)/a)* math.log(float(nk)/a, 2) for nk in p])
