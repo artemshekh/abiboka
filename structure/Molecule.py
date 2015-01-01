@@ -5,6 +5,7 @@ class Molecule():
     def __init__(self):
         self.atoms = []
         self.bonds = []
+        self.descriptor_cache = {}
 
     _hydrogen_suppressed = None
 
