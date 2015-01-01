@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from calc.matrixes.matrix import Matrix
 from collections import defaultdict, Counter
 
