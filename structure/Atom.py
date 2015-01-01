@@ -25,6 +25,10 @@ class Atom(object):
             print 'Error there is no Atom with such atomic number'
             raise
 
+    @property
+    def vertex_degree(self):
+        return len(self.bonds)
+
     def get_mass(self):
         """
         absolute weight of Atom
