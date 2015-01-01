@@ -6,6 +6,8 @@ class Molecule():
         self.atoms = []
         self.bonds = []
 
+    _hydrogen_suppressed = None
+
     def add_atom(self, atom):
         self.atoms.add(atom)
 
@@ -26,17 +28,20 @@ class Molecule():
     def molecular_graph(self):
         return Graph.Graph.from_molecule(self.atoms, self.bonds)
 
+    @property
     def hydrogen_suppressed(self):
-        atoms = []
-        bonds = []
+        if self._hydrogen_suppressed:
+            return self._hydrogen_suppressed
+        else:
+            atoms, bonds = [], []
         for atom in self.atoms:
-            if periodic_table[atom.Z]['symbol'] != 'H':
+            if atom.Z != 1:
                 atoms.append(atom)
                 bonds_list = []
                 for bond in atom.bonds:
                     h_in_bond_ = False
                     for atom_ in bond:
-                        if periodic_table[atom_.Z]['symbol'] == 'H':
+                        if atom_.Z == 1:
                             h_in_bond_ = True
                     if not h_in_bond_:
                         bonds_list.append(bond)
@@ -44,13 +49,14 @@ class Molecule():
         for bond in self.bonds:
             h_in_bond = False
             for atom in bond:
-                if periodic_table[atom.Z]['symbol'] == 'H':
+                if atom.Z == 1:
                     h_in_bond = True
             if not h_in_bond:
                 bonds.append(bond)
         molecule = Molecule()
         molecule.atoms = atoms
         molecule.bonds = bonds
+        self._hydrogen_suppressed = molecule
         return molecule
 
 if __name__ == '__main__':
