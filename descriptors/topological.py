@@ -6,7 +6,7 @@ import operator
 from collections import Counter
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
-from descriptors.descriptor_utils import p2_matrix, p3_matrix
+from descriptors.descriptor_utils import path_sequence_matrix
 import math
 
 
@@ -404,47 +404,14 @@ def csi(molecule):
     max_distance = [max(row) for row in m]
     return sum([x[0]*x[1] for x in zip(vertex_degree, max_distance)])
 
-def s1k(molecule):
+def wap(molecule):
     molecule = molecule.hydrogen_suppressed()
-    alpha = sum([float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius'] for atom in molecule.atoms])
-    return (len(molecule.atoms) + alpha) * ((len(molecule.atoms) + alpha - 1)**2)/ ((2*len(molecule.bonds) + alpha)**2)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    m = path_sequence_matrix(molecule)
+    descriptor = 0
+    for row in m.matrix:
+        for i, value in enumerate(row):
+            descriptor += value * (i+1)
+    return descriptor/2 + len(molecule.atoms)
 
 
 
