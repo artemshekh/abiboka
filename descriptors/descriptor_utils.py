@@ -65,7 +65,7 @@ def path_vector(molecule):
     :param molecule:
     :return:
     """
-    molecule = molecule.hydrogen_suppressed()
+    molecule = molecule.hydrogen_suppressed
     def dfs(atom):
         used_atom.add(atom)
         bonds = atom.bonds
@@ -87,7 +87,7 @@ def path_vector(molecule):
     return dct
 
 def path_sequence_matrix(molecule, l=None):
-    molecule = molecule.hydrogen_suppressed()
+    molecule = molecule.hydrogen_suppressed
     dct = path_vector(molecule)
     if not l:
         l = max([max(v.keys()) for k, v in dct.items()])
@@ -99,7 +99,7 @@ def path_sequence_matrix(molecule, l=None):
     return m
 
 def walk_vector(molecule, order):
-    molecule = molecule.hydrogen_suppressed()
+    molecule = molecule.hydrogen_suppressed
     dct = defaultdict(lambda : 0)
     def walk(atom, step):
         if step < order:

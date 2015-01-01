@@ -79,7 +79,7 @@ def scbo(molecule):
     :return:
     """
     scbo_ = 0
-    for bond in molecule.hydrogen_suppressed().bonds:
+    for bond in molecule.hydrogen_suppressed.bonds:
         if bond.is_aromatic():
             scbo_ += 1.5
         else:
@@ -93,7 +93,7 @@ def rbn(molecule):
     :return:
     """
     rbn_ = 0
-    molecule = molecule.hydrogen_suppressed()
+    molecule = molecule.hydrogen_suppressed
     cycle_atoms = check_cycle(molecule)
     for bond in molecule.bonds:
         rotatable = True
