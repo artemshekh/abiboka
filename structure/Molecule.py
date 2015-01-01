@@ -60,5 +60,9 @@ class Molecule():
         self._hydrogen_suppressed = molecule
         return molecule
 
+    @property
+    def size(self):
+        return len(self.atoms)
+
 if __name__ == '__main__':
     print Molecule()
