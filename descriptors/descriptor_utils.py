@@ -86,4 +86,15 @@ def path_vector(molecule):
         dfs(atom)
     return dct
 
+def path_sequence_matrix(molecule, l=None):
+    molecule = molecule.hydrogen_suppressed()
+    dct = path_vector(molecule)
+    if not l:
+        l = max([max(v.keys()) for k, v in dct.items()])
+    m = Matrix([[0 for y in range(l)] for x in range(len(molecule.atoms))])
+    for index, atom in enumerate(molecule.atoms):
+        for k, v in dct[atom].iteritems():
+            if k <= l:
+                m.matrix[index][k-1] = v
+    return m
 
