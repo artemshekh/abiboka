@@ -29,6 +29,17 @@ class Atom(object):
     def vertex_degree(self):
         return len(self.bonds)
 
+    @property
+    def bond_vertex_degree(self):
+        s = 0
+        for bond in self.bonds:
+            if all(atom.aromatic for atom in bond):
+                s += 1.5
+            else:
+                s += bond.order
+        return s
+
+
     def get_mass(self):
         """
         absolute weight of Atom
