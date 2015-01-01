@@ -98,3 +98,16 @@ def path_sequence_matrix(molecule, l=None):
                 m.matrix[index][k-1] = v
     return m
 
+def walk_vector(molecule, order):
+    molecule = molecule.hydrogen_suppressed()
+    dct = defaultdict(lambda : 0)
+    def walk(atom, step):
+        if step < order:
+            step += 1
+            for next_atom in atom.connected_with():
+                walk(next_atom, step)
+        else:
+            dct[atom] += 1
+    for atom in molecule.atoms:
+        walk(atom, 0)
+    return dct
