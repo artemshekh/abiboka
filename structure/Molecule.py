@@ -1,4 +1,14 @@
+# -*- coding: utf-8 -*-
+"""
+Molecule class
+Internal representation
+"""
+
+import operator
+import itertools
+
 from calc.graph import Graph
+from calc.matrixes.matrix import Matrix
 from utils.periodic_table import periodic_table
 # TODO! Think about consistency of atom, molecule, and bond class
 class Molecule():
@@ -8,6 +18,7 @@ class Molecule():
         self.descriptor_cache = {}
 
     _hydrogen_suppressed = None
+    _edge_adjacency_matrix = None
 
     def add_atom(self, atom):
         self.atoms.add(atom)
@@ -63,6 +74,22 @@ class Molecule():
     @property
     def size(self):
         return len(self.atoms)
+
+    @property
+    def edge_adjacency_matrix(self):
+        if self._edge_adjacency_matrix:
+            return self._edge_adjacency_matrix
+        else:
+            bonds = self.hydrogen_suppressed.bonds
+            n = len(bonds)
+            m = [[0 for x in range(n)] for y in range(n)]
+            for i, bond1 in enumerate(bonds):
+                for j, bond2 in enumerate(bonds):
+                    if bond1 is not bond2:
+                        if bond1 & bond2:
+                            m[i][j] = 1
+            self._edge_adjacency_matrix = Matrix(m)
+            return self._edge_adjacency_matrix
 
 if __name__ == '__main__':
     print Molecule()
