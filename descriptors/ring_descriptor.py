@@ -3,6 +3,8 @@
 Ring descriptors
 """
 
+from calc.graph import dfs
+
 def cyclomatic_number(molecule):
     connectivity = 0
     used = set()

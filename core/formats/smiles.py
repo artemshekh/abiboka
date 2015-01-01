@@ -49,8 +49,11 @@ class SmilesParser(Parser):
         return True
 
     def decode(self, string=''):
+        # check that our string is really smile
         self.is_smiles(string)
+
         smiles_string = string
+
         molecule = Molecule()
         previuos_atom = None
         previous_bond = None
@@ -58,6 +61,7 @@ class SmilesParser(Parser):
         after_branch_close = False
         after_branch_close_open = False
         numbering_stack = {}
+
         while len(smiles_string) > 0:
             index = 0
             while index < len(smiles_string):

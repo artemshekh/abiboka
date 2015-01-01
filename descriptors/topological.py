@@ -4,6 +4,7 @@ Topological descriptors
 ZM1 - first Zagreb index (H - depleted)
 ZM1_h first Zagreb index (all molecule)
 platt_number Platt number
+connection_number = connection number (N2)
 
 """
 import operator
@@ -97,11 +98,12 @@ def zm1per(molecule, permutation_coefficient):
 def zm1mulper(molecule, permutation_coefficient):
     return sum([permutation_multiplicative(atom, permutation_coefficient) ** 2 for atom in molecule.atoms])
 
+@cached
 def zm2(molecule):
     _ = []
     for bond in molecule.hydrogen_suppressed.bonds:
         atoms = [atom for atom in bond]
-        _.append(len(atoms[0].bonds)*len(atoms[1].bonds))
+        _.append(atoms[0].vertex_degree *atoms[1].vertex_degree)
     return sum(_)
 
 def zm2v(molecule):
