@@ -6,7 +6,7 @@ import operator
 from collections import Counter
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
-from descriptors.descriptor_utils import path_sequence_matrix
+from descriptors.descriptor_utils import path_sequence_matrix, walk_vector
 from descriptors.walk import mpc
 import math
 
@@ -442,6 +442,11 @@ def phi(molecule):
     molecule = molecule.hydrogen_suppressed()
     return (s1k(molecule) * s2k(molecule)) / len(molecule.atoms)
 
+def pw(molecule, order):
+    molecule = molecule.hydrogen_suppressed()
+    p = mpc(molecule, order)
+    w =  sum(walk_vector(molecule, order).values())/2
+    return (float(p)/w)/len(molecule.atoms)
 
 
 
