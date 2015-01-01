@@ -438,6 +438,10 @@ def s3k(molecule):
     else:
         return float(((a + alpha -1) * ((a + alpha -3)**2)))/((p + alpha)**2)
 
+def phi(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    return (s1k(molecule) * s2k(molecule)) / len(molecule.atoms)
+
 
 
 
