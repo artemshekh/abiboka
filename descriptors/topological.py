@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 Topological descriptors
-ZM1 - first Zagreb index
+ZM1 - first Zagreb index (H - depleted)
+ZM1_h first Zagreb index (all molecule)
+platt_number Platt number
 
 """
 import operator
+import math
 from collections import Counter
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
@@ -12,7 +15,7 @@ from descriptors.descriptor_utils import path_sequence_matrix, walk_vector
 from descriptors.walk import mpc
 from descriptors.ring_descriptor import cyclomatic_number
 from utils.functional import cached
-import math
+
 
 @cached
 def zm1(molecule):
@@ -20,8 +23,16 @@ def zm1(molecule):
     return sum([atom.vertex_degree**2 for atom in molecule.hydrogen_suppressed.atoms])
 
 @cached
-def zm1_H(molecule):
+def zm1_h(molecule):
     return sum([atom.vertex_degree**2 for atom in molecule.atoms])
+
+@cached
+def platt_number(molecule):
+    return zm1(molecule) - 2*(molecule.size - 1)
+
+@cached
+def connection_number(molecule):
+    return zm1(molecule)/2 -molecule.size + 1
 
 close_shell = [1, 3, 11, 19, 37, 55, 87]
 
