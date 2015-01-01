@@ -8,6 +8,7 @@ from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
 from descriptors.descriptor_utils import path_sequence_matrix, walk_vector
 from descriptors.walk import mpc
+from descriptors.ring_descriptor import cyclomatic_number
 import math
 
 
@@ -448,9 +449,50 @@ def pw(molecule, order):
     w =  sum(walk_vector(molecule, order).values())/2
     return (float(p)/w)/len(molecule.atoms)
 
+# electrotopologocal index
 
 
+def intrinsic_state(atom):
+    a = (2.0/periodic_table[atom.Z]["principal_quantum_number"]) **2
+    b = a * valence_degree(atom) + 1
+    c =sum([atom_.Z!= 1 for atom_ in atom.connected_with()])
+    return b/c
 
+def intrinsic_state_sum(molecule):
+    s = 0
+    for atom in molecule.atoms:
+        if atom.Z != 1:
+            s += intrinsic_state(atom)
+    return s
 
-
-
+def bac(molecule):
+    if cyclomatic_number(molecule) > 0:
+        return None
+    molecule = molecule.hydrogen_suppressed()
+    p = []
+    while len(molecule.atoms) > 1:
+        p.append(0)
+        if len(molecule.atoms) == 2:
+            p[-1] +=2
+            molecule.atoms = []
+            break
+        a = []
+        for atom in molecule.atoms:
+            if len(atom.bonds) == 1:
+                a.append(atom)
+        for atom in a:
+            atom1 = atom
+            bond = atom1.bonds[0]
+            for atom_ in bond:
+                if atom_ is not atom1:
+                    atom2 = atom_
+            molecule.atoms.remove(atom1)
+            molecule.bonds.remove(bond)
+            atom2.bonds.remove(bond)
+            p[-1] += 1
+    if len(molecule.atoms) > 0:
+        if p[-1] <2:
+            p[-1] += len(molecule.atoms)
+        else:
+            p.append(1)
+    return sum([x*x for x in p])
