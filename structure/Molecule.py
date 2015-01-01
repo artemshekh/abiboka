@@ -88,7 +88,7 @@ class Molecule():
                     if bond1 is not bond2:
                         if bond1 & bond2:
                             m[i][j] = 1
-            self._edge_adjacency_matrix = Matrix(m)
+            self._edge_adjacency_matrix = m
             return self._edge_adjacency_matrix
 
 if __name__ == '__main__':
