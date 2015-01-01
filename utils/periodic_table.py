@@ -15,7 +15,7 @@ periodic_table = {
     'ar_electronegativity': None,
     'atomic_polarizability': 0,
     '1st_ionization_energy': 0,
-    'covalent_radius': None,
+    'covalent_radius': 76,
     },
     1:{
     'symbol':'H',
