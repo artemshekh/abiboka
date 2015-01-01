@@ -7,6 +7,7 @@ from collections import Counter
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
 from descriptors.descriptor_utils import path_sequence_matrix
+from descriptors.walk import mpc
 import math
 
 
@@ -412,6 +413,30 @@ def wap(molecule):
         for i, value in enumerate(row):
             descriptor += value * (i+1)
     return descriptor/2 + len(molecule.atoms)
+
+def s1k(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    alpha = sum([(float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']) -1 for atom in molecule.atoms])
+    a = len(molecule.atoms)
+    p = len(molecule.bonds)/2
+    return float(((a + alpha) * ((a + alpha -1)**2)))/((p + alpha)**2)
+
+def s2k(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    alpha = sum([(float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']) -1 for atom in molecule.atoms])
+    a = len(molecule.atoms)
+    p = mpc(molecule, 2)
+    return float(((a + alpha -1) * ((a + alpha -2)**2)))/((p + alpha)**2)
+
+def s3k(molecule):
+    molecule = molecule.hydrogen_suppressed()
+    alpha = sum([(float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']) -1 for atom in molecule.atoms])
+    a = len(molecule.atoms)
+    p = mpc(molecule, 3)
+    if a % 2 == 0:
+        return float(((a + alpha -3) * ((a + alpha -2)**2)))/((p + alpha)**2)
+    else:
+        return float(((a + alpha -1) * ((a + alpha -3)**2)))/((p + alpha)**2)
 
 
 
