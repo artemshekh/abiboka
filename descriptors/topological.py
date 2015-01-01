@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Topological descriptors
+ZM1 - first Zagreb index
+
 """
 import operator
 from collections import Counter
@@ -9,14 +11,17 @@ from calc.matrixes.matrix import AdjacencyMatrix, Matrix
 from descriptors.descriptor_utils import path_sequence_matrix, walk_vector
 from descriptors.walk import mpc
 from descriptors.ring_descriptor import cyclomatic_number
+from utils.functional import cached
 import math
 
-
+@cached
 def zm1(molecule):
-    return sum([len(atom.bonds)**2 for atom in molecule.hydrogen_suppressed.atoms])
+    # first Zagreb index
+    return sum([atom.vertex_degree**2 for atom in molecule.hydrogen_suppressed.atoms])
 
+@cached
 def zm1_H(molecule):
-    return sum([len(atom.bonds)**2 for atom in moleculeatoms])
+    return sum([atom.vertex_degree**2 for atom in molecule.atoms])
 
 close_shell = [1, 3, 11, 19, 37, 55, 87]
 
@@ -151,7 +156,7 @@ def on1v(molecule):
 
 def qindex(molecule):
     molecule = molecule.hydrogen_suppressed
-    return 3 -  2* len(molecule.atoms) + zm1(molecule)/2.0
+    return 3 -  2* molecule.size + zm1(molecule)/2.0
 
 def bbi(molecule):
     return sum([len(atom.bonds)*(len(atom.bonds) - 1) for atom in molecule.hydrogen_suppressed.atoms])/2.0
@@ -161,11 +166,11 @@ def snar(molecule):
 
 def hnar(molecule):
     molecule = molecule.hydrogen_suppressed
-    return len(molecule.atoms)/sum([1.0/len(atom.bonds) for atom in molecule.hydrogen_suppressed.atoms])
+    return molecule.size/sum([1.0/len(atom.bonds) for atom in molecule.hydrogen_suppressed.atoms])
 
 def gnar(molecule):
     molecule = molecule.hydrogen_suppressed
-    return math.pow(snar(molecule), 1.0/len(molecule.atoms))
+    return math.pow(snar(molecule), 1.0/molecule.size)
 
 def xt(molecule):
     molecule = molecule.hydrogen_suppressed
@@ -239,7 +244,7 @@ def msd(molecule):
     for row in m:
         for v in row:
             _ += v*v
-    return math.sqrt(float(_)/(len(molecule.atoms)*(len(molecule.atoms) - 1)))
+    return math.sqrt(float(_)/(molecule.size*(molecule.size - 1)))
 
 def spi(molecule):
     molecule = molecule.hydrogen_suppressed
@@ -299,24 +304,24 @@ def ecc(molecule):
 def aecc(molecule):
     molecule = molecule.hydrogen_suppressed
     m = distance_matrix(molecule)
-    return sum([max(row) for row in m])/float(len(molecule.atoms))
+    return sum([max(row) for row in m])/float(molecule.size)
 
 def decc(molecule):
     molecule = molecule.hydrogen_suppressed
     m = distance_matrix(molecule)
-    aecc_ = sum([max(row) for row in m])/float(len(molecule.atoms))
-    return sum([abs(max(row) - aecc_) for row in m])/float(len(molecule.atoms))
+    aecc_ = sum([max(row) for row in m])/float(molecule.size)
+    return sum([abs(max(row) - aecc_) for row in m])/float(molecule.size)
 
 def agdd(molecule):
     molecule = molecule.hydrogen_suppressed
     m = distance_matrix(molecule)
-    return sum([sum(row) for row in m])/float(len(molecule.atoms))
+    return sum([sum(row) for row in m])/float(molecule.size)
 
 def mddd(molecule):
     molecule = molecule.hydrogen_suppressed
     m = distance_matrix(molecule)
-    agdd_ = sum([sum(row) for row in m])/float(len(molecule.atoms))
-    return sum([abs(sum(row) - agdd_) for row in m])/float(len(molecule.atoms))
+    agdd_ = sum([sum(row) for row in m])/float(molecule.size)
+    return sum([abs(sum(row) - agdd_) for row in m])/float(molecule.size)
 
 def unip(molecule):
     molecule = molecule.hydrogen_suppressed
@@ -327,7 +332,7 @@ def cent(molecule):
     molecule = molecule.hydrogen_suppressed
     m = distance_matrix(molecule)
     unip_ = min([sum(row) for row in m])
-    return sum([sum(row) for row in m]) - (len(molecule.atoms) * unip_)
+    return sum([sum(row) for row in m]) - (molecule.size * unip_)
 
 def var(molecule):
     molecule = molecule.hydrogen_suppressed
@@ -343,7 +348,7 @@ def icr(molecule):
         c[max(row)] += 1
     descriptor = 0
     for k, v in c.iteritems():
-        ng = float(v)/len(molecule.atoms)
+        ng = float(v)/molecule.size
         descriptor += ng * (math.log(ng, 2))
     return -1 * descriptor
 
@@ -389,7 +394,7 @@ def gmtiv(molecule):
 
 def xu(molecule):
     molecule = molecule.hydrogen_suppressed
-    a = math.sqrt(len(molecule.atoms))
+    a = math.sqrt(molecule.size)
     vertex_degree = [len(atom.bonds) for atom in molecule.atoms]
     m = distance_matrix(molecule)
     distance_degree = [sum(row) for row in m]
@@ -412,26 +417,26 @@ def wap(molecule):
     for row in m.matrix:
         for i, value in enumerate(row):
             descriptor += value * (i+1)
-    return descriptor/2 + len(molecule.atoms)
+    return descriptor/2 + molecule.size
 
 def s1k(molecule):
     molecule = molecule.hydrogen_suppressed
     alpha = sum([(float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']) -1 for atom in molecule.atoms])
-    a = len(molecule.atoms)
+    a = molecule.size
     p = len(molecule.bonds)/2
     return float(((a + alpha) * ((a + alpha -1)**2)))/((p + alpha)**2)
 
 def s2k(molecule):
     molecule = molecule.hydrogen_suppressed
     alpha = sum([(float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']) -1 for atom in molecule.atoms])
-    a = len(molecule.atoms)
+    a = molecule.size
     p = mpc(molecule, 2)
     return float(((a + alpha -1) * ((a + alpha -2)**2)))/((p + alpha)**2)
 
 def s3k(molecule):
     molecule = molecule.hydrogen_suppressed
     alpha = sum([(float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']) -1 for atom in molecule.atoms])
-    a = len(molecule.atoms)
+    a = molecule.size
     p = mpc(molecule, 3)
     if a % 2 == 0:
         return float(((a + alpha -3) * ((a + alpha -2)**2)))/((p + alpha)**2)
@@ -440,13 +445,13 @@ def s3k(molecule):
 
 def phi(molecule):
     molecule = molecule.hydrogen_suppressed
-    return (s1k(molecule) * s2k(molecule)) / len(molecule.atoms)
+    return (s1k(molecule) * s2k(molecule)) / molecule.size
 
 def pw(molecule, order):
     molecule = molecule.hydrogen_suppressed
     p = mpc(molecule, order)
     w =  sum(walk_vector(molecule, order).values())/2
-    return (float(p)/w)/len(molecule.atoms)
+    return (float(p)/w)/molecule.size
 
 # electrotopologocal index
 
@@ -470,9 +475,9 @@ def partition(molecule):
         return None
     molecule = molecule.hydrogen_suppressed
     p = []
-    while len(molecule.atoms) > 1:
+    while molecule.size > 1:
         p.append(0)
-        if len(molecule.atoms) == 2:
+        if molecule.size == 2:
             p[-1] +=2
             molecule.atoms = []
             break
@@ -490,9 +495,9 @@ def partition(molecule):
             molecule.bonds.remove(bond)
             atom2.bonds.remove(bond)
             p[-1] += 1
-    if len(molecule.atoms) > 0:
+    if molecule.size > 0:
         if p[-1] <2:
-            p[-1] += len(molecule.atoms)
+            p[-1] += molecule.size
         else:
             p.append(1)
     return p
@@ -502,6 +507,6 @@ def bac(molecule):
     return sum([x*x for x in p])
 
 def loc(molecule):
-    a = len(molecule.atoms)
+    a = molecule.size
     p = partition(molecule)
     return -1 * sum([(float(nk)/a)* math.log(float(nk)/a, 2) for nk in p])
