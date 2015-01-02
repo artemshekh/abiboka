@@ -25,6 +25,7 @@ class Molecule():
     _additive_adjacency_matrix = None
     _adjacency_matrix = None
     _distance_matrix = None
+    _burden_matrix = None
 
     def add_atom(self, atom):
         self.atoms.add(atom)
@@ -181,6 +182,26 @@ class Molecule():
                         m[i][j] = min(m[i][j], m[i][k] + m[k][j])
             self._distance_matrix = m
             return self._distance_matrix
+
+    @property
+    def burden_matrix(self):
+        if self._burden_matrix:
+            return self._burden_matrix
+        else:
+            adjacency_matrix = self.adjacency_matrix
+            m = [row[:] for row in adjacency_matrix]
+            for i, row in enumerate(m):
+                for j, value in enumerate(row):
+                    if i==j:
+                        m[i][j] = self.atoms[i].Z
+                    elif value == 1:
+                        for bond in self.bonds:
+                            if self.atoms[i] in bond and self.atoms[j] in bond:
+                                m[i][j] = bond.conventional_bond_order * 0.1
+                    else:
+                        m[i][j] = 0.001
+            self._burden_matrix = m
+            return self._burden_matrix
 
 
 
