@@ -107,3 +107,17 @@ def ct_vertex_degree(atom):
 
 def z_delta_number(atom):
     return float(valence_electrones(atom))/periodic_table[atom.Z]['principal_quantum_number']
+
+def neignboor_interconenctivity(atom):
+    descriptor =0
+    neignboor = atom.connected_with()
+    for atom1 in neignboor:
+        descriptor += len(set(atom1.connected_with()) & set(neignboor))
+    return descriptor/2
+
+def cluster_coefficient_vertex(atom):
+    v = vertex_degree(atom)
+    if v > 1:
+        return 2.0*neignboor_interconenctivity(atom)/(v* (v - 1))
+    else:
+        return 0

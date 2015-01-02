@@ -22,6 +22,8 @@ class Molecule():
     _vertex_degree_matrix = None
     _vertex_zagreb_matrix = None
     _modified_vertex_zagreb_matrix = None
+    _additive_adjacency_matrix = None
+    _adjacency_matrix = None
 
     def add_atom(self, atom):
         self.atoms.add(atom)
@@ -129,6 +131,38 @@ class Molecule():
                 m[index][index] = 1.0/(atom.vertex_degree**2)
             self._modified_vertex_zagreb_matrix = m
             return self._modified_vertex_zagreb_matrix
+
+    @property
+    def adjacency_matrix(self):
+        if self._adjacency_matrix:
+            return self._adjacency_matrix
+        else:
+            n = self.hydrogen_suppressed.size
+            m = [[0 for x in range(n)] for y in range(n)]
+            d = {}
+            for index, atom in enumerate(self.hydrogen_suppressed.atoms):
+                d[atom] = index
+            for bond in self.hydrogen_suppressed.bonds:
+                _ = list(bond)
+                i, j = d[_[0]], d[_[1]]
+                m[i][j], m[j][i] = 1, 1
+            self._adjacency_matrix = m
+            return self._adjacency_matrix
+
+    @property
+    def additive_adjacency_matrix(self):
+        if self._additive_adjacency_matrix:
+            return self._additive_adjacency_matrix
+        else:
+            n = self.hydrogen_suppressed.size
+            m = [[0 for x in range(n)] for y in range(n)]
+            for i, row in enumerate(self.adjacency_matrix):
+                for j, value in enumerate(row):
+                    if value:
+                        m[i][j] = sum(self.adjacency_matrix[j])
+            self._additive_adjacency_matrix = m
+            return self._additive_adjacency_matrix
+
 
 
 

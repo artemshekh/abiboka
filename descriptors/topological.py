@@ -10,7 +10,7 @@ connection_number = connection number (N2)
 import operator
 import math
 from collections import Counter
-from descriptors.vertex_degree import intrinsic_state, valence_electrones, valence_degree
+from descriptors.vertex_degree import intrinsic_state, valence_electrones, valence_degree, cluster_coefficient_vertex
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
 from descriptors.descriptor_utils import path_sequence_matrix, walk_vector
@@ -494,3 +494,6 @@ def loc(molecule):
     a = molecule.size
     p = partition(molecule)
     return -1 * sum([(float(nk)/a)* math.log(float(nk)/a, 2) for nk in p])
+
+def overall_clustering(molecule):
+    return sum([cluster_coefficient_vertex(atom) for atom in molecule.hydrogen_suppressed.atoms])
