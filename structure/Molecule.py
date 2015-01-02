@@ -7,7 +7,7 @@ Internal representation
 import operator
 import itertools
 
-from calc.graph import Graph
+from calc.graph import Graph, path_find
 from calc.matrixes.matrix import Matrix
 from utils.periodic_table import periodic_table
 # TODO! Think about consistency of atom, molecule, and bond class
@@ -26,6 +26,7 @@ class Molecule():
     _adjacency_matrix = None
     _distance_matrix = None
     _burden_matrix = None
+    _multigraph_distance_matrix = None
 
     def add_atom(self, atom):
         self.atoms.add(atom)
@@ -202,6 +203,33 @@ class Molecule():
                         m[i][j] = 0.001
             self._burden_matrix = m
             return self._burden_matrix
+
+    @property
+    def multigraph_distance_matrix(self):
+        if self._multigraph_distance_matrix:
+            return self._multigraph_distance_matrix
+        else:
+            molecule = self.hydrogen_suppressed
+            n = self.hydrogen_suppressed.size
+            m = [[0 for x in range(n)] for y in range(n)]
+            dct = path_find(molecule)
+            for i, row in enumerate(m):
+                for j, v in enumerate(row):
+                    if i!= j:
+                        atom1 = molecule.atoms[i]
+                        atom2 = molecule.atoms[j]
+                        key = [atom1, atom2]
+                        key.sort()
+                        key = tuple(key)
+                        bonds = dct[key]
+                        s = 0
+                        for bond in bonds:
+                            s += 1.0/bond.conventional_bond_order
+                        m[i][j], m[j][i] = s, s
+
+            self._multigraph_distance_matrix = m
+            return self._multigraph_distance_matrix
+
 
 
 

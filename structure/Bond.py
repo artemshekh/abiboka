@@ -19,7 +19,7 @@ class Bond(set):
 
     @property
     def conventional_bond_order(self):
-        if all([atom.aromatic for atom in self]):
+        if self.is_aromatic():
             return 1.5
         else:
             return self.order

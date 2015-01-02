@@ -40,3 +40,35 @@ def check_cycle(molecule):
         if cycle_[0]:
             s.add(_)
     return s
+
+
+def path_find(molecule):
+    def dfs(atom):
+        used_atoms.append(atom)
+
+        for bond in atom.bonds:
+            next_atom = filter(lambda x: x is not atom,  [atom_ for atom_ in bond])[0]
+            #print next_atom
+            if next_atom != used_atoms[-2] and next_atom != used_atoms[0]:
+                bond_stack.append(bond)
+                key = [used_atoms[0], next_atom]
+                key.sort()
+                key = tuple(key)
+                value = tuple(bond_stack[:])
+                if key not in path_distance_dct:
+                    path_distance_dct[key] = value
+                else:
+                    if len(path_distance_dct[key]) > len(value):
+                        path_distance_dct[key] = value
+            if next_atom not in used_atoms:
+                dfs(next_atom)
+        if bond_stack:
+            bond_stack.pop()
+
+
+    path_distance_dct = {}
+    for atom in molecule.atoms:
+        used_atoms = [atom]
+        bond_stack = []
+        dfs(atom)
+    return path_distance_dct
