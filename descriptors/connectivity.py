@@ -13,6 +13,8 @@ from collections import Counter
 
 from descriptors.vertex_degree import valence_degree
 from utils.functional import cached
+from ring_descriptor import cyclomatic_number
+from vertex_degree import vertex_degree
 
 @cached
 def edge_degree(molecule):
@@ -484,3 +486,37 @@ def average_bond_order_connectivity_index_4(molecule):
 @cached
 def average_bond_order_connectivity_index_5(molecule):
     return bond_order_connectivity_index_5(molecule)/molecule.size
+
+@cached
+def balaban_distance_connectivity_index(molecule):
+    descriptor = 0
+    molecule = molecule.hydrogen_suppressed
+    distance_matrix = molecule.distance_matrix
+    for i, row in enumerate(molecule.adjacency_matrix):
+        for j, value in enumerate(row):
+            if value == 1:
+                descriptor += 1/math.sqrt(sum(distance_matrix[i])*sum(distance_matrix[j]))
+    return len(molecule.bonds) * descriptor/(cyclomatic_number(molecule)+1)
+
+@cached
+def balaban_distance_connectivity_index_j(molecule):
+    balaban_distance_connectivity_index(molecule) * (cyclomatic_number(molecule) + 1)
+
+@cached
+def balaban_distance_connectivity_index_g(molecule):
+    molecule = molecule.hydrogen_suppressed
+    a = molecule.size **2 * (cyclomatic_number(molecule) + 1)/ (molecule.size + cyclomatic_number(molecule) + 1)
+    return a *balaban_distance_connectivity_index(molecule)
+
+@cached
+def jt_index(molecule):
+    descriptor = 0
+    molecule = molecule.hydrogen_suppressed
+    distance_matrix = molecule.distance_matrix
+    for i, row in enumerate(molecule.adjacency_matrix):
+        for j, value in enumerate(row):
+            if value == 1:
+                ti = sum(distance_matrix[i])/ float(vertex_degree(molecule.atoms[i]))
+                tj = sum(distance_matrix[j])/ float(vertex_degree(molecule.atoms[j]))
+                descriptor += 1/math.sqrt(ti*tj)
+    return len(molecule.bonds) * descriptor/(cyclomatic_number(molecule)+1)
