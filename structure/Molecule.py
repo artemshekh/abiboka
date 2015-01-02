@@ -24,6 +24,7 @@ class Molecule():
     _modified_vertex_zagreb_matrix = None
     _additive_adjacency_matrix = None
     _adjacency_matrix = None
+    _distance_matrix = None
 
     def add_atom(self, atom):
         self.atoms.add(atom)
@@ -162,6 +163,24 @@ class Molecule():
                         m[i][j] = sum(self.adjacency_matrix[j])
             self._additive_adjacency_matrix = m
             return self._additive_adjacency_matrix
+
+    @property
+    def distance_matrix(self):
+        if self._distance_matrix:
+            return self._distance_matrix
+        else:
+            adjacency_matrix = self.adjacency_matrix
+            m = [row[:] for row in adjacency_matrix]
+            for i, row in enumerate(m):
+                for j, value in enumerate(row):
+                    if i!=j and value == 0:
+                        m[i][j] = 1000
+            for k in range(len(m)):
+                for i in range(len(m)):
+                    for j in range(len(m)):
+                        m[i][j] = min(m[i][j], m[i][k] + m[k][j])
+            self._distance_matrix = m
+            return self._distance_matrix
 
 
 
