@@ -11,7 +11,7 @@ import math
 import operator
 from collections import Counter
 
-from descriptors.descriptor_utils import valence_degree
+from descriptors.vertex_degree import valence_degree
 from utils.functional import cached
 
 @cached

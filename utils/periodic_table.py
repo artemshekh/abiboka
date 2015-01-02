@@ -17,6 +17,7 @@ periodic_table = {
     '1st_ionization_energy': 0,
     'covalent_radius': 76,
     'principal_quantum_number': 2,
+    'yang_electronegativity': 1,
     },
     1:{
     'symbol':'H',
@@ -30,6 +31,7 @@ periodic_table = {
     '1st_ionization_energy': 1312.0,
     'covalent_radius': 31,
     'principal_quantum_number': 1,
+    'yang_electronegativity': 1.40,
     },
     2:{
     'symbol':'He',
@@ -43,6 +45,7 @@ periodic_table = {
     '1st_ionization_energy': 2372.3,
     'covalent_radius': 28,
     'principal_quantum_number': 1,
+    'yang_electronegativity': 1,
     },
     3:{
     'symbol':'Li',
@@ -56,6 +59,7 @@ periodic_table = {
     '1st_ionization_energy': 520.2,
     'covalent_radius': 128,
     'principal_quantum_number': 2,
+    'yang_electronegativity': 0.97,
     },
     4:{
     'symbol':'Be',
@@ -69,6 +73,7 @@ periodic_table = {
     '1st_ionization_energy': 899.5,
     'covalent_radius': 96,
     'principal_quantum_number': 2,
+    'yang_electronegativity': 1.42,
     },
     5:{
     'symbol':'B',
@@ -82,6 +87,7 @@ periodic_table = {
     '1st_ionization_energy': 800.6,
     'covalent_radius': 84,
     'principal_quantum_number': 2,
+    'yang_electronegativity': 1.50,
     },
     6:{
     'symbol':'C',
@@ -95,6 +101,7 @@ periodic_table = {
     '1st_ionization_energy': 1086.5,
     'covalent_radius': 76,
     'principal_quantum_number': 2,
+    'yang_electronegativity': 1.70,
     },
     7:{
     'symbol':'N',
@@ -108,6 +115,7 @@ periodic_table = {
     '1st_ionization_energy': 1402.3,
     'covalent_radius': 71,
     'principal_quantum_number': 2,
+    'yang_electronegativity': 1.85,
     },
     8:{
     'symbol':'O',
@@ -121,6 +129,7 @@ periodic_table = {
     '1st_ionization_energy': 1313.9,
     'covalent_radius': 66,
     'principal_quantum_number': 2,
+    'yang_electronegativity': 1.92,
     },
     9:{
     'symbol':'F',
@@ -134,6 +143,7 @@ periodic_table = {
     '1st_ionization_energy': 1681.0,
     'covalent_radius': 57,
     'principal_quantum_number': 2,
+    'yang_electronegativity': 2.00,
     },
     10:{
     'symbol':'Ne',
@@ -147,6 +157,7 @@ periodic_table = {
     '1st_ionization_energy': 2080.7,
     'covalent_radius': 58,
     'principal_quantum_number': 2,
+    'yang_electronegativity': 1,
     },
     11:{
     'symbol':'Na',
@@ -160,6 +171,7 @@ periodic_table = {
     '1st_ionization_energy': 495.8,
     'covalent_radius': 166,
     'principal_quantum_number': 3,
+    'yang_electronegativity': 0.85,
     },
     12:{
     'symbol':'Mg',
@@ -173,6 +185,7 @@ periodic_table = {
     '1st_ionization_energy': 737.7,
     'covalent_radius': 141,
     'principal_quantum_number': 3,
+    'yang_electronegativity': 1.12,
     },
     13:{
     'symbol':'Al',
@@ -186,6 +199,7 @@ periodic_table = {
     '1st_ionization_energy': 577.5,
     'covalent_radius': 121,
     'principal_quantum_number': 3,
+    'yang_electronegativity': 1.26,
     },
     14:{
     'symbol':'Si',
@@ -199,6 +213,7 @@ periodic_table = {
     '1st_ionization_energy': 786.5,
     'covalent_radius': 111,
     'principal_quantum_number': 3,
+    'yang_electronegativity': 1.40,
     },
     15:{
     'symbol':'P',
@@ -212,6 +227,7 @@ periodic_table = {
     '1st_ionization_energy': 1011.8,
     'covalent_radius': 107,
     'principal_quantum_number': 3,
+    'yang_electronegativity': 1.54,
     },
     16:{
     'symbol':'S',
@@ -225,6 +241,7 @@ periodic_table = {
     '1st_ionization_energy': 999.6,
     'covalent_radius': 105,
     'principal_quantum_number': 3,
+    'yang_electronegativity': 1.62,
     },
     17:{
     'symbol':'Cl',
@@ -238,6 +255,7 @@ periodic_table = {
     '1st_ionization_energy': 1251.2,
     'covalent_radius': 102,
     'principal_quantum_number': 3,
+    'yang_electronegativity': 1.72,
     },
     18:{
     'symbol':'Ar',
@@ -251,6 +269,7 @@ periodic_table = {
     '1st_ionization_energy': 1520.6,
     'covalent_radius': 106,
     'principal_quantum_number': 3,
+    'yang_electronegativity': 1,
     },
     19:{
     'symbol':'K',
@@ -264,6 +283,7 @@ periodic_table = {
     '1st_ionization_energy': 418.8,
     'covalent_radius': 203,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 0.69,
     },
     20:{
     'symbol':'Ca',
@@ -277,6 +297,7 @@ periodic_table = {
     '1st_ionization_energy': 589.8,
     'covalent_radius': 176,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 0.72,
     },
     21:{
     'symbol':'Sc',
@@ -290,6 +311,7 @@ periodic_table = {
     '1st_ionization_energy': 633.1,
     'covalent_radius': 170,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.15,
     },
     22:{
     'symbol':'Ti',
@@ -303,6 +325,7 @@ periodic_table = {
     '1st_ionization_energy': 658.8,
     'covalent_radius': 160,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.34,
     },
     23:{
     'symbol':'V',
@@ -316,6 +339,7 @@ periodic_table = {
     '1st_ionization_energy': 650.9,
     'covalent_radius': 153,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.47,
     },
     24:{
     'symbol':'Cr',
@@ -329,6 +353,7 @@ periodic_table = {
     '1st_ionization_energy': 652.9,
     'covalent_radius': 139,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.56,
     },
     25:{
     'symbol':'Mn',
@@ -342,6 +367,7 @@ periodic_table = {
     '1st_ionization_energy': 717.3,
     'covalent_radius': 139,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.60,
     },
     26:{
     'symbol':'Fe',
@@ -355,6 +381,7 @@ periodic_table = {
     '1st_ionization_energy': 762.5,
     'covalent_radius': 132,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.44,
     },
     27:{
     'symbol':'Co',
@@ -368,6 +395,7 @@ periodic_table = {
     '1st_ionization_energy': 760.4,
     'covalent_radius': 126,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.48,
     },
     28:{
     'symbol':'Ni',
@@ -381,6 +409,7 @@ periodic_table = {
     '1st_ionization_energy': 737.1,
     'covalent_radius': 124,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.52,
     },
     29:{
     'symbol':'Cu',
@@ -394,6 +423,7 @@ periodic_table = {
     '1st_ionization_energy': 745.5,
     'covalent_radius': 132,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.45,
     },
     30:{
     'symbol':'Zn',
@@ -407,6 +437,7 @@ periodic_table = {
     '1st_ionization_energy': 906.4,
     'covalent_radius': 122,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.35,
     },
     31:{
     'symbol':'Ga',
@@ -420,6 +451,7 @@ periodic_table = {
     '1st_ionization_energy': 578.8,
     'covalent_radius': 122,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.26,
     },
     32:{
     'symbol':'Ge',
@@ -433,6 +465,7 @@ periodic_table = {
     '1st_ionization_energy': 762,
     'covalent_radius': 120,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.38,
     },
     33:{
     'symbol':'As',
@@ -446,6 +479,7 @@ periodic_table = {
     '1st_ionization_energy': 947,
     'covalent_radius': 119,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.48,
     },
     34:{
     'symbol':'Se',
@@ -459,6 +493,7 @@ periodic_table = {
     '1st_ionization_energy': 941,
     'covalent_radius': 120,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.54,
     },
     35:{
     'symbol':'Br',
@@ -472,6 +507,7 @@ periodic_table = {
     '1st_ionization_energy': 1139.9,
     'covalent_radius': 120,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1.62,
     },
     36:{
     'symbol':'Kr',
@@ -485,6 +521,7 @@ periodic_table = {
     '1st_ionization_energy': 1350.8,
     'covalent_radius': 116,
     'principal_quantum_number': 4,
+    'yang_electronegativity': 1,
     },
     37:{
     'symbol':'Rb',
@@ -498,6 +535,7 @@ periodic_table = {
     '1st_ionization_energy': 403,
     'covalent_radius': 220,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 0.63,
     },
     38:{
     'symbol':'Sr',
@@ -511,6 +549,7 @@ periodic_table = {
     '1st_ionization_energy': 549.5,
     'covalent_radius': 195,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 0.85,
     },
     39:{
     'symbol':'Y',
@@ -524,6 +563,7 @@ periodic_table = {
     '1st_ionization_energy': 600,
     'covalent_radius': 190,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.10,
     },
     40:{
     'symbol':'Zr',
@@ -537,6 +577,7 @@ periodic_table = {
     '1st_ionization_energy': 640.1,
     'covalent_radius': 175,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.28,
     },
     41:{
     'symbol':'Nb',
@@ -550,6 +591,7 @@ periodic_table = {
     '1st_ionization_energy': 652.1,
     'covalent_radius': 164,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.54,
     },
     42:{
     'symbol':'Mo',
@@ -563,6 +605,7 @@ periodic_table = {
     '1st_ionization_energy': 684.3,
     'covalent_radius': 154,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.56,
     },
     43:{
     'symbol':'Tc',
@@ -576,6 +619,7 @@ periodic_table = {
     '1st_ionization_energy': 702,
     'covalent_radius': 147,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.56,
     },
     44:{
     'symbol':'Ru',
@@ -589,6 +633,7 @@ periodic_table = {
     '1st_ionization_energy': 710.2,
     'covalent_radius': 146,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.53,
     },
     45:{
     'symbol':'Rh',
@@ -602,6 +647,7 @@ periodic_table = {
     '1st_ionization_energy': 719.7,
     'covalent_radius': 142,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.57,
     },
     46:{
     'symbol':'Pd',
@@ -615,6 +661,7 @@ periodic_table = {
     '1st_ionization_energy': 804.4,
     'covalent_radius': 139,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.58,
     },
     47:{
     'symbol':'Ag',
@@ -628,6 +675,7 @@ periodic_table = {
     '1st_ionization_energy': 731,
     'covalent_radius': 145,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.46,
     },
     48:{
     'symbol':'Cd',
@@ -641,6 +689,7 @@ periodic_table = {
     '1st_ionization_energy': 867.8,
     'covalent_radius': 144,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.40,
     },
     49:{
     'symbol':'In',
@@ -654,6 +703,7 @@ periodic_table = {
     '1st_ionization_energy': 558.3,
     'covalent_radius': 142,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.12,
     },
     50:{
     'symbol':'Sn',
@@ -667,6 +717,7 @@ periodic_table = {
     '1st_ionization_energy': 708.6,
     'covalent_radius': 139,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.28,
     },
     51:{
     'symbol':'Sb',
@@ -680,6 +731,7 @@ periodic_table = {
     '1st_ionization_energy': 834,
     'covalent_radius': 139,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.35,
     },
     52:{
     'symbol':'Te',
@@ -693,6 +745,7 @@ periodic_table = {
     '1st_ionization_energy': 869.3,
     'covalent_radius': 138,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.41,
     },
     53:{
     'symbol':'I',
@@ -706,6 +759,7 @@ periodic_table = {
     '1st_ionization_energy': 1008.4,
     'covalent_radius': 139,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1.48,
     },
     54:{
     'symbol':'Xe',
@@ -719,6 +773,7 @@ periodic_table = {
     '1st_ionization_energy': 1170.4,
     'covalent_radius': 140,
     'principal_quantum_number': 5,
+    'yang_electronegativity': 1,
     },
     55:{
     'symbol':'Cs',
@@ -732,6 +787,7 @@ periodic_table = {
     '1st_ionization_energy': 375.7,
     'covalent_radius': 244,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 0.58,
     },
     56:{
     'symbol':'Ba',
@@ -745,6 +801,7 @@ periodic_table = {
     '1st_ionization_energy': 502.9,
     'covalent_radius': 215,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 0.82,
     },
     57:{
     'symbol':'La',
@@ -758,6 +815,7 @@ periodic_table = {
     '1st_ionization_energy': 538.1,
     'covalent_radius': 207,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     58:{
     'symbol':'Ce',
@@ -771,6 +829,7 @@ periodic_table = {
     '1st_ionization_energy': 534.4,
     'covalent_radius': 204,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     59:{
     'symbol':'Pr',
@@ -784,6 +843,7 @@ periodic_table = {
     '1st_ionization_energy': 527,
     'covalent_radius': 203,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     60:{
     'symbol':'Nd',
@@ -797,6 +857,7 @@ periodic_table = {
     '1st_ionization_energy': 533.1,
     'covalent_radius': 201,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     61:{
     'symbol':'Pm',
@@ -810,6 +871,7 @@ periodic_table = {
     '1st_ionization_energy': 540,
     'covalent_radius': 199,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     62:{
     'symbol':'Sm',
@@ -823,6 +885,7 @@ periodic_table = {
     '1st_ionization_energy': 544.5,
     'covalent_radius': 198,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     63:{
     'symbol':'Eu',
@@ -836,6 +899,7 @@ periodic_table = {
     '1st_ionization_energy': 547.1,
     'covalent_radius': 198,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     64:{
     'symbol':'Gd',
@@ -849,6 +913,7 @@ periodic_table = {
     '1st_ionization_energy': 593.4,
     'covalent_radius': 196,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     65:{
     'symbol':'Tb',
@@ -862,6 +927,7 @@ periodic_table = {
     '1st_ionization_energy': 565.8,
     'covalent_radius': 194,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     66:{
     'symbol':'Dy',
@@ -875,6 +941,7 @@ periodic_table = {
     '1st_ionization_energy': 573.0,
     'covalent_radius': 192,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     67:{
     'symbol':'Ho',
@@ -888,6 +955,7 @@ periodic_table = {
     '1st_ionization_energy': 581.0,
     'covalent_radius': 192,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     68:{
     'symbol':'Er',
@@ -901,6 +969,7 @@ periodic_table = {
     '1st_ionization_energy': 589.3,
     'covalent_radius': 189,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     69:{
     'symbol':'Tm',
@@ -914,6 +983,7 @@ periodic_table = {
     '1st_ionization_energy': 596.7,
     'covalent_radius': 190,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     70:{
     'symbol':'Yb',
@@ -927,6 +997,7 @@ periodic_table = {
     '1st_ionization_energy': 603.4,
     'covalent_radius': 187,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     71:{
     'symbol':'Lu',
@@ -940,6 +1011,7 @@ periodic_table = {
     '1st_ionization_energy': 523.5,
     'covalent_radius': 187,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     72:{
     'symbol':'Hf',
@@ -953,6 +1025,7 @@ periodic_table = {
     '1st_ionization_energy': 658.5,
     'covalent_radius': 175,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     73:{
     'symbol':'Ta',
@@ -966,6 +1039,7 @@ periodic_table = {
     '1st_ionization_energy': 761,
     'covalent_radius': 170,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     74:{
     'symbol':'W',
@@ -979,6 +1053,7 @@ periodic_table = {
     '1st_ionization_energy': 770,
     'covalent_radius': 162,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1.56,
     },
     75:{
     'symbol':'Re',
@@ -992,6 +1067,7 @@ periodic_table = {
     '1st_ionization_energy': 760,
     'covalent_radius': 151,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1.60,
     },
     76:{
     'symbol':'Os',
@@ -1005,6 +1081,7 @@ periodic_table = {
     '1st_ionization_energy': 840,
     'covalent_radius': 144,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1.56,
     },
     77:{
     'symbol':'Ir',
@@ -1018,6 +1095,7 @@ periodic_table = {
     '1st_ionization_energy': 880,
     'covalent_radius': 141,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1.57,
     },
     78:{
     'symbol':'Pt',
@@ -1031,6 +1109,7 @@ periodic_table = {
     '1st_ionization_energy': 870,
     'covalent_radius': 136,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1.58,
     },
     79:{
     'symbol':'Au',
@@ -1044,6 +1123,7 @@ periodic_table = {
     '1st_ionization_energy': 890.1,
     'covalent_radius': 136,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1.57,
     },
     80:{
     'symbol':'Hg',
@@ -1057,6 +1137,7 @@ periodic_table = {
     '1st_ionization_energy': 1007.1,
     'covalent_radius': 132,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1.48,
     },
     81:{
     'symbol':'Tl',
@@ -1070,6 +1151,7 @@ periodic_table = {
     '1st_ionization_energy': 589.4,
     'covalent_radius': 145,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1.10,
     },
     82:{
     'symbol':'Pb',
@@ -1083,6 +1165,7 @@ periodic_table = {
     '1st_ionization_energy': 715.6,
     'covalent_radius': 146,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1.21,
     },
     83:{
     'symbol':'Bi',
@@ -1096,6 +1179,7 @@ periodic_table = {
     '1st_ionization_energy': 703,
     'covalent_radius': 148,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1.29,
     },
     84:{
     'symbol':'Po',
@@ -1109,6 +1193,7 @@ periodic_table = {
     '1st_ionization_energy': 812.1,
     'covalent_radius': 140,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     85:{
     'symbol':'At',
@@ -1122,6 +1207,7 @@ periodic_table = {
     '1st_ionization_energy': 899.003,
     'covalent_radius': 150,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     86:{
     'symbol':'Rn',
@@ -1135,6 +1221,7 @@ periodic_table = {
     '1st_ionization_energy': 1037,
     'covalent_radius': 150,
     'principal_quantum_number': 6,
+    'yang_electronegativity': 1,
     },
     87:{
     'symbol':'Fr',
@@ -1148,6 +1235,7 @@ periodic_table = {
     '1st_ionization_energy': 380,
     'covalent_radius': 260,
     'principal_quantum_number': 7,
+    'yang_electronegativity': 1,
     },
     88:{
     'symbol':'Ra',
@@ -1161,6 +1249,7 @@ periodic_table = {
     '1st_ionization_energy': 509.3,
     'covalent_radius': 221,
     'principal_quantum_number': 7,
+    'yang_electronegativity': 1,
     },
     89:{
     'symbol':'Ac',
@@ -1174,6 +1263,7 @@ periodic_table = {
     '1st_ionization_energy': 499,
     'covalent_radius': 215,
     'principal_quantum_number': 7,
+    'yang_electronegativity': 1,
     },
     90:{
     'symbol':'Th',
@@ -1187,6 +1277,7 @@ periodic_table = {
     '1st_ionization_energy': 587,
     'covalent_radius': 206,
     'principal_quantum_number': 7,
+    'yang_electronegativity': 1,
     },
     91:{
     'symbol':'Pa',
@@ -1200,6 +1291,7 @@ periodic_table = {
     '1st_ionization_energy': 568,
     'covalent_radius': 200,
     'principal_quantum_number': 7,
+    'yang_electronegativity': 1,
     },
     92:{
     'symbol':'U',
@@ -1213,6 +1305,7 @@ periodic_table = {
     '1st_ionization_energy': 597.6,
     'covalent_radius': 196,
     'principal_quantum_number': 7,
+    'yang_electronegativity': 1,
     },
     93:{
     'symbol':'Np',
@@ -1226,6 +1319,7 @@ periodic_table = {
     '1st_ionization_energy': 604.5,
     'covalent_radius': 190,
     'principal_quantum_number': 7,
+    'yang_electronegativity': 1,
     },
     94:{
     'symbol':'Pu',
@@ -1239,6 +1333,7 @@ periodic_table = {
     '1st_ionization_energy': 584.7,
     'covalent_radius': 187,
     'principal_quantum_number': 7,
+    'yang_electronegativity': 1,
     },
     95:{
     'symbol':'Am',
@@ -1252,6 +1347,7 @@ periodic_table = {
     '1st_ionization_energy': 578,
     'covalent_radius': 180,
     'principal_quantum_number': 7,
+    'yang_electronegativity': 1,
     },
     96:{
     'symbol':'Cm',
@@ -1265,6 +1361,7 @@ periodic_table = {
     '1st_ionization_energy': 581,
     'covalent_radius': 169,
     'principal_quantum_number': 7,
+    'yang_electronegativity': 1,
     },
     97:{
     'symbol':'Bk',
@@ -1278,6 +1375,7 @@ periodic_table = {
     '1st_ionization_energy': 601,
     'covalent_radius': 168,
     'principal_quantum_number': 7,
+    'yang_electronegativity': 1,
     },
     98:{
     'symbol':'Cf',
@@ -1291,6 +1389,7 @@ periodic_table = {
     '1st_ionization_energy': 608,
     'covalent_radius': 168,
     'principal_quantum_number': 7,
+    'yang_electronegativity': 1,
     },
     99:{
     'symbol':'En',
@@ -1304,6 +1403,7 @@ periodic_table = {
     '1st_ionization_energy': 619,
     'covalent_radius': 165,
     'principal_quantum_number': 7,
+    'yang_electronegativity': 1,
     },
     100:{
     'symbol':'Fm',
@@ -1317,6 +1417,7 @@ periodic_table = {
     '1st_ionization_energy': 627,
     'covalent_radius': 167,
     'principal_quantum_number': 7,
+    'yang_electronegativity': 1,
     }
 }
 

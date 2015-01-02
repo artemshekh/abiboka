@@ -17,6 +17,13 @@ class Bond(set):
     def is_aromatic(self):
         return all([atom_.aromatic for atom_ in self])
 
+    @property
+    def conventional_bond_order(self):
+        if all([atom.aromatic for atom in self]):
+            return 1.5
+        else:
+            return self.order
+
 
 if __name__ == '__main__':
     bond = Bond(order=1, atom1 = Atom(1), atom2 = Atom(1))

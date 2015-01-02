@@ -2,6 +2,7 @@
 from calc.matrixes.matrix import Matrix
 from collections import defaultdict, Counter
 from descriptors.topological import close_shell
+from descriptors.vertex_degree import valence_electrones
 
 
 def p3_matrix(molecule):
@@ -115,35 +116,3 @@ def walk_vector(molecule, order):
         walk(atom, 0)
     return dct
 
-
-close_shell = [1, 3, 11, 19, 37, 55, 87]
-
-def valence_electrones(atom):
-    valence_e = 4
-    for period,n in enumerate(close_shell):
-        if atom.Z < n:
-            core_e, valence_e = close_shell[period-1]-1, atom.Z - close_shell[period-1] + 1
-            break
-    if valence_e:
-       return valence_e
-    else:
-        return atom.Z - 87
-
-
-def valence_degree(atom):
-    # all valence electrons of the ith atom
-    vd = valence_electrones(atom)
-    for _ in atom.connected_with():
-        if atom.Z == 1:
-            vd -= 1
-    return vd
-
-
-def valence_degree_(atom):
-    # the electronic identity of the atom in terms of both valence electron and core electron counts
-    vd = valence_electrones(atom)
-    for _ in atom.connected_with():
-        if atom.Z == 1:
-            vd -= 1
-    vd = float(vd)/(atom.Z - valence_e - 1)
-    return vd

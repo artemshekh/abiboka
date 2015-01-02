@@ -10,9 +10,10 @@ connection_number = connection number (N2)
 import operator
 import math
 from collections import Counter
+from descriptors.vertex_degree import intrinsic_state, valence_electrones, valence_degree
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
-from descriptors.descriptor_utils import path_sequence_matrix, walk_vector, valence_electrones, valence_degree
+from descriptors.descriptor_utils import path_sequence_matrix, walk_vector
 from descriptors.walk import mpc
 from descriptors.ring_descriptor import cyclomatic_number
 from utils.functional import cached
@@ -444,14 +445,6 @@ def pw(molecule, order):
     w =  sum(walk_vector(molecule, order).values())/2
     return (float(p)/w)/molecule.size
 
-# electrotopologocal index
-
-
-def intrinsic_state(atom):
-    a = (2.0/periodic_table[atom.Z]["principal_quantum_number"]) **2
-    b = a * valence_degree(atom) + 1
-    c =sum([atom_.Z!= 1 for atom_ in atom.connected_with()])
-    return b/c
 
 def intrinsic_state_sum(molecule):
     s = 0
