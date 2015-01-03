@@ -43,7 +43,7 @@ def valence_state_indicator(atom):
     return vertex_degree(atom) + valence_degree(atom)
 
 def kupchik_vertex_degree(atom):
-    a = float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']
+    a = float(periodic_table[6]['covalent_radius'])/periodic_table[atom.Z]['covalent_radius']
     b = valence_electrones(atom) - sum([atom.Z == 1 for atom in atom.connected_with()])
     return a*b
 

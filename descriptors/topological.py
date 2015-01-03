@@ -11,6 +11,7 @@ import operator
 import math
 from collections import Counter
 from descriptors.vertex_degree import intrinsic_state, valence_electrones, valence_degree, cluster_coefficient_vertex
+from descriptors.vertex_degree import kupchik_vertex_degree, madan_chemical_degree
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
 from descriptors.descriptor_utils import path_sequence_matrix, walk_vector
@@ -21,19 +22,38 @@ from utils.functional import cached
 
 @cached
 def zm1(molecule):
-    # first Zagreb index
+    """
+    First zagreb index
+    :param molecule:
+    :return: int
+    """
     return sum([atom.vertex_degree**2 for atom in molecule.hydrogen_suppressed.atoms])
 
 @cached
 def zm1_h(molecule):
+    """
+    first zagreb in dex in full graph
+    :param molecule:
+    :return: int
+    """
     return sum([atom.vertex_degree**2 for atom in molecule.atoms])
 
 @cached
 def platt_number(molecule):
-    return zm1(molecule) - 2*(molecule.size - 1)
+    """
+    Platt number
+    :param molecule:
+    :return: int
+    """
+    return zm1(molecule) - 2*(molecule.hydrogen_suppressed.size - 1)
 
 @cached
 def connection_number(molecule):
+    """
+    Connection_number
+    :param molecule:
+    :return:
+    """
     return zm1(molecule)/2 -molecule.size + 1
 
 close_shell = [1, 3, 11, 19, 37, 55, 87]
@@ -53,17 +73,11 @@ def zm1v_(molecule):
     # depends from core electrons
     return sum([valence_degree(atom)**2 for atom in molecule.hydrogen_suppressed.atoms])
 
-def kupchik_degree(atom):
-    return  (float(periodic_table[6]['covalent_radius'])/periodic_table[atom.Z]["covalent_radius"])* valence_degree(atom)
-
 def zm1kup(molecule):
-    return sum([kupchik_degree(atom)**2 for atom in molecule.atoms])
-
-def madan_degree(atom):
-    return sum([periodic_table[atom1.Z]["relative_atomic_weight"]/periodic_table[6]["relative_atomic_weight"] for atom1 in atom.connected_with()])
+    return sum([kupchik_vertex_degree(atom)**2 for atom in molecule.atoms])
 
 def zm1mad(molecule):
-    return sum([madan_degree(atom) ** 2 for atom in molecule.atoms])
+    return sum([madan_chemical_degree(atom) ** 2 for atom in molecule.atoms])
 
 def permutation_additive(atom, perm_coefficient):
     return valence_degree(atom) + sum([perm_coefficient * valence_degree(atom) for _ in atom.connected_with()])
@@ -96,7 +110,7 @@ def zm2kup(molecule):
     _ = []
     for bond in molecule.bonds:
         atoms = [atom for atom in bond]
-        _.append(kupchik_degree(atoms[0])*kupchik_degree(atoms[1]))
+        _.append(kupchik_vertex_degree(atoms[0])*kupchik_vertex_degree(atoms[1]))
     return sum(_)
 
 

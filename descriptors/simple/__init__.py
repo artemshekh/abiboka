@@ -5,7 +5,8 @@ Simple descriptor of molecule
 """
 from utils.periodic_table import periodic_table
 import math
-from calc.graph import check_cycle, dfs
+from calc.graph import check_cycle
+from descriptors.ring_descriptor import cyclomatic_number
 
 
 def sv(molecule):
@@ -22,7 +23,7 @@ def mv(molecule):
     :param molecule:
     :return:
     """
-    return sv(molecule)/len(molecule.atoms)
+    return sv(molecule)/molecule.size
 
 def sp(molecule):
     """

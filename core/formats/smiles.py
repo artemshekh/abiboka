@@ -105,6 +105,8 @@ class SmilesParser(Parser):
                     atom = atom.capitalize()
                     try:
                         z = periodic_table_by_symbol[atom]['z']
+                        if z == '*':
+                            z = 6
                         atom = Atom(z=z, n=n, charge=charge, aromatic=aromatic, chiral=chiral, bracket=bracket)
 
                         if hcount:
