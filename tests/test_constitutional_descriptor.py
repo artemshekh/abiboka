@@ -48,6 +48,9 @@ class Constitutional_descriptor_Test():
     def test_mean_sum_of_sanderson_electronegativity(self):
         assert_almost_equals(mean_sum_of_sanderson_electronegativity(self.molecule1), 0.998, places=3)
 
+    def test_number_of_atoms(self):
+        assert_equals(number_of_atoms(self.molecule1), 9)
+
 
 
 

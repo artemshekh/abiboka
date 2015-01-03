@@ -78,6 +78,9 @@ def sum_of_sanderson_electronegativity(molecule):
 def mean_sum_of_sanderson_electronegativity(molecule):
     return sum_of_sanderson_electronegativity(molecule)/molecule.size
 
+def number_of_atoms(molecule):
+    return molecule.size
+
 def nbo(molecule):
     """
     number of non-H bonds
@@ -185,9 +188,6 @@ def ncsp(molecule):
 
 
 _ = {
-
-    # number of atoms
-    "nAT": lambda x: len(x.atoms),
 
     # number of non-H atoms
     "nSK": lambda x: len(filter( lambda x: x.Z !=1 ,x.atoms)),
