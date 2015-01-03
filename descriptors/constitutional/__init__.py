@@ -90,6 +90,35 @@ def number_of_bonds(molecule):
 def number_of_non_hydrogen_bonds(molecule):
     return len(molecule.hydrogen_suppressed.bonds)
 
+def number_of_single_bond(molecule):
+    descriptor = 0
+    for bond in molecule.bonds:
+        if bond.order == 1 and not bond.is_aromatic():
+            print bond
+            descriptor += 1
+    return descriptor
+
+def number_of_double_bonds(molecule):
+    descriptor = 0
+    for bond in molecule.bonds:
+        if bond.order == 2:
+            descriptor += 1
+    return descriptor
+
+def number_of_triple_bonds(molecule):
+    descriptor = 0
+    for bond in molecule.bonds:
+        if bond.order == 3:
+            descriptor += 1
+    return descriptor
+
+def number_of_aromatic_bonds(molecule):
+    descriptor = 0
+    for bond in molecule.bonds:
+        if bond.is_aromatic():
+            descriptor += 1
+    return descriptor
+
 def nbo(molecule):
     """
     number of non-H bonds
@@ -197,8 +226,6 @@ def ncsp(molecule):
 
 
 _ = {
-
-    "nBO": nbo,
 
     # number of multiple bonds (2 or 3) aromatic bonds is not multiple. Good question?
     "nBM": lambda x: len(filter( lambda x: x.order !=1 ,x.bonds)),
