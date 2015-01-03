@@ -9,6 +9,9 @@ from calc.graph import check_cycle
 from descriptors.ring_descriptor import cyclomatic_number
 
 
+def molecular_weight(molecule):
+    return molecule.molecular_mass()
+
 def sv(molecule):
     """
     Sum of Van der Waals volume
