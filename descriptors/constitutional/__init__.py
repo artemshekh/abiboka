@@ -12,21 +12,27 @@ from descriptors.ring_descriptor import cyclomatic_number
 def molecular_weight(molecule):
     return molecule.molecular_mass()
 
-def sv(molecule):
+def average_molecular_weight(molecule):
+    return molecular_weight(molecule)/molecule.size
+
+def sum_van_der_waals_volume(molecule):
     """
     Sum of Van der Waals volume
     :param molecule:
     :return:
     """
-    return sum([(4 * math.pi * periodic_table[atom.Z]['vdw_radius']**3)/3 for atom in molecule.atoms])/((4 * math.pi * periodic_table[6]['vdw_radius']**3)/3)
+    constant = (4.0/3)*math.pi
+    volume_carbon_atom = constant*(periodic_table[6]['vdw_radius']**3)
+    sum_volume = sum([constant * periodic_table[atom.Z]['vdw_radius']**3  for atom in molecule.atoms])
+    return sum_volume/volume_carbon_atom
 
-def mv(molecule):
+def mean_van_der_waals_volume(molecule):
     """
     Mean of Van der Waals volume
     :param molecule:
     :return:
     """
-    return sv(molecule)/molecule.size
+    return sum_van_der_waals_volume(molecule)/molecule.size
 
 def sp(molecule):
     """
@@ -167,16 +173,6 @@ def ncsp(molecule):
 
 
 _ = {
-
-    #molecular weight
-    "MW": lambda x: x.molecular_mass(),
-
-    # average molecular weight
-    "AMW": lambda x: x.molecular_mass()/len(x.atoms),
-
-    "SV": sv,
-
-    "MV": mv,
 
     "SP": sp,
 

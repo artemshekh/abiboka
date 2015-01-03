@@ -3,13 +3,6 @@ __author__ = 'a.shehovtsov'
 
 """
 
-def dfs(atom, ex):
-    ex.add(atom)
-    for bond in atom.bonds:
-        for atom_ in bond:
-            if atom_ not in ex:
-                dfs(atom_, ex)
-
 def check_cycle(molecule):
 
     def cycle(parent, atom):
