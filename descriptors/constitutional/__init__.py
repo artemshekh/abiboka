@@ -87,6 +87,9 @@ def number_of_non_hydrogen_atoms(molecule):
 def number_of_bonds(molecule):
     return len(molecule.bonds)
 
+def number_of_non_hydrogen_bonds(molecule):
+    return len(molecule.hydrogen_suppressed.bonds)
+
 def nbo(molecule):
     """
     number of non-H bonds

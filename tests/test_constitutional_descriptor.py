@@ -49,6 +49,9 @@ class Constitutional_descriptor_Test():
     def test_number_of_bonds(self):
         assert_equals(number_of_bonds(self.molecule1), 8)
 
+    def test_number_of_non_hydrogen_bonds(self):
+        assert_equals(number_of_non_hydrogen_bonds(self.molecule1), 2)
+
 
 
 
