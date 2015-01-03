@@ -17,7 +17,7 @@ def average_molecular_weight(molecule):
 
 def sum_van_der_waals_volume(molecule):
     """
-    Sum of Van der Waals volume
+    Sum of Van der Waals volume (scaled on Carbon atom)
     :param molecule:
     :return:
     """
@@ -34,37 +34,41 @@ def mean_van_der_waals_volume(molecule):
     """
     return sum_van_der_waals_volume(molecule)/molecule.size
 
-def sp(molecule):
+def sum_of_atom_polarizability(molecule):
     """
     sum of atomic polarizabilities (scaled on Carbon atom)
     :param molecule:
     :return:
     """
-    return sum([periodic_table[atom.Z]['atomic_polarizability'] for atom in molecule.atoms])/periodic_table[6]['atomic_polarizability']
+    polarizability_carbon_atom = periodic_table[6]['atomic_polarizability']
+    sum_polarizability = sum([periodic_table[atom.Z]['atomic_polarizability'] for atom in molecule.atoms])
+    return sum_polarizability/polarizability_carbon_atom
 
-def mp(molecule):
+def mean_sum_atom_polarizability(molecule):
     """
     mean atomic polarizability (scaled on Carbon atom)
     :param molecule:
     :return:
     """
-    return sp(molecule)/len(molecule.atoms)
+    return sum_of_atom_polarizability(molecule)/molecule.size
 
-def si(molecule):
+def sum_of_first_ionization_potentials(molecule):
     """
     sum of first ionization potentials (scaled on Carbon atom)
     :param molecule:
     :return:
     """
-    return sum([periodic_table[atom.Z]['1st_ionization_energy'] for atom in molecule.atoms])/periodic_table[6]['1st_ionization_energy']
+    carbon_first_ionization_potential = periodic_table[6]['1st_ionization_energy']
+    sum_first_ionization_potential_molecule = sum([periodic_table[atom.Z]['1st_ionization_energy'] for atom in molecule.atoms])
+    return sum_first_ionization_potential_molecule/carbon_first_ionization_potential
 
-def mi(molecule):
+def mean_sum_of_first_ionization_potentials(molecule):
     """
     mean first ionization potential (scaled on Carbon atom)
     :param molecule:
     :return:
     """
-    return si(molecule)/len(molecule.atoms)
+    return sum_of_first_ionization_potentials(molecule)/molecule.size
 
 def nbo(molecule):
     """
@@ -173,14 +177,6 @@ def ncsp(molecule):
 
 
 _ = {
-
-    "SP": sp,
-
-    "MP": mp,
-
-    "SI": si,
-
-    "MI": mi,
 
     # number of atoms
     "nAT": lambda x: len(x.atoms),

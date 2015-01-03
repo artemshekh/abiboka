@@ -30,4 +30,37 @@ class Constitutional_descriptor_Test():
     def test_mean_van_der_waals_volume(self):
         assert_almost_equals(mean_van_der_waals_volume(self.molecule1), 0.482, places=3)
 
+    def test_sum_of_atom_polarizability(self):
+        assert_almost_equals(sum_of_atom_polarizability(self.molecule1), 5.004, places=3)
+
+    def test_mean_sum_of_atom_polarizability(self):
+        assert_almost_equals(mean_sum_atom_polarizability(self.molecule1), 0.556, places=3)
+
+    def test_sum_of_first_ionization_potentials(self):
+        assert_almost_equals(sum_of_first_ionization_potentials(self.molecule1), 10.455, places=3)
+
+    def test_mean_sum_of_first_ionization_potentials(self):
+        assert_almost_equals(mean_sum_of_first_ionization_potentials(self.molecule1), 1.162, places=3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
