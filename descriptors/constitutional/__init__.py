@@ -70,6 +70,14 @@ def mean_sum_of_first_ionization_potentials(molecule):
     """
     return sum_of_first_ionization_potentials(molecule)/molecule.size
 
+def sum_of_sanderson_electronegativity(molecule):
+    sanderson_electronegativity_c = periodic_table[6]['sanderson_electronegativity']
+    sanderson_electronegativity_molecule = sum([periodic_table[atom.Z]['sanderson_electronegativity'] for atom in molecule.atoms])
+    return sanderson_electronegativity_molecule/sanderson_electronegativity_c
+
+def mean_sum_of_sanderson_electronegativity(molecule):
+    return sum_of_sanderson_electronegativity(molecule)/molecule.size
+
 def nbo(molecule):
     """
     number of non-H bonds

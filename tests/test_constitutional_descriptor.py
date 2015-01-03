@@ -42,6 +42,12 @@ class Constitutional_descriptor_Test():
     def test_mean_sum_of_first_ionization_potentials(self):
         assert_almost_equals(mean_sum_of_first_ionization_potentials(self.molecule1), 1.162, places=3)
 
+    def test_sum_of_sanderson_electronegativity(self):
+        assert_almost_equals(sum_of_sanderson_electronegativity(self.molecule1), 8.978, places=3)
+
+    def test_mean_sum_of_sanderson_electronegativity(self):
+        assert_almost_equals(mean_sum_of_sanderson_electronegativity(self.molecule1), 0.998, places=3)
+
 
 
 
