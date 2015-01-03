@@ -1,20 +1,12 @@
 import math
 from nose.tools import assert_almost_equals, assert_equals
 
-
-from structure.Atom import Atom
-from structure.Bond import Bond
-from structure.Molecule import Molecule
-
+from fixtures.molecule import ethanol
 from descriptors.constitutional import *
 
 class Constitutional_descriptor_Test():
     def setUp(self):
-        m = Molecule()
-        m.atoms += [Atom(z=6) for x in range(2)]
-        m.atoms += [Atom(z=1) for x in range(6)]
-        m.atoms += [Atom(z=8) for x in range(1)]
-        self.molecule1 = m
+        self.molecule1 = ethanol()
 
 
 
@@ -53,6 +45,9 @@ class Constitutional_descriptor_Test():
 
     def test_number_of_non_hydrogen_atoms(self):
         assert_equals(number_of_non_hydrogen_atoms(self.molecule1), 3)
+
+    def test_number_of_bonds(self):
+        assert_equals(number_of_bonds(self.molecule1), 8)
 
 
 

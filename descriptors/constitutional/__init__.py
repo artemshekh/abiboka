@@ -84,6 +84,9 @@ def number_of_atoms(molecule):
 def number_of_non_hydrogen_atoms(molecule):
     return len(filter( lambda atom: atom.Z != 1 , molecule.atoms))
 
+def number_of_bonds(molecule):
+    return len(molecule.bonds)
+
 def nbo(molecule):
     """
     number of non-H bonds
@@ -191,11 +194,6 @@ def ncsp(molecule):
 
 
 _ = {
-
-    # number of non-H atoms
-    "nSK": lambda x: len(filter( lambda x: x.Z !=1 ,x.atoms)),
-
-    "nBT": lambda x: len(x.bonds),
 
     "nBO": nbo,
 
