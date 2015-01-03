@@ -51,6 +51,9 @@ class Constitutional_descriptor_Test():
     def test_number_of_atoms(self):
         assert_equals(number_of_atoms(self.molecule1), 9)
 
+    def test_number_of_non_hydrogen_atoms(self):
+        assert_equals(number_of_non_hydrogen_atoms(self.molecule1), 3)
+
 
 
 

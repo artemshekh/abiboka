@@ -81,6 +81,9 @@ def mean_sum_of_sanderson_electronegativity(molecule):
 def number_of_atoms(molecule):
     return molecule.size
 
+def number_of_non_hydrogen_atoms(molecule):
+    return len(filter( lambda atom: atom.Z != 1 , molecule.atoms))
+
 def nbo(molecule):
     """
     number of non-H bonds
