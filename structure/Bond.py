@@ -29,6 +29,16 @@ class Bond(set):
                     return True
         return False
 
+    def is_terminal(self):
+        return any(map(lambda x: x.vertex_degree == 1, [atom for atom in self]))
+
+    def adjacent_to_triple_bond(self):
+        atoms = [atom for atom in self]
+        for atom in atoms:
+            for bond in atom.bonds:
+                if bond.order == 3:
+                    return True
+
     @property
     def conventional_bond_order(self):
         if self.is_aromatic():
