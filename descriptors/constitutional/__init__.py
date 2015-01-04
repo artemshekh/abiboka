@@ -266,7 +266,7 @@ def number_of_csp3_carbon_atoms(molecule):
             if bond.order != 1:
                 not_sp3 = True
                 break
-        descriptor += 1 if not bad else 0
+        descriptor += 1 if not not_sp3 else 0
     return descriptor
 
 def number_of_csp2_carbon_atoms(molecule):

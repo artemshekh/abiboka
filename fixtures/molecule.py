@@ -39,3 +39,80 @@ def ethynylbenzoicacid():
         bond = Bond(order=3, atom1=atoms[i], atom2=atoms[j])
         m.bonds.append(bond)
     return m
+
+def borane():
+    m = Molecule()
+    m.atoms += [Atom(z=5) for x in range(1)]
+    m.atoms += [Atom(z=1) for x in range(3)]
+    bonds = [(0,1), (0,2), (0,3)]
+    atoms = m.atoms
+    for i,j in bonds:
+        bond = Bond(atom1=atoms[i], atom2=atoms[j])
+        m.bonds.append(bond)
+    return m
+
+def ammiac():
+    m = Molecule()
+    m.atoms += [Atom(z=7) for x in range(1)]
+    m.atoms += [Atom(z=1) for x in range(3)]
+    bonds = [(0,1), (0,2), (0,3)]
+    atoms = m.atoms
+    for i,j in bonds:
+        bond = Bond(atom1=atoms[i], atom2=atoms[j])
+        m.bonds.append(bond)
+    return m
+
+def phosphane():
+    m = Molecule()
+    m.atoms += [Atom(z=15) for x in range(1)]
+    m.atoms += [Atom(z=1) for x in range(3)]
+    bonds = [(0,1), (0,2), (0,3)]
+    atoms = m.atoms
+    for i,j in bonds:
+        bond = Bond(atom1=atoms[i], atom2=atoms[j])
+        m.bonds.append(bond)
+    return m
+
+def hydrogen_sulfide():
+    m = Molecule()
+    m.atoms += [Atom(z=16) for x in range(1)]
+    m.atoms += [Atom(z=1) for x in range(2)]
+    bonds = [(0,1), (0,2)]
+    atoms = m.atoms
+    for i,j in bonds:
+        bond = Bond(atom1=atoms[i], atom2=atoms[j])
+        m.bonds.append(bond)
+    return m
+
+def hydrogen_chloride():
+    m = Molecule()
+    m.atoms += [Atom(z=17) for x in range(1)]
+    m.atoms += [Atom(z=1) for x in range(1)]
+    bonds = [(0,1)]
+    atoms = m.atoms
+    for i,j in bonds:
+        bond = Bond(atom1=atoms[i], atom2=atoms[j])
+        m.bonds.append(bond)
+    return m
+
+def hydrogen_bromide():
+    m = Molecule()
+    m.atoms += [Atom(z=35) for x in range(1)]
+    m.atoms += [Atom(z=1) for x in range(1)]
+    bonds = [(0,1)]
+    atoms = m.atoms
+    for i,j in bonds:
+        bond = Bond(atom1=atoms[i], atom2=atoms[j])
+        m.bonds.append(bond)
+    return m
+
+def hydrogen_iodide():
+    m = Molecule()
+    m.atoms += [Atom(z=53) for x in range(1)]
+    m.atoms += [Atom(z=1) for x in range(1)]
+    bonds = [(0,1)]
+    atoms = m.atoms
+    for i,j in bonds:
+        bond = Bond(atom1=atoms[i], atom2=atoms[j])
+        m.bonds.append(bond)
+    return m
