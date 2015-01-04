@@ -143,27 +143,4 @@ class Constitutional_descriptor_Test():
 
     def test_number_of_csp_atoms(self):
         assert_equals(number_of_csp_carbon_atoms(self.ethynylbenzoicacid), 2)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
