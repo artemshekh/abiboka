@@ -96,3 +96,45 @@ def cycle_vertex(molecule):
         if atom not in used_atoms:
             dfs(atom)
     return cycle_atoms
+
+def cycle_bonds(molecule):
+    """
+    Find all bond in cycle
+    :param molecule:
+    :return:
+    """
+    def dfs(atom, parentatom):
+        used_atoms.add(atom)
+        for bond in atom.bonds:
+            next_atom = filter(lambda x: x is not atom, [next_atom for next_atom in bond])[0]
+            if next_atom not in used_atoms:
+                bond_stack.append(bond)
+                dfs(next_atom, atom)
+            else:
+                if next_atom is not parentatom:
+                    if bond not in cycle_bonds_list:
+                        reversed_bond_stack = reversed(bond_stack)
+                        good_bond = None
+                        for bond_ in reversed_bond_stack:
+                            if next_atom in bond_:
+                                good_bond = bond_
+                                break
+                        i = 0
+                        if good_bond:
+                            i = bond_stack.index(good_bond)
+                        bonds_to_list = bond_stack[i:] + [bond]
+                        for bond in bonds_to_list:
+                            if bond not in cycle_bonds_list:
+                                cycle_bonds_list.append(bond)
+        if bond_stack:
+            b = bond_stack.pop()
+
+
+    molecule = molecule.hydrogen_suppressed
+    cycle_bonds_list = []
+    used_atoms = set()
+    bond_stack = []
+    for atom in molecule.atoms:
+        if atom not in used_atoms:
+            dfs(atom, None)
+    return cycle_bonds_list
