@@ -64,6 +64,9 @@ class Constitutional_descriptor_Test():
     def test_number_of_aromatic_bonds(self):
         assert_equals(number_of_aromatic_bonds(self.ethynylbenzoicacid), 6)
 
+    def test_sum_of_conventional_bond_order(self):
+        assert_equals(sum_of_conventional_bond_order(self.ethynylbenzoicacid), 17)
+
 
 
 

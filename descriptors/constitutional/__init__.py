@@ -119,35 +119,14 @@ def number_of_aromatic_bonds(molecule):
             descriptor += 1
     return descriptor
 
-def nbo(molecule):
-    """
-    number of non-H bonds
-    :param molecule:
-    :return:
-    """
-    nbo_ = 0
-    for bond in molecule.bonds:
-        h_in_bond = False
-        for atom in bond:
-            if atom.Z == 1:
-                h_in_bond = True
-        if not h_in_bond:
-            nbo_ += 1
-    return nbo_
-
-def scbo(molecule):
-    """
-    sum of conventional bond orders (H-depleted)
-    :param molecule:
-    :return:
-    """
-    scbo_ = 0
+def sum_of_conventional_bond_order(molecule):
+    descriptor = 0
     for bond in molecule.hydrogen_suppressed.bonds:
         if bond.is_aromatic():
-            scbo_ += 1.5
+            descriptor += 1.5
         else:
-            scbo_ += bond.order
-    return scbo_
+            descriptor += bond.order
+    return descriptor
 
 def rbn(molecule):
     """
@@ -226,11 +205,6 @@ def ncsp(molecule):
 
 
 _ = {
-
-    # number of multiple bonds (2 or 3) aromatic bonds is not multiple. Good question?
-    "nBM": lambda x: len(filter( lambda x: x.order !=1 ,x.bonds)),
-
-    "SCBO": scbo,
 
     "RBN": rbn,
 
