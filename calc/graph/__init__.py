@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 __author__ = 'a.shehovtsov'
 """
 
@@ -65,3 +66,33 @@ def path_find(molecule):
         bond_stack = []
         dfs(atom)
     return path_distance_dct
+
+def cycle_vertex(molecule):
+    """
+    Find all vertices which belongs to cycles
+    :param molecule:
+    :return: set(atom1, atom2, atom3)
+    Need tests
+    """
+    def dfs(atom):
+        used_atoms.add(atom)
+        atoms = atom.connected_with()
+        for next_atom in atoms:
+            if next_atom not in used_atoms:
+                atom_stack.append(atom)
+                dfs(next_atom)
+            elif next_atom in used_atoms:
+                if atom_stack and next_atom in atom_stack and next_atom is not atom_stack[-1]:
+                    i = atom_stack.index(next_atom)
+                    cycle = atom_stack[i:] + [atom]
+                    for cycle_atom in cycle:
+                        cycle_atoms.add(cycle_atom)
+        if atom_stack:
+            atom_stack.pop()
+    used_atoms = set()
+    atom_stack = []
+    cycle_atoms = set()
+    for atom in molecule.atoms:
+        if atom not in used_atoms:
+            dfs(atom)
+    return cycle_atoms
