@@ -17,6 +17,18 @@ class Bond(set):
     def is_aromatic(self):
         return all([atom_.aromatic for atom_ in self])
 
+    def is_amide_bond(self):
+        atoms = [atom for atom in self]
+        if atoms[0].Z == 6 and atoms[1].Z ==7:
+            for new_bond in atoms[0].bonds:
+                if new_bond.order ==2 and any(map(lambda x: x.Z == 8, [atom for atom in new_bond])):
+                    return True
+        if atoms[0].Z == 7 and atoms[1].Z ==6:
+            for new_bond in atoms[1].bonds:
+                if new_bond.order ==2 and any(map(lambda x: x.Z == 8, [atom for atom in new_bond])):
+                    return True
+        return False
+
     @property
     def conventional_bond_order(self):
         if self.is_aromatic():
