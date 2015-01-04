@@ -5,7 +5,7 @@ Simple descriptor of molecule
 """
 from utils.periodic_table import periodic_table
 import math
-from calc.graph import check_cycle
+from calc.graph import cycle_bonds
 from descriptors.ring_descriptor import cyclomatic_number
 
 
@@ -128,30 +128,30 @@ def sum_of_conventional_bond_order(molecule):
             descriptor += bond.order
     return descriptor
 
-def rbn(molecule):
+def rotatable_bond_countn(molecule):
     """
     number of rotatable bonds
     :param molecule:
     :return:
     """
-    rbn_ = 0
+    descriptor = 0
     molecule = molecule.hydrogen_suppressed
-    cycle_atoms = check_cycle(molecule)
+    cycle_bond_list = cycle_bonds(molecule)
     for bond in molecule.bonds:
         rotatable = True
-        if bond.order > 1:
+        if bond.order > 1: # double, triple bond not count
             rotatable = False
-        atoms = [atom for atom in bond]
-
-        if atoms[0] in cycle_atoms and atoms[1] in cycle_atoms:
+        elif bond in cycle_bond_list:
             rotatable = False
-        elif atoms[0].Z == 7 or atoms[1].Z == 7:
+        elif bond.is_amide_bond():
             rotatable = False
-        elif len(atoms[0].bonds) == 1 or len(atoms[1].bonds) == 1:
+        elif bond.is_terminal():
+            rotatable = False
+        elif bond.adjacent_to_triple_bond():
             rotatable = False
         if rotatable:
-            rbn_ += 1
-    return rbn_
+            descriptor += 1
+    return descriptor
 
 def rbf(molecule):
     """
@@ -205,8 +205,6 @@ def ncsp(molecule):
 
 
 _ = {
-
-    "RBN": rbn,
 
     "RBF": rbf,
 
