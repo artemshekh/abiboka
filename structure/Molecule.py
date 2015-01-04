@@ -27,6 +27,7 @@ class Molecule():
     _distance_matrix = None
     _burden_matrix = None
     _multigraph_distance_matrix = None
+    _laplacian_matrix = None
 
     def add_atom(self, atom):
         self.atoms.add(atom)
@@ -230,6 +231,14 @@ class Molecule():
             self._multigraph_distance_matrix = m
             return self._multigraph_distance_matrix
 
+    @property
+    def laplacian_matrix(self):
+        if self._laplacian_matrix:
+            return self._laplacian_matrix
+        else:
+            m = Matrix(self.vertex_degree_matrix) - Matrix(self.adjacency_matrix)
+            self._laplacian_matrix = m.matrix
+            return self._laplacian_matrix
 
 
 
