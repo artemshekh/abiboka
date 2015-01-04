@@ -1,7 +1,48 @@
 # -*- coding: utf-8 -*-
 """
-Simple descriptor of molecule
-
+Constitutional descriptor (0D - 1D)
+Molecular weight
+Average molecular weight
+Number of atoms
+Number of bonds
+Number of non hydrogen atoms
+Number of non hydrogen bonds
+Number of single bonds
+Number of double bonds
+Number of triple bonds
+Number of aromatic bonds
+Sum of conventional bond order
+Rotatable bond count (J. Med. Chem. 2002, 45, 2615-2623)
+Rotatable bond fraction
+Number of H atoms
+Number of B atoms
+Number of C atoms
+Number of N atoms
+Number of O atoms
+Number of P atoms
+Number of S atoms
+Number of Cl atoms
+Number of Br atoms
+Number of I atoms
+Number of heavy atoms
+Number of heteroatoms
+Number of halogen atoms
+Percentage of H atoms
+Percentage of C atoms
+Percentage of N atoms
+Percentage of O atoms
+Percentage of halogen atoms
+Number of C-sp3 atoms
+Number of C-sp2 atoms
+Number of C-sp atoms
+Sum of van der Waals Volumes (scaled on Carbon atom)
+Mean of van der Waals Volumes (scaled on Carbon atom)
+Sum of atomic polarizability (scaled on Carbon atom)
+Mean of atomic polarizability (scaled on Carbon atom)
+Sum of first_ionization_potential (scaled on Carbon atom)
+Mean of first_ionization_potential (scaled on Carbon atom)
+Sum of Sanderson electronegativity (scaled on Carbon atom)
+Mean of Sanderson electronegativity (scaled on Carbon atom)
 """
 from utils.periodic_table import periodic_table
 import math
@@ -161,118 +202,90 @@ def rotatable_bond_fraction(molecule):
     """
     return float(rotatable_bond_count(molecule))/molecule.size
 
-def nab(molecule):
-    _ = 0
-    for bond in molecule.bonds:
-        _ += 1 if bond.is_aromatic() else 0
-    return _
+def number_of_hydrogen_atoms(molecule):
+    return len(filter( lambda x: x.Z == 1 ,molecule.atoms))
 
-def ncsp3(molecule):
-    _ = 0
+def number_of_boron_atoms(molecule):
+    return len(filter( lambda x: x.Z == 5 ,molecule.atoms))
+
+def number_of_carbon_atoms(molecule):
+    return len(filter( lambda x: x.Z == 6 ,molecule.atoms))
+
+def number_of_nytrogen_atoms(molecule):
+    return len(filter( lambda x: x.Z == 7,molecule.atoms))
+
+def number_of_oxygen_atoms(molecule):
+    return len(filter( lambda x: x.Z == 8 ,molecule.atoms))
+
+def number_of_phosphorous_atoms(molecule):
+    return len(filter( lambda x: x.Z == 15 ,molecule.atoms))
+
+def number_of_sulfur_atoms(molecule):
+    return len(filter( lambda x: x.Z == 16 ,molecule.atoms))
+
+def number_of_chlorine_atoms(molecule):
+    return len(filter( lambda x: x.Z == 17 ,molecule.atoms))
+
+def number_of_bromine_atoms(molecule):
+    return len(filter( lambda x: x.Z == 35 ,molecule.atoms))
+
+def number_of_iodine_atoms(molecule):
+    return len(filter( lambda x: x.Z == 53 ,molecule.atoms))
+
+def number_of_heavy_atoms(molecule):
+    return len(filter( lambda x: x.Z != 1 ,molecule.atoms))
+
+def number_of_heteroatoms(molecule):
+    return len(filter( lambda x: x.Z  not in [1, 6] ,molecule.atoms))
+
+def number_of_halogen_atoms(molecule):
+    return len(filter( lambda x: x.Z in [9, 17, 35, 53] ,molecule.atoms))
+
+def percentage_of_hydrogen_atoms(molecule):
+    return 100*float(number_of_hydrogen_atoms(molecule))/molecule.size
+
+def percentage_of_carbon_atoms(molecule):
+    return 100*float(number_of_carbon_atoms(molecule))/molecule.size
+
+def percentage_of_nytrogen_atoms(molecule):
+    return 100*float(number_of_nytrogen_atoms(molecule))/molecule.size
+
+def percentage_of_oxygen_atoms(molecule):
+    return 100*float(number_of_oxygen_atoms(molecule))/molecule.size
+
+def percentage_of_halogen(molecule):
+    return 100*float(number_of_halogen_atoms(molecule))/molecule.size
+
+def number_of_csp3_carbon_atoms(molecule):
+    descriptor = 0
     for atom in molecule.atoms:
         if atom.Z != 6 or atom.aromatic:
             continue
-        bad = False
+        not_sp3 = False
         for bond in atom.bonds:
             if bond.order != 1:
-                bad = True
+                not_sp3 = True
                 break
-        _ += 1 if not bad else 0
-    return _
+        descriptor += 1 if not bad else 0
+    return descriptor
 
-def ncsp2(molecule):
-    _ = 0
+def number_of_csp2_carbon_atoms(molecule):
+    descriptor = 0
     for atom in molecule.atoms:
         if atom.Z != 6:
             continue
         if atom.aromatic:
-            _ += 1
+            descriptor += 1
             continue
         if any([bond.order == 2 for bond in atom.bonds]):
-            _ += 1
-    return _
+            descriptor += 1
+    return descriptor
 
-def ncsp(molecule):
-    _ = 0
+def number_of_csp_carbon_atoms(molecule):
+    descriptor = 0
     for atom in molecule.atoms:
         if atom.Z != 6 or atom.aromatic:
             continue
         if any([bond.order == 3 for bond in atom.bonds]):
-            _ += 1
-    return _
-
-
-
-
-_ = {
-
-    # number of Hydrogen atoms
-    "nH": lambda x: len(filter( lambda x: x.Z ==1 ,x.atoms)),
-
-    # number of Carbon atoms
-    "nC": lambda x: len(filter( lambda x: x.Z ==6 ,x.atoms)),
-
-    # number of Nytrogen atoms
-    "nN": lambda x: len(filter( lambda x: x.Z ==7 ,x.atoms)),
-
-    # number of Oxygen atoms
-    "nO": lambda x: len(filter( lambda x: x.Z ==8 ,x.atoms)),
-
-    # number of Posphorus atoms
-    "nP": lambda x: len(filter( lambda x: x.Z ==15 ,x.atoms)),
-
-    # number of Sulfur atoms
-    "NS": lambda x: len(filter( lambda x: x.Z ==16 ,x.atoms)),
-
-    # number of Fluorine atoms
-    "nF": lambda x: len(filter( lambda x: x.Z ==9 ,x.atoms)),
-
-    # number of Chlorine atoms
-    "nCL": lambda x: len(filter( lambda x: x.Z ==17 ,x.atoms)),
-
-    # number of Bromine atoms
-    "nBR": lambda x: len(filter( lambda x: x.Z ==35 ,x.atoms)),
-
-    # number of Iodine atoms
-    "nI": lambda x: len(filter( lambda x: x.Z ==53 ,x.atoms)),
-
-    # number of Boron atoms
-    "nB": lambda x: len(filter( lambda x: x.Z ==5 ,x.atoms)),
-
-    # number of heavy atom ( see nSK)
-    "nHM": lambda x: len(filter( lambda x: x.Z !=1 ,x.atoms)),
-
-    # number of heteroatoms
-    "nHet": lambda x: len(filter(lambda x: x.Z not in [1,6], x.atoms)),
-
-    # number of halogen atoms
-    "nX": lambda x: len(filter(lambda x: x.Z  in [9,17,35,53], x.atoms)),
-
-    # percentage of H atoms
-    "H%": lambda x: 100*float(len(filter( lambda x: x.Z ==1 ,x.atoms)))/len(x.atoms),
-
-    # percentage of C atoms
-    "C%": lambda x: 100*float(len(filter( lambda x: x.Z ==6 ,x.atoms)))/len(x.atoms),
-
-    # percentage of N atoms
-    "N%": lambda x: 100*float(len(filter( lambda x: x.Z ==7 ,x.atoms)))/len(x.atoms),
-
-    # percentage of O atoms
-    "O%": lambda x: 100*float(len(filter( lambda x: x.Z ==8 ,x.atoms)))/len(x.atoms),
-
-    # percentage of halogen atoms
-    "X%": lambda x: 100*float(len(filter( lambda x: x.Z in [9,17,35,53] ,x.atoms)))/len(x.atoms),
-
-    # number of Csp3 Carbon atoms
-    "nCsp3": ncsp3,
-
-    # number of Csp2 Carbon atoms
-    "nCsp2": ncsp2,
-
-    # number of Csp Carbon atoms
-    "nCsp": ncsp,
-
-    # cyclomatic number
-    "nCIC": cyclomatic_number,
-
-}
+            descriptor += 1
+    return descriptor
