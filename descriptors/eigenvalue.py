@@ -9,60 +9,43 @@ from descriptors.descriptor_utils import p3_matrix, p2_matrix
 from utils.periodic_table import periodic_table
 
 
-def jacobi(matrix):
+def jacobi_rotation(matrix, epsilon= 0.0005):
 
-    def max_(matrix):
-        max_ele = 0
-        x, y = 0, 1
+    def max_element(matrix):
+        maximal_value, k, l = 0, None, None
         for i, row in enumerate(matrix.matrix):
-            for j, value in enumerate(row):
-                if i != j and abs(value) > max_ele:
-                    max_ele, x, y = abs(value), i, j
-        return max_ele, x, y
+            for j, value in enumerate(row[i+1:]):
+                if value > maximal_value and value > epsilon:
+                    maximal_value, k, l = value, i, j+i+1
+        return maximal_value, k, l
 
-    def rotate(a, p, k, l):
-        n = a.rows()
-        aDiff = a.matrix[l][l] - a.matrix[k][k]
-        if abs(a.matrix[k][l]) < abs(aDiff)*1.0e-36:
-            t = a.matrix[k][l]/aDiff
+    def find_phi(matrix, k, l):
+        if matrix.matrix[k][k] != matrix.matrix[l][l]:
+            angle = float(2*matrix.matrix[k][l])/(matrix.matrix[k][k]-matrix.matrix[l][l])
+            phi = 0.5*(math.atan(angle))
         else:
-            phi = aDiff/(2.0*a.matrix[k][l])
-            t = 1.0/(abs(phi) + math.sqrt(phi**2 + 1.0))
-            if phi < 0.0:
-                t = -t
-        c = 1.0/math.sqrt(t**2 + 1.0)
-        s = t*c
-        tau = s/(1.0 + c)
-        temp = a.matrix[k][l]
-        a.matrix[k][l] = 0.0
-        a.matrix[k][k] -= t*temp
-        a.matrix[l][l] += t*temp
-        for i in range(k):      # Case of i < k
-            temp = a.matrix[i][k]
-            a.matrix[i][k] = temp - s*(a.matrix[i][l] + tau*temp)
-            a.matrix[i][l] += s*(temp - tau*a.matrix[i][l])
-        for i in range(k+1, l):  # Case of k < i < l
-            temp = a.matrix[k][i]
-            a.matrix[k][i] = temp - s*(a.matrix[i][l] + tau*a.matrix[k][i])
-            a.matrix[i][l] += s*(temp - tau*a.matrix[i][l])
-        for i in range(l+1, n):  # Case of i > l
-            temp = a.matrix[k][i]
-            a.matrix[k][i] = temp - s*(a.matrix[l][i] + tau*temp)
-            a.matrix[l][i] += s*(temp - tau*a.matrix[l][i])
-        for i in range(n):      # Update transformation matrix
-            temp = p.matrix[i][k]
-            p.matrix[i][k] = temp - s*(p.matrix[i][l] + tau*p.matrix[i][k])
-            p.matrix[i][l] += s*(temp - tau*p.matrix[i][l])
+            phi = math.pi/4
+        return phi
 
-    n = matrix.rows()
-    maxRot = 5*(n**2)       # Set limit on number of rotations
-    p = IdentityMatrix.n(n)
+    def transformation_matrix(n, phi, k, l):
+        i = IdentityMatrix.n(n)
+        i.matrix[k][l] = -math.sin(phi)
+        i.matrix[l][k] = math.sin(phi)
+        i.matrix[k][k] = math.cos(phi)
+        i.matrix[l][l] = math.cos(phi)
+        return i
 
-    for i in range(maxRot):# Jacobi rotation loop
-        aMax, k, l = max_(matrix)
-        if aMax < 1.0e-3:
+
+    n = len(matrix.matrix)
+    maxRot = 5*(n**2)
+    for i in range(maxRot):
+        max, k, l = max_element(matrix)
+        if max < epsilon:
             return matrix
-        rotate(matrix, p, k, l)
+        phi = find_phi(matrix, k, l)
+        rt = transformation_matrix(n, phi, k, l)
+        tr_transpose = rt.transpose()
+        matrix = tr_transpose * (matrix * rt)
 
 
 def ax1(molecule):
@@ -71,7 +54,7 @@ def ax1(molecule):
         p1.matrix[x] = [math.sqrt(sum(p1.matrix[x])), math.sqrt(periodic_table[molecule.atoms[x].Z]['vdw_radius'])] + p1.matrix[x]
     p1plus = Matrix(p1.matrix)
     matrix = p1plus * p1plus.transpose()
-    _ = jacobi(matrix)
+    _ = jacobi_rotation(matrix, epsilon=0.003)
     return max([_.matrix[x][x]for x in range(_.rows())])/2
 
 
@@ -81,7 +64,7 @@ def ax2(molecule):
         p2.matrix[x] = [math.sqrt(sum(p2.matrix[x])), math.sqrt(periodic_table[molecule.atoms[x].Z]['vdw_radius'])] + p2.matrix[x]
     p2plus = Matrix(p2.matrix)
     matrix = p2plus * p2plus.transpose()
-    _ = jacobi(matrix)
+    _ = jacobi_rotation(matrix, epsilon=0.003)
     return max([_.matrix[x][x]for x in range(_.rows())])/2
 
 
@@ -91,7 +74,7 @@ def ax3(molecule):
         p3.matrix[x] = [math.sqrt(sum(p3.matrix[x])), math.sqrt(periodic_table[molecule.atoms[x].Z]['vdw_radius'])] + p3.matrix[x]
     p3plus = Matrix(p3.matrix)
     matrix = p3plus * p3plus.transpose()
-    _ = jacobi(matrix)
+    _ = jacobi_rotation(matrix, epsilon=0.003)
     return max([_.matrix[x][x]for x in range(_.rows())])/2
 
 
