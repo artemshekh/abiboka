@@ -67,6 +67,12 @@ class Constitutional_descriptor_Test():
     def test_sum_of_conventional_bond_order(self):
         assert_equals(sum_of_conventional_bond_order(self.ethynylbenzoicacid), 17)
 
+    def test_rotational_bond_count(self):
+        assert_equals(rotatable_bond_count(self.ethynylbenzoicacid), 1)
+
+    def test_rotational_bond_fraction(self):
+        assert_almost_equals(rotatable_bond_fraction(self.ethynylbenzoicacid), 0.059, places=3)
+
 
 
 

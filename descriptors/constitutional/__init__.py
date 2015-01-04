@@ -128,7 +128,7 @@ def sum_of_conventional_bond_order(molecule):
             descriptor += bond.order
     return descriptor
 
-def rotatable_bond_countn(molecule):
+def rotatable_bond_count(molecule):
     """
     number of rotatable bonds
     :param molecule:
@@ -153,13 +153,13 @@ def rotatable_bond_countn(molecule):
             descriptor += 1
     return descriptor
 
-def rbf(molecule):
+def rotatable_bond_fraction(molecule):
     """
     rotatable bond fraction
     :param molecule:
     :return:
     """
-    return float(rbn(molecule))/len(molecule.bonds)
+    return float(rotatable_bond_count(molecule))/molecule.size
 
 def nab(molecule):
     _ = 0
@@ -205,16 +205,6 @@ def ncsp(molecule):
 
 
 _ = {
-
-    "RBF": rbf,
-
-    # number of double bonds
-    "NDB": lambda x: len([bond.order for bond in x.bonds if bond.order==2]),
-
-    # number of triple bonds
-    "NTB": lambda x: len([bond.order for bond in x.bonds if bond.order==3]),
-
-    "NAB": nab,
 
     # number of Hydrogen atoms
     "nH": lambda x: len(filter( lambda x: x.Z ==1 ,x.atoms)),
