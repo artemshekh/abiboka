@@ -6,10 +6,12 @@ Internal representation
 
 import operator
 import itertools
+import math
 
 from calc.graph import Graph, path_find
 from calc.matrixes.matrix import Matrix
 from utils.periodic_table import periodic_table
+from descriptors.vertex_degree import vertex_degree
 # TODO! Think about consistency of atom, molecule, and bond class
 class Molecule():
     def __init__(self):
@@ -28,6 +30,8 @@ class Molecule():
     _burden_matrix = None
     _multigraph_distance_matrix = None
     _laplacian_matrix = None
+    _chi_matrix = None
+    _reciprocal_square_distance_matrix = None
 
     def add_atom(self, atom):
         self.atoms.add(atom)
@@ -240,9 +244,37 @@ class Molecule():
             self._laplacian_matrix = m.matrix
             return self._laplacian_matrix
 
+    @property
+    def chi_matrix(self):
+        if self._chi_matrix:
+            return self._chi_matrix
+        else:
+            adjacency_matrix = self.adjacency_matrix
+            n = len(adjacency_matrix)
+            m = [[0 for x in range(n)] for y in range(n)]
+            for i, row in enumerate(self.adjacency_matrix):
+                for j, value in enumerate(row):
+                    if value:
+                        d1 = vertex_degree(self.atoms[i])
+                        d2 = vertex_degree(self.atoms[j])
+                        m[i][j] = 1.0/math.sqrt(d1*d2)
+            self._chi_matrix = m
+            return self._chi_matrix
+
+    @property
+    def reciprocal_square_distance_matrix(self):
+        if self._reciprocal_square_distance_matrix:
+            return self._reciprocal_square_distance_matrix
+        else:
+            m = self.distance_matrix[:]
+            for i, row in enumerate(m):
+                for j, value in enumerate(row):
+                    if value:
+                        m[i][j] = 1.0/(value**2)
+            self._distance_matrix = m
+            return self._distance_matrix
 
 
 
 
-if __name__ == '__main__':
-    print Molecule()
+
