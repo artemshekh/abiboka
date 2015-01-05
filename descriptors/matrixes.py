@@ -103,6 +103,14 @@ def zagreb_matrix(molecule, exp):
         matrix[i][j], matrix[j][i] = value, value
     return Matrix(matrix)
 
+@cached
+def edge_zagreb_matrix(molecule):
+    return zagreb_matrix(molecule, 1)
+
+@cached
+def modified_edge_zagreb_matrix(molecule):
+    return zagreb_matrix(molecule, -1)
+
 
 
 @cached
