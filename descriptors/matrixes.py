@@ -89,6 +89,19 @@ def distance_sum_connectivity_matrix(molecule):
                 matrix[i][j] = v
     return Matrix(matrix)
 
+def zagreb_matrix(molecule, exp):
+    molecule = molecule.hydrogen_suppressed
+    size = molecule.size
+    matrix = [[0 for x in range(size)] for y in range(size)]
+    d = {}
+    for index, atom in enumerate(molecule.atoms):
+        d[atom] = index
+    for bond in molecule.bonds:
+        atoms = list(bond)
+        i, j = d[atoms[0]], d[atoms[1]]
+        value = math.pow(vertex_degree(atoms[0])*vertex_degree(atoms[1]), exp)
+        matrix[i][j], matrix[j][i] = value, value
+    return Matrix(matrix)
 
 
 
