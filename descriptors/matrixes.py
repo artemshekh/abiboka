@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 """
 All type of matrices which can be helpful for calculation of descriptor
-molecular_matrix
-molecular_geometry
-geometry_matrix
+Adjacency matrix
+Atom connectivity matrix
+Augmented adjacency matrix
+Degree adjacency matrix
+Distance sum connectivity matrix
+Zagreb matrix
+Edge zagreb matrix
+Modified edge zagreb matrix
 
 """
 import math
@@ -110,6 +115,42 @@ def edge_zagreb_matrix(molecule):
 @cached
 def modified_edge_zagreb_matrix(molecule):
     return zagreb_matrix(molecule, -1)
+
+def extended_vertex_adjacency_matrix(molecule):
+    molecule = molecule.hydrogen_suppressed
+    size = molecule.size
+    matrix = [[0 for x in range(size)] for y in range(size)]
+    d = {}
+    for index, atom in enumerate(molecule.atoms):
+        d[atom] = index
+    for bond in molecule.bonds:
+        atoms = list(bond)
+        i, j = d[atoms[0]], d[atoms[1]]
+        v1, v2 = float(vertex_degree(atoms[0])), float(vertex_degree(atoms[1]))
+        value = (v1/v2 + v2/v1)/2
+        matrix[i][j], matrix[j][i] = value, value
+    return Matrix(matrix)
+
+def heteroatom_corrected_extended_adjacency_matrix(molecule):
+    molecule = molecule.hydrogen_suppressed
+    size = molecule.size
+    matrix = [[0 for x in range(size)] for y in range(size)]
+    d = {}
+    for index, atom in enumerate(molecule.atoms):
+        d[atom] = index
+    for bond in molecule.bonds:
+        atoms = list(bond)
+        i, j = d[atoms[0]], d[atoms[1]]
+        e1 = periodic_table[atoms[0].Z]['sanderson_electronegativity']
+        e2 = periodic_table[atoms[1].Z]['sanderson_electronegativity']
+        v1, v2 = float(vertex_degree(atoms[0])), float(vertex_degree(atoms[1]))
+        h1, h2 = v1*e1, v2*e2
+        value = (h1/h2 + h2/h1)/2
+        matrix[i][j], matrix[j][i] = value, value
+    for index, atom in enumerate(molecule.atoms):
+        matrix[index][index] = periodic_table[atom.Z]['sanderson_electronegativity']
+    return Matrix(matrix)
+
 
 
 
