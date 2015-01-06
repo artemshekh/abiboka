@@ -16,7 +16,8 @@ import math
 from calc.matrixes.matrix import Matrix
 from utils.functional import cached
 from utils.periodic_table import periodic_table
-from descriptors.vertex_degree import vertex_degree
+from descriptors.vertex_degree import vertex_degree, edge_degree
+
 
 @cached
 def adjacency_matrix(molecule):
@@ -172,6 +173,20 @@ def heteroatom_multiplicity_corrected_extended_adjacency_matrix(molecule):
         matrix[index][index] = periodic_table[atom.Z]['sanderson_electronegativity']
     return Matrix(matrix)
 
+def extended_edge_adjacency_matrix(molecule):
+    molecule = molecule.hydrogen_suppressed
+    bonds = molecule.hydrogen_suppressed.bonds
+    n = len(bonds)
+    matrix = [[0 for x in range(n)] for y in range(n)]
+    for i, bond1 in enumerate(bonds):
+        for j, bond2 in enumerate(bonds):
+            if bond1 is not bond2:
+                if bond1 & bond2:
+                    e1 = edge_degree(bond1)
+                    e2 = edge_degree(bond2)
+                    value = (e1/e2 + e2/e1)/2
+                    matrix[i][j], matrix[j][i] = value, value
+    return Matrix(matrix)
 
 
 

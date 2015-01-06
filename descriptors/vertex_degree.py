@@ -121,3 +121,10 @@ def cluster_coefficient_vertex(atom):
         return 2.0*neignboor_interconenctivity(atom)/(v* (v - 1))
     else:
         return 0
+
+
+def edge_degree(bond):
+    invariant = 0.0
+    for atom in bond:
+        invariant += vertex_degree(atom)
+    return invariant - 2
