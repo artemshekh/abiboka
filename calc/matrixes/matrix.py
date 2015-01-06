@@ -13,6 +13,10 @@ class Matrix(object):
         self.cols_number = self.cols()
 
     ##################### MAIN OPERATIONS ############################
+
+    def __getitem__(self, item):
+        return self.matrix[item]
+
     def __add__(self, other):
         """
         Addiction of Matrix
