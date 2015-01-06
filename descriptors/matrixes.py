@@ -151,6 +151,29 @@ def heteroatom_corrected_extended_adjacency_matrix(molecule):
         matrix[index][index] = periodic_table[atom.Z]['sanderson_electronegativity']
     return Matrix(matrix)
 
+def heteroatom_multiplicity_corrected_extended_adjacency_matrix(molecule):
+    molecule = molecule.hydrogen_suppressed
+    size = molecule.size
+    matrix = [[0 for x in range(size)] for y in range(size)]
+    d = {}
+    for index, atom in enumerate(molecule.atoms):
+        d[atom] = index
+    for bond in molecule.bonds:
+        atoms = list(bond)
+        i, j = d[atoms[0]], d[atoms[1]]
+        e1 = periodic_table[atoms[0].Z]['sanderson_electronegativity']
+        e2 = periodic_table[atoms[1].Z]['sanderson_electronegativity']
+        v1, v2 = float(vertex_degree(atoms[0])), float(vertex_degree(atoms[1]))
+        h1, h2 = v1*e1, v2*e2
+        rcp = 1.0/bond.conventional_bond_order # reciprocal conventional bond order
+        value = ((h1 +1 - rcp)/(h2 + 1 - rcp) + (h2 + 1 - rcp)/(h1 + 1 - rcp))/2
+        matrix[i][j], matrix[j][i] = value, value
+    for index, atom in enumerate(molecule.atoms):
+        matrix[index][index] = periodic_table[atom.Z]['sanderson_electronegativity']
+    return Matrix(matrix)
+
+
+
 
 
 
