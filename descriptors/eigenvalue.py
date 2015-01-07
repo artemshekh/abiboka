@@ -15,7 +15,7 @@ def jacobi_rotation(matrix, epsilon= 0.0005):
         maximal_value, k, l = 0, None, None
         for i, row in enumerate(matrix.matrix):
             for j, value in enumerate(row[i+1:]):
-                if value > maximal_value and value > epsilon:
+                if abs(value) > maximal_value and abs(value) > epsilon:
                     maximal_value, k, l = value, i, j+i+1
         return maximal_value, k, l
 
@@ -40,7 +40,7 @@ def jacobi_rotation(matrix, epsilon= 0.0005):
     maxRot = 5*(n**2)
     for i in range(maxRot):
         max, k, l = max_element(matrix)
-        if max < epsilon:
+        if abs(max) < epsilon:
             return matrix
         phi = find_phi(matrix, k, l)
         rt = transformation_matrix(n, phi, k, l)
