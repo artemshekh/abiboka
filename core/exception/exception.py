@@ -12,3 +12,6 @@ class MalformedMatrixException(Exception):
 
 class TabularDataAbsenceException(Exception):
     pass
+
+class MoleculeRestrictedAction(Exception):
+    pass

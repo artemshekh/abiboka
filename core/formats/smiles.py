@@ -30,7 +30,7 @@ class SmilesParser(Parser):
                                        '|C|N|O|Cl|Br|F|I|S|P|B|\*|n|o|c|s|p)'
                                        '(?P<bonds>[=#%/()0-9\\\\\.]*)')
         self.SQUARE_BRACKET = re.compile('\[(?P<mass>[0-9]{0,3})'
-                                         '(?P<symbol>th|rh|[a-gi-zA-GI-Z]{1,2}|h|hf|ho|hg)'
+                                         '(?P<symbol>Th|Rh|[a-gi-zA-GI-Z]{1,2}|H|Hf|Ho|Hg)'
                                          '(?P<chiralsign>@{0,2})'
                                          '(?P<chiralclass>(AL|TB|SP|OH)?[0-9]{0,2})'
                                          '(?P<hpresence>h?|H?)(?P<hcount>[0-9]?)'
@@ -49,42 +49,36 @@ class SmilesParser(Parser):
         return True
 
     def decode(self, string):
+        self.is_smiles(string)
         molecule = Molecule()
-        numbering_stack = {}
         previous_atom = None
         previous_bond = None
         atom_stack = []
+        numbering_stack = {}
         after_branch_close = False
         after_branch_close_open = False
 
         parsing_string = re.findall(self.RE_STRUCTURE, string)
         for atom_exp, bond_exp in parsing_string:
-
             #PARSING ATOM EXPRESSION
-            aromatic = False
-            if atom_exp.islower():
-                aromatic = True
-
-            atom_symbol = atom_exp.capitalize()
-            neuthron_number = None
-            charge = 0
-            h_presence = False
-            h_count = 0
-            chiral_sign = ''
-            chiral_class = ''
-            bracket = False
-
-            if atom_symbol[0] == '[':
-                bracket = True
-                complex_atom = self.SQUARE_BRACKET.match(atom_symbol).groupdict()
-                atom_symbol = complex_atom['symbol'].capitalize()
+            if atom_exp[0] != '[':
+                atom_symbol = atom_exp
+                neuthron_number = 0
+                charge = 0
+                h_count = 0
+                chiral_sign = ''
+                chiral_class = ''
+                bracket = False
+            else:
+                complex_atom = self.SQUARE_BRACKET.match(atom_exp).groupdict()
+                atom_symbol = complex_atom['symbol']
                 neuthron_number = int(complex_atom['mass'] or 0)
-
-                h_presence = True if complex_atom['hpresence'] else False
-                if h_presence:
+                h_count = 0
+                if complex_atom['hpresence']:
                     h_count = int(complex_atom['hcount'] or 1)
 
                 charge_string = complex_atom['charge']
+                charge = 0
                 if charge_string:
                     if len(charge_string) == 1:
                         if charge_string == '-':
@@ -98,6 +92,13 @@ class SmilesParser(Parser):
                             charge = int(charge_string[1:])
                 chiral_sign = complex_atom['chiralsign']
                 chiral_class = complex_atom['chiralclass']
+                bracket = True
+
+            if atom_symbol.islower():
+                aromatic = True
+            else:
+                aromatic = False
+            atom_symbol = atom_symbol.capitalize()
             z = periodic_table_by_symbol[atom_symbol]['z']
 
             # CREATING ATOM

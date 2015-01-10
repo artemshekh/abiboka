@@ -5,5 +5,5 @@ class Parser():
     def encode(self, molecule):
         raise NotImplementedError
 
-    def decode(self):
+    def decode(self, format):
         raise NotImplementedError
