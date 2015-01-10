@@ -26,9 +26,9 @@ from utils.periodic_table import periodic_table_by_symbol, periodic_table
 class SmilesParser(Parser):
     def __init__(self):
         self.SMILES_STING = re.compile('^[A-Za-z0-9\[\]\-=#:\\\\/().\+@%\*]*$')
-        self.RE_STRUCTURE = re.compile('^(?P<atom>C|\[[a-zA-Z0-9\-+@]*\]'
+        self.RE_STRUCTURE = re.compile('(?P<atom>C|\[[a-zA-Z0-9\-+@]*\]'
                                        '|C|N|O|Cl|Br|F|I|S|P|B|\*|n|o|c|s|p)'
-                                       '(?P<bonds>[=#%/()0-9\\\\\.]*)$')
+                                       '(?P<bonds>[=#%/()0-9\\\\\.]*)')
         self.SQUARE_BRACKET = re.compile('\[(?P<mass>[0-9]{0,3})'
                                          '(?P<symbol>th|rh|[a-gi-zA-GI-Z]{1,2}|h|hf|ho|hg)'
                                          '(?P<chiralsign>@{0,2})'
@@ -42,7 +42,7 @@ class SmilesParser(Parser):
         """
         Check if it string can be SMILES String or not
         :param string:
-        :return:
+        :return: bool
         """
         if not self.SMILES_STING.match(string):
             raise BadFormatError
@@ -56,11 +56,8 @@ class SmilesParser(Parser):
         atom_stack = []
         after_branch_close = False
         after_branch_close_open = False
-        regexp = re.compile('(?P<atom>C|\[[a-zA-Z0-9\-+@]*\]'
-                                '|C|N|O|Cl|Br|F|I|S|P|B|\*|n|o|c|s|p)'
-                                '(?P<bonds>[=#%/()0-9\\\\\.]*)')
 
-        parsing_string = re.findall(regexp, string)
+        parsing_string = re.findall(self.RE_STRUCTURE, string)
         for atom_exp, bond_exp in parsing_string:
 
             #PARSING ATOM EXPRESSION

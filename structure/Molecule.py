@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 """
 Molecule class
-Internal representation
+Internal representation of molecule in code
+Molecule represent list of atom and bonds between atoms
 """
 
 import operator
 import itertools
 import math
 
+from core.exception.exception import MoleculeRestrictedAction
 from calc.graph import Graph, path_find
 from calc.matrixes.matrix import Matrix
 from utils.periodic_table import periodic_table
@@ -34,7 +36,11 @@ class Molecule():
     _reciprocal_square_distance_matrix = None
 
     def add_atom(self, atom):
-        self.atoms.add(atom)
+        if atom not in self.atoms:
+            self.atoms.append(atom)
+        else:
+            msg = 'Trying to add atom to molecule. Atom {} already in molecule'.format(atom)
+            raise MoleculeRestrictedAction(msg)
 
     def add_atoms(self, atoms):
         for atom in atoms:

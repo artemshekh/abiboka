@@ -14,6 +14,9 @@ class Bond(set):
             self.add(atom)
             atom.bonds.append(self)
 
+    def __hash__(self):
+        return id(self)
+
     def is_aromatic(self):
         return all([atom_.aromatic for atom_ in self])
 
