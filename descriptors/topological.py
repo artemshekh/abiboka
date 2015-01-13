@@ -21,7 +21,7 @@ from utils.functional import cached
 
 
 @cached
-def zm1(molecule):
+def first_zagreb_index(molecule):
     """
     First zagreb index
     :param molecule:
@@ -30,22 +30,13 @@ def zm1(molecule):
     return sum([atom.vertex_degree**2 for atom in molecule.hydrogen_suppressed.atoms])
 
 @cached
-def zm1_h(molecule):
-    """
-    first zagreb in dex in full graph
-    :param molecule:
-    :return: int
-    """
-    return sum([atom.vertex_degree**2 for atom in molecule.atoms])
-
-@cached
 def platt_number(molecule):
     """
     Platt number
     :param molecule:
     :return: int
     """
-    return zm1(molecule) - 2*(molecule.hydrogen_suppressed.size - 1)
+    return first_zagreb_index(molecule) - 2*(molecule.hydrogen_suppressed.size - 1)
 
 @cached
 def connection_number(molecule):
@@ -54,7 +45,7 @@ def connection_number(molecule):
     :param molecule:
     :return:
     """
-    return zm1(molecule)/2 -molecule.size + 1
+    return first_zagreb_index(molecule)/2 -molecule.size + 1
 
 close_shell = [1, 3, 11, 19, 37, 55, 87]
 
@@ -162,7 +153,7 @@ def on1v(molecule):
 
 def qindex(molecule):
     molecule = molecule.hydrogen_suppressed
-    return 3 -  2* molecule.size + zm1(molecule)/2.0
+    return 3 -  2* molecule.size + first_zagreb_index(molecule)/2.0
 
 def bbi(molecule):
     return sum([len(atom.bonds)*(len(atom.bonds) - 1) for atom in molecule.hydrogen_suppressed.atoms])/2.0
