@@ -43,9 +43,9 @@ def connection_number(molecule):
     """
     Connection_number
     :param molecule:
-    :return:
+    :return: int
     """
-    return first_zagreb_index(molecule)/2 -molecule.size + 1
+    return first_zagreb_index(molecule)/2 - molecule.hydrogen_suppressed.size + 1
 
 close_shell = [1, 3, 11, 19, 37, 55, 87]
 
