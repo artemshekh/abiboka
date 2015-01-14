@@ -56,8 +56,10 @@ def intrinsic_state(atom):
     c = vertex_degree(atom)
     return b/c
 
+
 def madan_chemical_degree(atom):
-    return sum([periodic_table[atom_n.Z]['relative_atomic_weight']/periodic_table[6]['relative_atomic_weight'] for atom_n in atom.connected_with()])
+    return sum([periodic_table[atom_n.Z]['relative_atomic_weight']/periodic_table[6]['relative_atomic_weight']
+                for atom_n in atom.connected_with() if atom_n.Z != 1])
 
 
 def extended_madan_vertex_degree(atom):

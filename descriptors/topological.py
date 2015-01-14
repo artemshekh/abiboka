@@ -29,6 +29,7 @@ def first_zagreb_index(molecule):
     """
     return sum([atom.vertex_degree**2 for atom in molecule.hydrogen_suppressed.atoms])
 
+
 @cached
 def platt_number(molecule):
     """
@@ -37,6 +38,7 @@ def platt_number(molecule):
     :return: int
     """
     return first_zagreb_index(molecule) - 2*(molecule.hydrogen_suppressed.size - 1)
+
 
 @cached
 def connection_number(molecule):
@@ -50,25 +52,17 @@ def connection_number(molecule):
 close_shell = [1, 3, 11, 19, 37, 55, 87]
 
 
+def first_zagreb_index_by_valence_degree(molecule):
+    return sum([valence_degree(atom)**2 for atom in molecule.atoms if atom.Z != 1])
 
 
+def first_zagreb_index_by_kupchik_degree(molecule):
+    return sum([kupchik_vertex_degree(atom)**2 for atom in molecule.atoms if atom.Z != 1])
 
 
+def first_zagreb_index_by_madan_degree(molecule):
+    return sum([madan_chemical_degree(atom) ** 2 for atom in molecule.atoms if atom.Z != 1])
 
-
-
-def zm1v(molecule):
-    return sum([valence_degree(atom)**2 for atom in molecule.hydrogen_suppressed.atoms])
-
-def zm1v_(molecule):
-    # depends from core electrons
-    return sum([valence_degree(atom)**2 for atom in molecule.hydrogen_suppressed.atoms])
-
-def zm1kup(molecule):
-    return sum([kupchik_vertex_degree(atom)**2 for atom in molecule.atoms])
-
-def zm1mad(molecule):
-    return sum([madan_chemical_degree(atom) ** 2 for atom in molecule.atoms])
 
 def permutation_additive(atom, perm_coefficient):
     return valence_degree(atom) + sum([perm_coefficient * valence_degree(atom) for _ in atom.connected_with()])
