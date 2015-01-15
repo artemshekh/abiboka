@@ -30,3 +30,12 @@ class Topological_descriptor_Test():
 
     def test_second_zagreb_index(self):
         assert_equals(second_zagreb_index(self.ethanol), 4)
+
+    def test_second_zagreb_index_by_valence_degree(self):
+        assert_equals(second_zagreb_index_by_valence_degree(self.ethanol), 24)
+
+    def test_second_zagreb_index_by_kuphik_degree(self):
+        assert_almost_equals(second_zagreb_index_by_kupchik_degree(self.ethanol), 44.792, places=3)
+
+    def test_second_zagreb_index_by_madan_degree(self):
+        assert_almost_equals(second_zagreb_index_by_madan_degree(self.ethanol), 13.660, places=3)

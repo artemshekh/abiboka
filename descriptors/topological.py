@@ -9,6 +9,9 @@ First Zagreb index by valence vertex degrees
 First Zagreb index by Kupchik vertex degrees
 First Zagreb index by Madan vertex degrees
 Second Zagreb index
+Second Zagreb index by valence vertex degrees
+Second Zagreb index by Kupchik vertex degrees
+Second Zagreb index by Madan vertex degrees
 
 """
 import operator
@@ -91,29 +94,34 @@ def second_zagreb_index(molecule):
     _ = []
     for bond in molecule.hydrogen_suppressed.bonds:
         atoms = [atom for atom in bond]
-        _.append(atoms[0].vertex_degree *atoms[1].vertex_degree)
-    return sum(_)
-
-def zm2v(molecule):
-    _ = []
-    for bond in molecule.bonds:
-        atoms = [atom for atom in bond]
-        _.append(valence_degree(atoms[0])*valence_degree(atoms[1]))
-    return sum(_)
-
-def zm2kup(molecule):
-    _ = []
-    for bond in molecule.bonds:
-        atoms = [atom for atom in bond]
-        _.append(kupchik_vertex_degree(atoms[0])*kupchik_vertex_degree(atoms[1]))
+        _.append(atoms[0].vertex_degree * atoms[1].vertex_degree)
     return sum(_)
 
 
-def zm2mad(molecule):
+@cached
+def second_zagreb_index_by_valence_degree(molecule):
     _ = []
     for bond in molecule.bonds:
         atoms = [atom for atom in bond]
-        _.append(madan_degree(atoms[0])*madan_degree(atoms[1]))
+        _.append(valence_degree(atoms[0]) * valence_degree(atoms[1]))
+    return sum(_)
+
+
+@cached
+def second_zagreb_index_by_kupchik_degree(molecule):
+    _ = []
+    for bond in molecule.bonds:
+        atoms = [atom for atom in bond]
+        _.append(kupchik_vertex_degree(atoms[0]) * kupchik_vertex_degree(atoms[1]))
+    return sum(_)
+
+
+@cached
+def second_zagreb_index_by_madan_degree(molecule):
+    _ = []
+    for bond in molecule.bonds:
+        atoms = [atom for atom in bond]
+        _.append(madan_chemical_degree(atoms[0]) * madan_chemical_degree(atoms[1]))
     return sum(_)
 
 def zm2per(molecule, permutative_coefficent):
