@@ -13,6 +13,7 @@ from utils.periodic_table import periodic_table
 
 
 sqrt_2 = math.sqrt(2)
+close_shell = [0, 2, 10, 18, 36, 54, 86]
 
 def vertex_degree(atom):
     return sum([atom.Z != 1 for atom in atom.connected_with()])
@@ -23,7 +24,7 @@ def extended_connectivity(atom):
 def dual_degree(atom):
     return float(extended_connectivity(atom))/vertex_degree(atom)
 
-close_shell = [0, 2, 10, 18, 36, 54, 86]
+
 def valence_electrones(atom):
     return atom.Z - close_shell[periodic_table[atom.Z]['principal_quantum_number']-1]
 
@@ -36,11 +37,14 @@ def valence_degree(atom):
             ve -= 1
     return ve
 
+
 def kier_hall_electronegativity(atom):
     return float(valence_degree(atom) - vertex_degree(atom))/(periodic_table[atom.Z]['principal_quantum_number']**2)
 
+
 def valence_state_indicator(atom):
     return vertex_degree(atom) + valence_degree(atom)
+
 
 def kupchik_vertex_degree(atom):
     a = float(periodic_table[6]['covalent_radius'])/periodic_table[atom.Z]['covalent_radius']

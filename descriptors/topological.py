@@ -5,13 +5,17 @@ ZM1 - first Zagreb index (H - depleted)
 ZM1_h first Zagreb index (all molecule)
 platt_number Platt number
 connection_number = connection number (N2)
+First Zagreb index by valence vertex degrees
+First Zagreb index by Kupchik vertex degrees
+First Zagreb index by Madan vertex degrees
+Second Zagreb index
 
 """
 import operator
 import math
 from collections import Counter
 from descriptors.vertex_degree import intrinsic_state, valence_electrones, valence_degree, cluster_coefficient_vertex
-from descriptors.vertex_degree import kupchik_vertex_degree, madan_chemical_degree
+from descriptors.vertex_degree import kupchik_vertex_degree, madan_chemical_degree, perturbation_delta_value
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
 from descriptors.descriptor_utils import path_sequence_matrix, walk_vector
@@ -64,8 +68,12 @@ def first_zagreb_index_by_madan_degree(molecule):
     return sum([madan_chemical_degree(atom) ** 2 for atom in molecule.atoms if atom.Z != 1])
 
 
+"""
+Need refactor
+
 def permutation_additive(atom, perm_coefficient):
     return valence_degree(atom) + sum([perm_coefficient * valence_degree(atom) for _ in atom.connected_with()])
+
 
 def permutation_multiplicative(atom, perm_coefficient):
     return valence_degree(atom) + reduce(operator.mul, [perm_coefficient * valence_degree(atom) for _ in atom.connected_with()])
@@ -75,9 +83,11 @@ def zm1per(molecule, permutation_coefficient):
 
 def zm1mulper(molecule, permutation_coefficient):
     return sum([permutation_multiplicative(atom, permutation_coefficient) ** 2 for atom in molecule.atoms])
+"""
+
 
 @cached
-def zm2(molecule):
+def second_zagreb_index(molecule):
     _ = []
     for bond in molecule.hydrogen_suppressed.bonds:
         atoms = [atom for atom in bond]
