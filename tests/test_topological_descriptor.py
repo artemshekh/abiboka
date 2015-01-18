@@ -63,3 +63,6 @@ class Topological_descriptor_Test():
 
     def test_arithmetic_topological_index(self):
         assert_almost_equals(arithmetic_topological_index(self.ethanol), 1.333, places=3)
+
+    def test_harmonic_narumi_index(self):
+        assert_almost_equals(harmonic_narumi_index(self.ethanol), 1.2, places=3)

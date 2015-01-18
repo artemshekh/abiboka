@@ -201,9 +201,11 @@ def arithmetic_topological_index(molecule):
     molecule = molecule.hydrogen_suppressed
     return 2.0*len(molecule.bonds)/len(molecule.atoms)
 
-def hnar(molecule):
+
+@cached
+def harmonic_narumi_index(molecule):
     molecule = molecule.hydrogen_suppressed
-    return molecule.size/sum([1.0/len(atom.bonds) for atom in molecule.hydrogen_suppressed.atoms])
+    return molecule.size/sum([1.0/len(atom.bonds) for atom in molecule.atoms])
 
 def gnar(molecule):
     molecule = molecule.hydrogen_suppressed
