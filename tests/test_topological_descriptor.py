@@ -39,3 +39,15 @@ class Topological_descriptor_Test():
 
     def test_second_zagreb_index_by_madan_degree(self):
         assert_almost_equals(second_zagreb_index_by_madan_degree(self.ethanol), 13.660, places=3)
+
+    def test_overall_modified_zagreb_index_0(self):
+        assert_almost_equals(overall_modified_zagreb_index_0(self.ethanol), 2.5, places=3)
+
+    def test_overall_modified_zagreb_ondex_by_valence_degree_0(self):
+        assert_almost_equals(overall_modified_zagreb_ondex_by_valence_degree_0(self.ethanol), 1.7, places=3)
+
+    def test_overall_modified_zagreb_index_1(self):
+        assert_almost_equals(overall_modified_zagreb_index_1(self.ethanol), 1.0, places=3)
+
+    def test_overall_modified_zagreb_index_by_valence_degree_1(self):
+        assert_almost_equals(overall_modified_zagreb_index_by_valence_degree_1(self.ethanol), 0.6, places=3)

@@ -163,7 +163,7 @@ class XedParser(Parser):
                     aromatic = True
 
                 atom = Atom(z=int(z), aromatic=aromatic)
-                atom.coords = (x_coord, y_coord, z_coord)
+                atom.coords = (float(x_coord), float(y_coord), float(z_coord))
                 molecule.add_atom(atom)
 
                 atom_dct[atom_count] = atom

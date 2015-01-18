@@ -123,7 +123,8 @@ def second_zagreb_index_by_madan_degree(molecule):
         atoms = [atom for atom in bond]
         _.append(madan_chemical_degree(atoms[0]) * madan_chemical_degree(atoms[1]))
     return sum(_)
-
+"""
+Fix
 def zm2per(molecule, permutative_coefficent):
     _ = []
     for bond in molecule.bonds:
@@ -137,31 +138,44 @@ def zm2mulper(molecule, permutative_coefficent):
         atoms = [atom for atom in bond]
         _.append(permutation_multiplicative(atoms[0], permutative_coefficent)*permutation_multiplicative(atoms[1], permutative_coefficent))
     return sum(_)
+"""
 
-def on0(molecule):
-    return sum([1.0/len(atom.bonds) for atom in molecule.hydrogen_suppressed().atoms])
 
-def on0v(molecule):
-    _ = []
+@cached
+def overall_modified_zagreb_index_0(molecule):
+    molecule = molecule.hydrogen_suppressed
+    return sum([1.0/len(atom.bonds) for atom in molecule.atoms])
+
+
+@cached
+def overall_modified_zagreb_ondex_by_valence_degree_0(molecule):
+    descriptor = []
     for atom in molecule.atoms:
-        v = valence_degree(atom)
-        if v:
-            _.append(1.0/v)
-    return sum(_)
+        if atom.Z != 1:
+            v = valence_degree(atom)
+            if v:
+                descriptor.append(1.0/v)
+    return sum(descriptor)
 
-def on1(molecule):
-    _ = []
-    for bond in molecule.hydrogen_suppressed.bonds:
-        atoms = [atom for atom in bond]
-        _.append(1.0/len(atoms[0].bonds)*1.0/len(atoms[1].bonds))
-    return sum(_)
 
-def on1v(molecule):
-    _ = []
-    for bond in molecule.hydrogen_suppressed.bonds:
+@cached
+def overall_modified_zagreb_index_1(molecule):
+    molecule = molecule.hydrogen_suppressed
+    descriptor = []
+    for bond in molecule.bonds:
         atoms = [atom for atom in bond]
-        _.append(1.0/valence_degree(atoms[0])*1.0/valence_degree(atoms[1]))
-    return sum(_)
+        descriptor.append(1.0/len(atoms[0].bonds) * 1.0/len(atoms[1].bonds))
+    return sum(descriptor)
+
+
+@cached
+def overall_modified_zagreb_index_by_valence_degree_1(molecule):
+    descriptor = []
+    for bond in molecule.bonds:
+        atoms = [atom for atom in bond]
+        if all(map(lambda x: x.Z != 1, atoms)):
+            descriptor.append(1.0/valence_degree(atoms[0])*1.0/valence_degree(atoms[1]))
+    return sum(descriptor)
 
 def qindex(molecule):
     molecule = molecule.hydrogen_suppressed
