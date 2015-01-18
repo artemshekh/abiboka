@@ -214,9 +214,10 @@ def geometric_narumi_index(molecule):
     molecule = molecule.hydrogen_suppressed
     return math.pow(simple_narumi_index, 1.0/molecule.size)
 
-def xt(molecule):
-    molecule = molecule.hydrogen_suppressed
-    return 1.0/math.sqrt(snar(molecule))
+
+@cached
+def total_structure_connectivity_index(molecule):
+    return 1.0/math.sqrt(narumi_simple_index(molecule))
 
 def dz(molecule):
     _ = []

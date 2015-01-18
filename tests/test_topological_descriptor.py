@@ -69,3 +69,6 @@ class Topological_descriptor_Test():
 
     def test_garmonic_narumi_index(self):
         assert_almost_equals(geometric_narumi_index(self.ethanol), 0.885, places=3)
+
+    def test_total_structure_connectivity_index(self):
+        assert_almost_equals(total_structure_connectivity_index(self.ethanol), 1.201, places=3)
