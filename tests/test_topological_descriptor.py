@@ -54,3 +54,6 @@ class Topological_descriptor_Test():
 
     def test_quadratic_index(self):
         assert_almost_equals(quadratic_index(self.ethanol), 0, places=3)
+
+    def test_bertz_branching_index(self):
+        assert_almost_equals(bertz_branching_index(self.ethanol), 1, places=3)
