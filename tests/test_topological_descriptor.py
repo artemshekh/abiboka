@@ -51,3 +51,6 @@ class Topological_descriptor_Test():
 
     def test_overall_modified_zagreb_index_by_valence_degree_1(self):
         assert_almost_equals(overall_modified_zagreb_index_by_valence_degree_1(self.ethanol), 0.6, places=3)
+
+    def test_quadratic_index(self):
+        assert_almost_equals(quadratic_index(self.ethanol), 0, places=3)

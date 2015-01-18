@@ -177,9 +177,11 @@ def overall_modified_zagreb_index_by_valence_degree_1(molecule):
             descriptor.append(1.0/valence_degree(atoms[0])*1.0/valence_degree(atoms[1]))
     return sum(descriptor)
 
-def qindex(molecule):
+
+@cached
+def quadratic_index(molecule):
     molecule = molecule.hydrogen_suppressed
-    return 3 -  2* molecule.size + first_zagreb_index(molecule)/2.0
+    return 3 - 2*molecule.size + first_zagreb_index(molecule)/2.0
 
 def bbi(molecule):
     return sum([len(atom.bonds)*(len(atom.bonds) - 1) for atom in molecule.hydrogen_suppressed.atoms])/2.0
