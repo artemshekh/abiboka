@@ -207,9 +207,12 @@ def harmonic_narumi_index(molecule):
     molecule = molecule.hydrogen_suppressed
     return molecule.size/sum([1.0/len(atom.bonds) for atom in molecule.atoms])
 
-def gnar(molecule):
+
+@cached
+def geometric_narumi_index(molecule):
+    simple_narumi_index = narumi_simple_index(molecule)
     molecule = molecule.hydrogen_suppressed
-    return math.pow(snar(molecule), 1.0/molecule.size)
+    return math.pow(simple_narumi_index, 1.0/molecule.size)
 
 def xt(molecule):
     molecule = molecule.hydrogen_suppressed
