@@ -195,6 +195,12 @@ def narumi_simple_index(molecule):
     molecule = molecule.hydrogen_suppressed
     return math.log(reduce(operator.mul, [len(atom.bonds) for atom in molecule.atoms]))
 
+
+@cached
+def arithmetic_topological_index(molecule):
+    molecule = molecule.hydrogen_suppressed
+    return 2.0*len(molecule.bonds)/len(molecule.atoms)
+
 def hnar(molecule):
     molecule = molecule.hydrogen_suppressed
     return molecule.size/sum([1.0/len(atom.bonds) for atom in molecule.hydrogen_suppressed.atoms])
