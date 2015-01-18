@@ -189,8 +189,11 @@ def bertz_branching_index(molecule):
     molecule = molecule.hydrogen_suppressed
     return sum([len(atom.bonds)*(len(atom.bonds) - 1) for atom in molecule.atoms])/2.0
 
-def snar(molecule):
-    return reduce(operator.mul, [len(atom.bonds) for atom in molecule.hydrogen_suppressed.atoms])
+
+@cached
+def narumi_simple_index(molecule):
+    molecule = molecule.hydrogen_suppressed
+    return math.log(reduce(operator.mul, [len(atom.bonds) for atom in molecule.atoms]))
 
 def hnar(molecule):
     molecule = molecule.hydrogen_suppressed

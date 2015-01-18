@@ -57,3 +57,6 @@ class Topological_descriptor_Test():
 
     def test_bertz_branching_index(self):
         assert_almost_equals(bertz_branching_index(self.ethanol), 1, places=3)
+
+    def test_narumi_simple_index(self):
+        assert_almost_equals(narumi_simple_index(self.ethanol), 0.693, places=3)
