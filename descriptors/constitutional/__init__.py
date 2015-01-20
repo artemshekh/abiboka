@@ -53,8 +53,10 @@ from descriptors.ring_descriptor import cyclomatic_number
 def molecular_weight(molecule):
     return molecule.molecular_mass()
 
+
 def average_molecular_weight(molecule):
     return molecular_weight(molecule)/molecule.size
+
 
 def sum_van_der_waals_volume(molecule):
     """
@@ -67,6 +69,7 @@ def sum_van_der_waals_volume(molecule):
     sum_volume = sum([constant * periodic_table[atom.Z]['vdw_radius']**3  for atom in molecule.atoms])
     return sum_volume/volume_carbon_atom
 
+
 def mean_van_der_waals_volume(molecule):
     """
     Mean of Van der Waals volume
@@ -74,6 +77,7 @@ def mean_van_der_waals_volume(molecule):
     :return:
     """
     return sum_van_der_waals_volume(molecule)/molecule.size
+
 
 def sum_of_atom_polarizability(molecule):
     """
@@ -85,6 +89,7 @@ def sum_of_atom_polarizability(molecule):
     sum_polarizability = sum([periodic_table[atom.Z]['atomic_polarizability'] for atom in molecule.atoms])
     return sum_polarizability/polarizability_carbon_atom
 
+
 def mean_sum_atom_polarizability(molecule):
     """
     mean atomic polarizability (scaled on Carbon atom)
@@ -92,6 +97,7 @@ def mean_sum_atom_polarizability(molecule):
     :return:
     """
     return sum_of_atom_polarizability(molecule)/molecule.size
+
 
 def sum_of_first_ionization_potentials(molecule):
     """
@@ -103,6 +109,7 @@ def sum_of_first_ionization_potentials(molecule):
     sum_first_ionization_potential_molecule = sum([periodic_table[atom.Z]['1st_ionization_energy'] for atom in molecule.atoms])
     return sum_first_ionization_potential_molecule/carbon_first_ionization_potential
 
+
 def mean_sum_of_first_ionization_potentials(molecule):
     """
     mean first ionization potential (scaled on Carbon atom)
@@ -111,25 +118,32 @@ def mean_sum_of_first_ionization_potentials(molecule):
     """
     return sum_of_first_ionization_potentials(molecule)/molecule.size
 
+
 def sum_of_sanderson_electronegativity(molecule):
     sanderson_electronegativity_c = periodic_table[6]['sanderson_electronegativity']
     sanderson_electronegativity_molecule = sum([periodic_table[atom.Z]['sanderson_electronegativity'] for atom in molecule.atoms])
     return sanderson_electronegativity_molecule/sanderson_electronegativity_c
 
+
 def mean_sum_of_sanderson_electronegativity(molecule):
     return sum_of_sanderson_electronegativity(molecule)/molecule.size
+
 
 def number_of_atoms(molecule):
     return molecule.size
 
+
 def number_of_non_hydrogen_atoms(molecule):
-    return len(filter( lambda atom: atom.Z != 1 , molecule.atoms))
+    return len(filter(lambda atom: atom.Z != 1, molecule.atoms))
+
 
 def number_of_bonds(molecule):
     return len(molecule.bonds)
 
+
 def number_of_non_hydrogen_bonds(molecule):
     return len(molecule.hydrogen_suppressed.bonds)
+
 
 def number_of_single_bond(molecule):
     descriptor = 0
@@ -139,12 +153,14 @@ def number_of_single_bond(molecule):
             descriptor += 1
     return descriptor
 
+
 def number_of_double_bonds(molecule):
     descriptor = 0
     for bond in molecule.bonds:
         if bond.order == 2:
             descriptor += 1
     return descriptor
+
 
 def number_of_triple_bonds(molecule):
     descriptor = 0
@@ -153,12 +169,14 @@ def number_of_triple_bonds(molecule):
             descriptor += 1
     return descriptor
 
+
 def number_of_aromatic_bonds(molecule):
     descriptor = 0
     for bond in molecule.bonds:
         if bond.is_aromatic():
             descriptor += 1
     return descriptor
+
 
 def sum_of_conventional_bond_order(molecule):
     descriptor = 0
@@ -168,6 +186,7 @@ def sum_of_conventional_bond_order(molecule):
         else:
             descriptor += bond.order
     return descriptor
+
 
 def rotatable_bond_count(molecule):
     """
@@ -194,6 +213,7 @@ def rotatable_bond_count(molecule):
             descriptor += 1
     return descriptor
 
+
 def rotatable_bond_fraction(molecule):
     """
     rotatable bond fraction
@@ -202,59 +222,78 @@ def rotatable_bond_fraction(molecule):
     """
     return float(rotatable_bond_count(molecule))/molecule.size
 
+
 def number_of_hydrogen_atoms(molecule):
-    return len(filter( lambda x: x.Z == 1 ,molecule.atoms))
+    return len(filter(lambda x: x.Z == 1, molecule.atoms))
+
 
 def number_of_boron_atoms(molecule):
-    return len(filter( lambda x: x.Z == 5 ,molecule.atoms))
+    return len(filter(lambda x: x.Z == 5, molecule.atoms))
+
 
 def number_of_carbon_atoms(molecule):
-    return len(filter( lambda x: x.Z == 6 ,molecule.atoms))
+    return len(filter(lambda x: x.Z == 6, molecule.atoms))
+
 
 def number_of_nytrogen_atoms(molecule):
-    return len(filter( lambda x: x.Z == 7,molecule.atoms))
+    return len(filter(lambda x: x.Z == 7, molecule.atoms))
+
 
 def number_of_oxygen_atoms(molecule):
-    return len(filter( lambda x: x.Z == 8 ,molecule.atoms))
+    return len(filter(lambda x: x.Z == 8, molecule.atoms))
+
 
 def number_of_phosphorous_atoms(molecule):
-    return len(filter( lambda x: x.Z == 15 ,molecule.atoms))
+    return len(filter(lambda x: x.Z == 15, molecule.atoms))
+
 
 def number_of_sulfur_atoms(molecule):
-    return len(filter( lambda x: x.Z == 16 ,molecule.atoms))
+    return len(filter(lambda x: x.Z == 16, molecule.atoms))
+
 
 def number_of_chlorine_atoms(molecule):
-    return len(filter( lambda x: x.Z == 17 ,molecule.atoms))
+    return len(filter(lambda x: x.Z == 17, molecule.atoms))
+
 
 def number_of_bromine_atoms(molecule):
-    return len(filter( lambda x: x.Z == 35 ,molecule.atoms))
+    return len(filter(lambda x: x.Z == 35, molecule.atoms))
+
 
 def number_of_iodine_atoms(molecule):
-    return len(filter( lambda x: x.Z == 53 ,molecule.atoms))
+    return len(filter(lambda x: x.Z == 53, molecule.atoms))
+
 
 def number_of_heavy_atoms(molecule):
-    return len(filter( lambda x: x.Z != 1 ,molecule.atoms))
+    return len(filter(lambda x: x.Z != 1, molecule.atoms))
+
 
 def number_of_heteroatoms(molecule):
-    return len(filter( lambda x: x.Z  not in [1, 6] ,molecule.atoms))
+    return len(filter(lambda x: x.Z not in [1, 6], molecule.atoms))
+
 
 def number_of_halogen_atoms(molecule):
-    return len(filter( lambda x: x.Z in [9, 17, 35, 53] ,molecule.atoms))
+    return len(filter(lambda x: x.Z in [9, 17, 35, 53], molecule.atoms))
+
 
 def percentage_of_hydrogen_atoms(molecule):
     return 100*float(number_of_hydrogen_atoms(molecule))/molecule.size
 
+
 def percentage_of_carbon_atoms(molecule):
     return 100*float(number_of_carbon_atoms(molecule))/molecule.size
+
 
 def percentage_of_nytrogen_atoms(molecule):
     return 100*float(number_of_nytrogen_atoms(molecule))/molecule.size
 
+
 def percentage_of_oxygen_atoms(molecule):
     return 100*float(number_of_oxygen_atoms(molecule))/molecule.size
 
+
 def percentage_of_halogen(molecule):
     return 100*float(number_of_halogen_atoms(molecule))/molecule.size
+
 
 def number_of_csp3_carbon_atoms(molecule):
     descriptor = 0
@@ -269,6 +308,7 @@ def number_of_csp3_carbon_atoms(molecule):
         descriptor += 1 if not not_sp3 else 0
     return descriptor
 
+
 def number_of_csp2_carbon_atoms(molecule):
     descriptor = 0
     for atom in molecule.atoms:
@@ -280,6 +320,7 @@ def number_of_csp2_carbon_atoms(molecule):
         if any([bond.order == 2 for bond in atom.bonds]):
             descriptor += 1
     return descriptor
+
 
 def number_of_csp_carbon_atoms(molecule):
     descriptor = 0
