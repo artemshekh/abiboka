@@ -130,3 +130,21 @@ def hydrogen_iodide():
         m.bonds.append(bond)
     return m
 
+
+def dimethylpentane():
+    m = Molecule()
+    m.atoms += [Atom(z=6) for x in range(7)]
+    m.atoms += [Atom(z=1) for x in range(16)]
+    bonds = [(0, 1), (1, 2), (1, 3), (3, 4), (4, 5), (4, 6), ]
+    atoms = m.atoms
+    for i, j in bonds:
+        bond = Bond(atom1=atoms[i], atom2=atoms[j])
+        m.bonds.append(bond)
+    bonds = [(0, 7), (0, 8), (0, 9), (1, 10), (2, 11), (2, 12), (2, 13), (3, 14), (3, 15), (4, 16), (5, 17), (5, 18),
+             (5, 19), (6, 20), (6, 21), (6, 22)]
+    for i, j in bonds:
+        bond = Bond(atom1=atoms[i], atom2=atoms[j])
+        m.bonds.append(bond)
+    return m
+
+
