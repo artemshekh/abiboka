@@ -2,6 +2,7 @@
 """
 All type of matrices which can be helpful for calculation of descriptor
 Adjacency matrix
+Edge adjacency matrix
 Atom connectivity matrix
 Augmented adjacency matrix
 Degree adjacency matrix
@@ -32,6 +33,22 @@ def adjacency_matrix(molecule):
         i, j = d[atoms[0]], d[atoms[1]]
         matrix[i][j], matrix[j][i] = 1, 1
     return Matrix(matrix)
+
+
+@cached
+def edge_adjacency_matrix(molecule):
+    molecule = molecule.hydrogen_suppressed
+    bonds = molecule.bonds
+    n = len(bonds)
+    matrix = [[0 for x in range(n)] for y in range(n)]
+    for i, bond1 in enumerate(bonds):
+        for j, bond2 in enumerate(bonds):
+            if bond1 is not bond2:
+                if bond1 & bond2:
+                    matrix[i][j] = 1
+    print Matrix(matrix)
+    return Matrix(matrix)
+
 
 @cached
 def atom_connectivity_matrix(molecule):

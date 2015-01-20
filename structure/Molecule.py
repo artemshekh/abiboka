@@ -95,22 +95,6 @@ class Molecule():
         return len(self.atoms)
 
     @property
-    def edge_adjacency_matrix(self):
-        if self._edge_adjacency_matrix:
-            return self._edge_adjacency_matrix
-        else:
-            bonds = self.hydrogen_suppressed.bonds
-            n = len(bonds)
-            m = [[0 for x in range(n)] for y in range(n)]
-            for i, bond1 in enumerate(bonds):
-                for j, bond2 in enumerate(bonds):
-                    if bond1 is not bond2:
-                        if bond1 & bond2:
-                            m[i][j] = 1
-            self._edge_adjacency_matrix = m
-            return self._edge_adjacency_matrix
-
-    @property
     def vertex_degree_matrix(self):
         if self._vertex_degree_matrix:
             return self._vertex_degree_matrix

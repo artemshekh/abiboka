@@ -12,13 +12,15 @@ import operator
 from collections import Counter
 
 from descriptors.vertex_degree import valence_degree
+from descriptors.matrixes import edge_adjacency_matrix
 from utils.functional import cached
 from ring_descriptor import cyclomatic_number
 from vertex_degree import vertex_degree
 
+
 @cached
 def edge_degree(molecule):
-    return sum([sum(row) for row in molecule.edge_adjacency_matrix])
+    return sum([sum(row) for row in edge_adjacency_matrix(molecule)])
 
 @cached
 def edge_degree_count(molecule):
