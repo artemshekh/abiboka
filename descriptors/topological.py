@@ -19,6 +19,7 @@ import math
 from collections import Counter
 from descriptors.vertex_degree import intrinsic_state, valence_electrones, valence_degree, cluster_coefficient_vertex
 from descriptors.vertex_degree import kupchik_vertex_degree, madan_chemical_degree, perturbation_delta_value
+from descriptors.vertex_degree import z_delta_number
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
 from descriptors.descriptor_utils import path_sequence_matrix, walk_vector
@@ -219,16 +220,14 @@ def geometric_narumi_index(molecule):
 def total_structure_connectivity_index(molecule):
     return 1.0/math.sqrt(narumi_simple_index(molecule))
 
-def dz(molecule):
-    _ = []
-    p = 2
+
+@cached
+def pogliani_index(molecule):
+    descriptor = 0
     for atom in molecule.atoms:
-        for period,n in enumerate(close_shell):
-            if atom.Z < n:
-                p = period
-                break
-        _.append(valence_degree(atom)/float(p))
-    return sum(_)
+        if atom.Z != 1:
+                descriptor += z_delta_number(atom)
+    return descriptor
 
 def ram(molecule):
     s = 0
