@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from nose.tools import assert_almost_equals, assert_equals
 
-from fixtures.molecule import ethanol, ethynylbenzoicacid
+from fixtures.molecule import ethanol, ethynylbenzoicacid, dimethylpentane
 from descriptors.topological import *
 
 
@@ -10,6 +10,7 @@ class Topological_descriptor_Test():
     def setUp(self):
         self.ethanol = ethanol()
         self.ethynylbenzoicacid = ethynylbenzoicacid()
+        self.dimethylpentane = dimethylpentane()
 
     def test_first_zafreb_index(self):
         assert_equals(first_zagreb_index(self.ethanol), 6)
@@ -79,3 +80,6 @@ class Topological_descriptor_Test():
 
     def test_ramification_index_1(self):
         assert_equals(ramification_index_1(self.ethynylbenzoicacid), 1)
+
+    def test_ramification_index_2(self):
+        assert_equals(ramification_index_2(self.dimethylpentane), 1)

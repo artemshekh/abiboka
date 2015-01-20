@@ -23,6 +23,7 @@ from descriptors.vertex_degree import z_delta_number
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
 from descriptors.descriptor_utils import path_sequence_matrix, walk_vector
+from descriptors.matrixes import distance_matrix
 from descriptors.walk import mpc
 from descriptors.ring_descriptor import cyclomatic_number
 from utils.functional import cached
@@ -238,6 +239,22 @@ def ramification_index_1(molecule):
         if len(atoms[0].bonds) == 3 and len(atoms[1].bonds) == 3:
             descriptor += 1
     return descriptor
+
+
+@cached
+def ramification_index_2(molecule):
+    descriptor = 0
+    molecule = molecule.hydrogen_suppressed
+    dist_matrix = distance_matrix(molecule)
+    for i, row in enumerate(dist_matrix):
+        for j, value in enumerate(row[i+1:]):
+            if value == 2:
+                v1 = len(molecule.atoms[i].bonds)
+                v2 = len(molecule.atoms[j+i+1].bonds)
+                if v1 == 3 and v2 == 3:
+                    descriptor += 1
+    return descriptor
+
 
 def bli(molecule):
     _ = []
