@@ -111,6 +111,7 @@ def ct_vertex_degree(atom):
     c = sum([(atom.Z + atom_n.Z)/12.0 for atom_n in atom.connected_with()])
     return math.sqrt(a*b*c)
 
+
 def z_delta_number(atom):
     return float(valence_electrones(atom))/periodic_table[atom.Z]['principal_quantum_number']
 

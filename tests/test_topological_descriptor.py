@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from nose.tools import assert_almost_equals, assert_equals
 
-from fixtures.molecule import ethanol
+from fixtures.molecule import ethanol, ethynylbenzoicacid
 from descriptors.topological import *
 
 
@@ -9,6 +9,7 @@ class Topological_descriptor_Test():
 
     def setUp(self):
         self.ethanol = ethanol()
+        self.ethynylbenzoicacid = ethynylbenzoicacid()
 
     def test_first_zafreb_index(self):
         assert_equals(first_zagreb_index(self.ethanol), 6)
@@ -75,3 +76,6 @@ class Topological_descriptor_Test():
 
     def test_pogliani_index(self):
         assert_almost_equals(pogliani_index(self.ethanol), 7.0, places=3)
+
+    def test_ramification_index_1(self):
+        assert_equals(ramification_index_1(self.ethynylbenzoicacid), 1)

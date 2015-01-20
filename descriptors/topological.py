@@ -229,12 +229,15 @@ def pogliani_index(molecule):
                 descriptor += z_delta_number(atom)
     return descriptor
 
-def ram(molecule):
-    s = 0
-    for atom in molecule.hydrogen_suppressed.atoms:
-        if len(atom.bonds) > 2:
-            s += (len(atom.bonds) -2)
-    return s
+
+@cached
+def ramification_index_1(molecule):
+    descriptor = 0
+    for bond in molecule.hydrogen_suppressed.bonds:
+        atoms = [atom for atom in bond]
+        if len(atoms[0].bonds) == 3 and len(atoms[1].bonds) == 3:
+            descriptor += 1
+    return descriptor
 
 def bli(molecule):
     _ = []
