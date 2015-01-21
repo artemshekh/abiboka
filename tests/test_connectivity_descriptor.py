@@ -14,3 +14,6 @@ class Connectivity_descriptor_Test():
 
     def test_edge_degree(self):
         assert_equals(edge_degree(self.ethynylbenzoicacid), 28)
+
+    def test_valence_connectivity_index_1(self):
+        assert_almost_equals(valence_connectivity_index_1(self.ethanol), 1.023, places=3)

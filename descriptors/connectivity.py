@@ -189,12 +189,14 @@ def average_connectivity_index_5(molecule):
 def valence_connectivity_index_0(molecule):
     return sum([1/math.sqrt(valence_degree(atom)) for atom in molecule.hydrogen_suppressed.atoms])
 
+
 @cached
 def valence_connectivity_index_1(molecule):
     descriptor = 0
-    for bond in molecule.hydrogen_suppressed.bonds:
+    for bond in molecule.bonds:
         atoms = [atom for atom in bond]
-        descriptor += (1/math.sqrt(valence_degree(atoms[0])))*(1/math.sqrt(valence_degree(atoms[1])))
+        if atoms[0].Z != 1 and atoms[1].Z != 1:
+            descriptor += (1/math.sqrt(valence_degree(atoms[0])))*(1/math.sqrt(valence_degree(atoms[1])))
     return descriptor
 
 @cached

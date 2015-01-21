@@ -46,7 +46,6 @@ def edge_adjacency_matrix(molecule):
             if bond1 is not bond2:
                 if bond1 & bond2:
                     matrix[i][j] = 1
-    print Matrix(matrix)
     return Matrix(matrix)
 
 
