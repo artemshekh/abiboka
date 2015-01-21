@@ -20,6 +20,7 @@ from collections import Counter
 from descriptors.vertex_degree import intrinsic_state, valence_electrones, valence_degree, cluster_coefficient_vertex
 from descriptors.vertex_degree import kupchik_vertex_degree, madan_chemical_degree, perturbation_delta_value
 from descriptors.vertex_degree import z_delta_number
+from descriptors.connectivity import valence_connectivity_index_1
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
 from descriptors.descriptor_utils import path_sequence_matrix, walk_vector
@@ -256,13 +257,8 @@ def ramification_index_2(molecule):
     return descriptor
 
 
-def bli(molecule):
-    _ = []
-    molecule = molecule.hydrogen_suppressed
-    for bond in molecule.bonds:
-        atoms = [atom for atom in bond]
-        _.append(1/math.sqrt(valence_degree(atoms[0])*valence_degree(atoms[1])))
-    return sum(_)/6
+def benzene_like_index(molecule):
+    return valence_connectivity_index_1(molecule)/6
 
 def pol(molecule):
     # Wiener polarity number - polarity index

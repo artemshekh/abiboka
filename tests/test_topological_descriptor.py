@@ -83,3 +83,6 @@ class Topological_descriptor_Test():
 
     def test_ramification_index_2(self):
         assert_equals(ramification_index_2(self.dimethylpentane), 1)
+
+    def test_benzene_like_index(self):
+        assert_almost_equals(benzene_like_index(self.ethanol), 0.171, places=3)
