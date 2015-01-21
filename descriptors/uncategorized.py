@@ -2,6 +2,8 @@
 """
 Can't classify category
 """
+from collections import defaultdict
+
 from utils.functional import cached
 from vertex_degree import vertex_degree
 
@@ -10,13 +12,16 @@ from vertex_degree import vertex_degree
 def total_adjacency_index(molecule):
     return 2 * len(molecule.bonds)
 
+
 @cached
 def average_total_adjacency_index(molecule):
     return float(total_adjacency_index(molecule))/molecule.size
 
+
 @cached
 def density_index(molecule):
     return average_total_adjacency_index(molecule)/molecule.size
+
 
 @cached
 def no2_group_count(molecule):
@@ -27,6 +32,7 @@ def no2_group_count(molecule):
             if len(connected_oxygens) == 2:
                 descriptor += 1
     return descriptor
+
 
 @cached
 def etylenyl_group_count(molecule):
@@ -45,6 +51,7 @@ def etylenyl_group_count(molecule):
                     descriptor += 1
     return descriptor
 
+
 @cached
 def hydroxi_group_count(molecule):
     descriptor = 0
@@ -54,6 +61,7 @@ def hydroxi_group_count(molecule):
             if 1 in atoms:
                 descriptor += 1
     return descriptor
+
 
 @cached
 def oxi_group_count(molecule):
@@ -65,6 +73,7 @@ def oxi_group_count(molecule):
                 if 1 not in atoms:
                     descriptor += 1
     return descriptor
+
 
 @cached
 def aldehyde_group_count(molecule):
@@ -84,6 +93,7 @@ def aldehyde_group_count(molecule):
 
     return descriptor
 
+
 @cached
 def amino_groups_count(molecule):
     descriptor = 0
@@ -92,6 +102,7 @@ def amino_groups_count(molecule):
             if all(atom.Z in [1,6] for atom in atom.connected_with()):
                 descriptor += 1
     return descriptor
+
 
 @cached
 def esters_group_count(molecule):
@@ -109,6 +120,7 @@ def esters_group_count(molecule):
                                     continue
     return descriptor
 
+
 @cached
 def cetone_group_count(molecule):
     descriptor = 0
@@ -125,6 +137,7 @@ def cetone_group_count(molecule):
                     if feature:
                         descriptor += 1
     return descriptor
+
 
 @cached
 def carboxy_group_count(molecule):
@@ -145,9 +158,6 @@ def carboxy_group_count(molecule):
             if double_o and hydroxi:
                 descriptor += 1
     return descriptor
-
-
-
 
 
 @cached
