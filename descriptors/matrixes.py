@@ -205,16 +205,13 @@ def extended_edge_adjacency_matrix(molecule):
     return Matrix(matrix)
 
 
-
-
-
 @cached
 def distance_matrix(molecule):
     adj_matrix = adjacency_matrix(molecule)
     matrix = [row[:] for row in adj_matrix.matrix]
     for i, row in enumerate(matrix):
         for j, value in enumerate(row):
-            if i!=j and value == 0:
+            if i != j and value == 0:
                 matrix[i][j] = 1000
     for k in range(len(matrix)):
         for i in range(len(matrix)):

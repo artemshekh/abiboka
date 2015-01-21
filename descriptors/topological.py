@@ -24,7 +24,7 @@ from descriptors.connectivity import valence_connectivity_index_1
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
 from descriptors.descriptor_utils import path_sequence_matrix, walk_vector
-from descriptors.matrixes import distance_matrix
+from descriptors.matrixes import distance_matrix, adjacency_matrix
 from descriptors.walk import mpc
 from descriptors.ring_descriptor import cyclomatic_number
 from utils.functional import cached
@@ -257,28 +257,21 @@ def ramification_index_2(molecule):
     return descriptor
 
 
+@cached
 def benzene_like_index(molecule):
     return valence_connectivity_index_1(molecule)/6
 
-def pol(molecule):
-    # Wiener polarity number - polarity index
-    molecule = molecule.hydrogen_suppressed
-    matrix = AdjacencyMatrix.from_molecule(molecule)
-    m = matrix.matrix
-    for i, row in enumerate(m):
-        for j, value in enumerate(row):
-            if i!=j and value == 0:
-                m[i][j] = 1000
-    for k in range(matrix.rows()):
-        for i in range(matrix.rows()):
-            for j in range(matrix.rows()):
-                m[i][j] = min(m[i][j], m[i][k] + m[k][j])
-    p = 0
-    for row in m:
+
+@cached
+def polarity_wiener_index(molecule):
+    descriptor = 0
+    dist_matrix = distance_matrix(molecule)
+    for row in dist_matrix:
+        print row
         for v in row:
             if v == 3:
-                p+=1
-    return p/2
+                descriptor += 1
+    return descriptor/2
 
 def prs(molecule):
     return reduce(operator.mul, [len(atom.bonds) for atom in molecule.atoms])
@@ -327,20 +320,6 @@ def spi(molecule):
         descriptor += reduce(operator.mul, [row[x] for x in pendant_vertexes])
     descriptor = math.sqrt(descriptor)
     return descriptor
-
-def distance_matrix(molecule):
-    matrix = AdjacencyMatrix.from_molecule(molecule)
-    m = matrix.matrix
-    for i, row in enumerate(m):
-        for j, value in enumerate(row):
-            if i!=j and value == 0:
-                m[i][j] = 1000
-    for k in range(matrix.rows()):
-        for i in range(matrix.rows()):
-            for j in range(matrix.rows()):
-                m[i][j] = min(m[i][j], m[i][k] + m[k][j])
-    return m
-
 
 def pji2(molecule):
     molecule = molecule.hydrogen_suppressed

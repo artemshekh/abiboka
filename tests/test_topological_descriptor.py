@@ -86,3 +86,6 @@ class Topological_descriptor_Test():
 
     def test_benzene_like_index(self):
         assert_almost_equals(benzene_like_index(self.ethanol), 0.171, places=3)
+
+    def test_polarity_wiener_index(self):
+        assert_equals(polarity_wiener_index(self.ethynylbenzoicacid), 13)
