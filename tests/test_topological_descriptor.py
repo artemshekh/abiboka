@@ -89,3 +89,9 @@ class Topological_descriptor_Test():
 
     def test_polarity_wiener_index(self):
         assert_equals(polarity_wiener_index(self.ethynylbenzoicacid), 13)
+
+    def test_product_of_row_sums(self):
+        assert_equals(product_of_row_sums(self.dimethylpentane), 18)
+
+    def test_log_product_of_row_sums(self):
+        assert_almost_equals(log_product_of_row_sums(self.dimethylpentane), 2.890, places=3)

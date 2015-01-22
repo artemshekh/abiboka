@@ -273,11 +273,15 @@ def polarity_wiener_index(molecule):
                 descriptor += 1
     return descriptor/2
 
-def prs(molecule):
-    return reduce(operator.mul, [len(atom.bonds) for atom in molecule.atoms])
 
-def lprs(molecule):
-    return math.log(prs(molecule))
+@cached
+def product_of_row_sums(molecule):
+    return reduce(operator.mul, [len(atom.bonds) for atom in molecule.hydrogen_suppressed.atoms])
+
+
+@cached
+def log_product_of_row_sums(molecule):
+    return math.log(product_of_row_sums(molecule))
 
 def msd(molecule):
     molecule = molecule.hydrogen_suppressed
