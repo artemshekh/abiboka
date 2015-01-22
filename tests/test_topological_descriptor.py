@@ -101,3 +101,6 @@ class Topological_descriptor_Test():
 
     def test_superpendentic_index(self):
         assert_almost_equals(superpendentic_index(self.dimethylpentane), 5.831, places=3)
+
+    def test_petitjean_shape_index(self):
+        assert_almost_equals(petitjean_shape_index(self.ethynylbenzoicacid), 0.5, places=3)

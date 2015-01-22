@@ -308,16 +308,18 @@ def superpendentic_index(molecule):
         descriptor += reduce(operator.mul, [row[x] for x in pendant_vertexes])
     return math.sqrt(descriptor)
 
-def pji2(molecule):
-    molecule = molecule.hydrogen_suppressed
-    m = distance_matrix(molecule)
+
+@cached
+def petitjean_shape_index(molecule):
+    dist_matrix = distance_matrix(molecule)
     diametr, radius = 0, 100000
-    for row in m:
+    for row in dist_matrix:
         _ = max(row)
         if _ > diametr:
             diametr = _
         if _ < radius:
             radius = _
+    print diametr, radius
     return (diametr - radius)/float(diametr)
 
 def ecc(molecule):
