@@ -322,21 +322,23 @@ def petitjean_shape_index(molecule):
     print diametr, radius
     return (diametr - radius)/float(diametr)
 
-def ecc(molecule):
-    molecule = molecule.hydrogen_suppressed
-    m = distance_matrix(molecule)
-    return sum([max(row) for row in m])
 
-def aecc(molecule):
-    molecule = molecule.hydrogen_suppressed
-    m = distance_matrix(molecule)
-    return sum([max(row) for row in m])/float(molecule.size)
+@cached
+def eccentricity(molecule):
+    dist_matrix = distance_matrix(molecule)
+    return sum([max(row) for row in dist_matrix])
 
-def decc(molecule):
-    molecule = molecule.hydrogen_suppressed
-    m = distance_matrix(molecule)
-    aecc_ = sum([max(row) for row in m])/float(molecule.size)
-    return sum([abs(max(row) - aecc_) for row in m])/float(molecule.size)
+
+@cached
+def average_eccentricity(molecule):
+    return eccentricity(molecule)/float(molecule.hydrogen_suppressed.size)
+
+
+@cached
+def eccentric(molecule):
+    dist_matrix = distance_matrix(molecule)
+    av_ecc = average_eccentricity(molecule)
+    return sum([abs(max(row) - av_ecc) for row in dist_matrix])/float(molecule.hydrogen_suppressed.size)
 
 def agdd(molecule):
     molecule = molecule.hydrogen_suppressed

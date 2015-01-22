@@ -104,3 +104,12 @@ class Topological_descriptor_Test():
 
     def test_petitjean_shape_index(self):
         assert_almost_equals(petitjean_shape_index(self.ethynylbenzoicacid), 0.5, places=3)
+
+    def test_eccentricity(self):
+        assert_equals(eccentricity(self.ethynylbenzoicacid), 53)
+
+    def test_average_eccentricity(self):
+        assert_almost_equals(average_eccentricity(self.dimethylpentane), 3.429, places=3)
+
+    def test_eccentric(self):
+        assert_almost_equals(eccentric(self.ethynylbenzoicacid), 0.777, places=3)
