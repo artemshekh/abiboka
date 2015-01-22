@@ -17,6 +17,9 @@ class Matrix(object):
     def __getitem__(self, item):
         return self.matrix[item]
 
+    def __len__(self):
+        return len(self.matrix)
+
     def __add__(self, other):
         """
         Addiction of Matrix

@@ -95,3 +95,6 @@ class Topological_descriptor_Test():
 
     def test_log_product_of_row_sums(self):
         assert_almost_equals(log_product_of_row_sums(self.dimethylpentane), 2.890, places=3)
+
+    def test_mean_square_distance_index(self):
+        assert_almost_equals(mean_square_distance_index(self.dimethylpentane), 1.786, places=3)
