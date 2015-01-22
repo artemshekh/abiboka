@@ -98,3 +98,6 @@ class Topological_descriptor_Test():
 
     def test_mean_square_distance_index(self):
         assert_almost_equals(mean_square_distance_index(self.dimethylpentane), 1.786, places=3)
+
+    def test_superpendentic_index(self):
+        assert_almost_equals(superpendentic_index(self.dimethylpentane), 5.831, places=3)

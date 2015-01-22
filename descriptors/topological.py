@@ -294,29 +294,19 @@ def mean_square_distance_index(molecule):
             descriptor += value**2
     return math.sqrt(float(descriptor)/(n*(n - 1)))
 
-def spi(molecule):
-    molecule = molecule.hydrogen_suppressed
+
+@cached
+def superpendentic_index(molecule):
+    adj_matrix = adjacency_matrix(molecule)
+    dist_matrix = distance_matrix(molecule)
     pendant_vertexes = []
-    for index, atom in enumerate(molecule.atoms):
-        if len(atom.bonds) == 1:
-            pendant_vertexes.append(index)
-    if not pendant_vertexes:
-        return 0
-    matrix = AdjacencyMatrix.from_molecule(molecule)
-    m = matrix.matrix
-    for i, row in enumerate(m):
-        for j, value in enumerate(row):
-            if i!=j and value == 0:
-                m[i][j] = 1000
-    for k in range(matrix.rows()):
-        for i in range(matrix.rows()):
-            for j in range(matrix.rows()):
-                m[i][j] = min(m[i][j], m[i][k] + m[k][j])
+    for i, row in enumerate(adj_matrix):
+        if sum(row) == 1:
+            pendant_vertexes.append(i)
     descriptor = 0
-    for row in m:
+    for i, row in enumerate(dist_matrix):
         descriptor += reduce(operator.mul, [row[x] for x in pendant_vertexes])
-    descriptor = math.sqrt(descriptor)
-    return descriptor
+    return math.sqrt(descriptor)
 
 def pji2(molecule):
     molecule = molecule.hydrogen_suppressed
