@@ -402,25 +402,25 @@ def schultz_topological_index_by_valence_degree(molecule):
         descriptor += sum(row)
     return descriptor
 
-def gmti(molecule):
-    molecule = molecule.hydrogen_suppressed
-    m = distance_matrix(molecule)
-    vertex_degree = [len(atom.bonds) for atom in molecule.atoms]
-    descriptor = 0
-    for i, row in enumerate(m):
-        for j, value in enumerate(row):
-            descriptor += value * vertex_degree[i]*vertex_degree[j]
-    return descriptor
 
-def gmtiv(molecule):
-    molecule = molecule.hydrogen_suppressed
-    m = distance_matrix(molecule)
-    vertex_degree = [valence_degree(atom) for atom in molecule.atoms]
+@cached
+def gutman_topological_index(molecule):
+    vertex_degree = [len(atom.bonds) for atom in molecule.hydrogen_suppressed.atoms]
     descriptor = 0
-    for i, row in enumerate(m):
+    for i, row in enumerate(distance_matrix(molecule)):
         for j, value in enumerate(row):
             descriptor += value * vertex_degree[i]*vertex_degree[j]
-    return descriptor
+    return descriptor/2.0
+
+
+@cached
+def gutman_topological_index_by_valence_degree(molecule):
+    vertex_degree = [valence_degree(atom) for atom in molecule.atoms if atom.Z != 1]
+    descriptor = 0
+    for i, row in enumerate(distance_matrix(molecule)):
+        for j, value in enumerate(row):
+            descriptor += value * vertex_degree[i]*vertex_degree[j]
+    return descriptor/2.0
 
 def xu(molecule):
     molecule = molecule.hydrogen_suppressed

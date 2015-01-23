@@ -137,3 +137,9 @@ class Topological_descriptor_Test():
 
     def test_schultz_topological_index_by_valence_degree(self):
         assert_almost_equals(schultz_topological_index_by_valence_degree(self.ethanol), 56, places=3)
+
+    def test_gutman_topological_index(self):
+        assert_equals(gutman_topological_index(self.ethanol), 6)
+
+    def test_gutman_topological_index_by_valence_degree(self):
+        assert_equals(gutman_topological_index_by_valence_degree(self.ethanol), 22)
