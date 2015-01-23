@@ -113,3 +113,9 @@ class Topological_descriptor_Test():
 
     def test_eccentric(self):
         assert_almost_equals(eccentric(self.ethynylbenzoicacid), 0.777, places=3)
+
+    def test_average_graph_distance_degree(self):
+        assert_almost_equals(average_graph_distance_degree(self.ethynylbenzoicacid), 28.364, places=3)
+
+    def test_mean_distance_degree_deviation(self):
+        assert_almost_equals(mean_square_distance_index(self.ethynylbenzoicacid), 2.236, places=3)

@@ -340,16 +340,17 @@ def eccentric(molecule):
     av_ecc = average_eccentricity(molecule)
     return sum([abs(max(row) - av_ecc) for row in dist_matrix])/float(molecule.hydrogen_suppressed.size)
 
-def agdd(molecule):
-    molecule = molecule.hydrogen_suppressed
-    m = distance_matrix(molecule)
-    return sum([sum(row) for row in m])/float(molecule.size)
 
-def mddd(molecule):
-    molecule = molecule.hydrogen_suppressed
-    m = distance_matrix(molecule)
-    agdd_ = sum([sum(row) for row in m])/float(molecule.size)
-    return sum([abs(sum(row) - agdd_) for row in m])/float(molecule.size)
+@cached
+def average_graph_distance_degree(molecule):
+    return sum([sum(row) for row in distance_matrix(molecule)])/float(molecule.hydrogen_suppressed.size)
+
+
+@cached
+def mean_distance_degree_deviation(molecule):
+    dist_matrix = distance_matrix(molecule)
+    return sum([abs(sum(row) - average_graph_distance_degree(molecule)) for row in dist_matrix])\
+        / float(molecule.hydrogen_suppressed.size)
 
 def unip(molecule):
     molecule = molecule.hydrogen_suppressed
