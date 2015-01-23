@@ -352,22 +352,20 @@ def mean_distance_degree_deviation(molecule):
     return sum([abs(sum(row) - average_graph_distance_degree(molecule)) for row in dist_matrix])\
         / float(molecule.hydrogen_suppressed.size)
 
-def unip(molecule):
-    molecule = molecule.hydrogen_suppressed
-    m = distance_matrix(molecule)
-    return min([sum(row) for row in m])
 
-def cent(molecule):
-    molecule = molecule.hydrogen_suppressed
-    m = distance_matrix(molecule)
-    unip_ = min([sum(row) for row in m])
-    return sum([sum(row) for row in m]) - (molecule.size * unip_)
+@cached
+def unipolarity(molecule):
+    return min([sum(row) for row in distance_matrix(molecule)])
 
-def var(molecule):
-    molecule = molecule.hydrogen_suppressed
-    m = distance_matrix(molecule)
-    unip_ = min([sum(row) for row in m])
-    return max([sum(row) - unip_ for row in m])
+
+@cached
+def centralization(molecule):
+    return sum([sum(row) for row in distance_matrix(molecule)]) - (molecule.hydrogen_suppressed.size * unipolarity(molecule))
+
+
+@cached
+def variance(molecule):
+    return max([sum(row) - unipolarity(molecule) for row in distance_matrix(molecule)])
 
 def icr(molecule):
     molecule = molecule.hydrogen_suppressed

@@ -119,3 +119,12 @@ class Topological_descriptor_Test():
 
     def test_mean_distance_degree_deviation(self):
         assert_almost_equals(mean_square_distance_index(self.ethynylbenzoicacid), 2.236, places=3)
+
+    def test_unipolarity(self):
+        assert_equals(unipolarity(self.ethynylbenzoicacid), 21)
+
+    def test_centralization(self):
+        assert_equals(centralization(self.ethynylbenzoicacid), 81)
+
+    def test_variance(self):
+        assert_equals(variance(self.dimethylpentane), 6)
