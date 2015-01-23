@@ -128,3 +128,12 @@ class Topological_descriptor_Test():
 
     def test_variance(self):
         assert_equals(variance(self.dimethylpentane), 6)
+
+    def test_radial_centric_information_index(self):
+        assert_almost_equals(radial_centric_information_index(self.ethynylbenzoicacid), 1.868, places=3)
+
+    def test_schultz_topological_index(self):
+        assert_almost_equals(schultz_topological_index(self.dimethylpentane), 176, places=3)
+
+    def test_schultz_topological_index_by_valence_degree(self):
+        assert_almost_equals(schultz_topological_index_by_valence_degree(self.ethanol), 56, places=3)

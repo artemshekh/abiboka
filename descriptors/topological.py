@@ -360,42 +360,45 @@ def unipolarity(molecule):
 
 @cached
 def centralization(molecule):
-    return sum([sum(row) for row in distance_matrix(molecule)]) - (molecule.hydrogen_suppressed.size * unipolarity(molecule))
+    return sum([sum(row) for row in distance_matrix(molecule)]) \
+        - (molecule.hydrogen_suppressed.size * unipolarity(molecule))
 
 
 @cached
 def variance(molecule):
     return max([sum(row) - unipolarity(molecule) for row in distance_matrix(molecule)])
 
-def icr(molecule):
-    molecule = molecule.hydrogen_suppressed
-    m = distance_matrix(molecule)
+
+@cached
+def radial_centric_information_index(molecule):
     c = Counter()
-    for row in m:
+    for row in distance_matrix(molecule):
         c[max(row)] += 1
     descriptor = 0
     for k, v in c.iteritems():
-        ng = float(v)/molecule.size
+        ng = float(v)/molecule.hydrogen_suppressed.size
         descriptor += ng * (math.log(ng, 2))
     return -1 * descriptor
 
-def smti(molecule):
-    molecule = molecule.hydrogen_suppressed
-    ad = AdjacencyMatrix.from_molecule(molecule) + Matrix(distance_matrix(molecule))
-    vertex_degree = Matrix([[x] for x in [len(atom.bonds) for atom in molecule.atoms]])
+
+@cached
+def schultz_topological_index(molecule):
+    ad = adjacency_matrix(molecule) + distance_matrix(molecule)
+    vertex_degree = Matrix([[x] for x in [len(atom.bonds) for atom in molecule.hydrogen_suppressed.atoms]])
     descriptor = 0
     _ = ad * vertex_degree
-    for row in _.matrix:
+    for row in _:
         descriptor += sum(row)
     return descriptor
 
-def smtiv(molecule):
-    molecule = molecule.hydrogen_suppressed
-    ad = AdjacencyMatrix.from_molecule(molecule) + Matrix(distance_matrix(molecule))
-    vertex_degree = Matrix([[x] for x in [valence_degree(atom) for atom in molecule.atoms]])
+
+@cached
+def schultz_topological_index_by_valence_degree(molecule):
+    ad = adjacency_matrix(molecule) + distance_matrix(molecule)
+    vertex_degree = Matrix([[x] for x in [valence_degree(atom) for atom in molecule.atoms if atom.Z != 1]])
     descriptor = 0
     _ = ad * vertex_degree
-    for row in _.matrix:
+    for row in _:
         descriptor += sum(row)
     return descriptor
 
