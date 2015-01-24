@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from calc.matrixes.matrix import Matrix
 from collections import defaultdict, Counter
-from descriptors.vertex_degree import valence_electrones
 
 
 def p3_matrix(molecule):

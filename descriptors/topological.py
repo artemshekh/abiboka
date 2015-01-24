@@ -20,7 +20,7 @@ TODO Sh index 10 eigenvalue for unsymmetric matrix
 import operator
 import math
 from collections import Counter
-from descriptors.vertex_degree import intrinsic_state, valence_electrones, valence_degree, cluster_coefficient_vertex
+from descriptors.vertex_degree import intrinsic_state, valence_degree, cluster_coefficient_vertex
 from descriptors.vertex_degree import kupchik_vertex_degree, madan_chemical_degree, perturbation_delta_value
 from descriptors.vertex_degree import z_delta_number
 from descriptors.connectivity import valence_connectivity_index_1

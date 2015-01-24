@@ -8,7 +8,7 @@ Dual degree
 Number of sigma electrones
 Number of bonded hydrogens
 
-
+TODO !!! VAlence electron kier hall exact calculation
 """
 import math
 import operator
@@ -17,7 +17,6 @@ from utils.periodic_table import periodic_table
 
 
 sqrt_2 = math.sqrt(2)
-close_shell = [0, 2, 10, 18, 36, 54, 86]
 
 
 def vertex_degree(atom):
@@ -40,18 +39,12 @@ def number_of_bonded_hydrogen(atom):
     return number_of_sigma_electrones(atom) - vertex_degree(atom)
 
 
-
-def valence_electrones(atom):
-    return atom.Z - close_shell[periodic_table[atom.Z]['principal_quantum_number']-1]
-
-
 def valence_degree(atom):
-    # all valence electrons of the ith atom
-    ve = valence_electrones(atom)
-    for atom in atom.connected_with():
-        if atom.Z == 1:
-            ve -= 1
-    return ve
+    numerator = periodic_table[atom.Z]['valence_electrone'] - number_of_bonded_hydrogen(atom)
+    denominator = 1
+    if atom.Z > 10:
+        denominator = atom.Z - periodic_table[atom.Z]['valence_electrone'] - 1
+    return float(numerator)/denominator
 
 
 def kier_hall_electronegativity(atom):
@@ -64,7 +57,7 @@ def valence_state_indicator(atom):
 
 def kupchik_vertex_degree(atom):
     a = float(periodic_table[6]['covalent_radius'])/periodic_table[atom.Z]['covalent_radius']
-    b = valence_electrones(atom) - sum([atom.Z == 1 for atom in atom.connected_with()])
+    b = periodic_table[atom.Z]['valence_electrone'] - sum([atom.Z == 1 for atom in atom.connected_with()])
     return a*b
 
 def perturbation_delta_value(atom, perturbation_func):
@@ -112,7 +105,7 @@ def ren_vertex_degree(atom):
     return vertex_degree(atom) + 1.0/(intrinsic_state(atom) * vertex_degree(atom))
 
 def li_valence_vertex_degree(atom):
-    return float(valence_electrones(atom) * valence_degree(atom))/(periodic_table[atom.Z]['principal_quantum_number']**2)
+    return float(periodic_table[atom.Z]['valence_electrone'] * valence_degree(atom))/(periodic_table[atom.Z]['principal_quantum_number']**2)
 
 def yang_vertex_degree(atom):
     # atom in full molecule with hydrogen
@@ -129,7 +122,7 @@ def ct_vertex_degree(atom):
 
 
 def z_delta_number(atom):
-    return float(valence_electrones(atom))/periodic_table[atom.Z]['principal_quantum_number']
+    return float(periodic_table[atom.Z]['valence_electrone'])/periodic_table[atom.Z]['principal_quantum_number']
 
 def neignboor_interconenctivity(atom):
     descriptor =0
