@@ -27,9 +27,9 @@ from descriptors.connectivity import valence_connectivity_index_1
 from descriptors.constitutional import number_of_carbon_atoms
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
-from descriptors.descriptor_utils import path_sequence_matrix, walk_vector
+from descriptors.descriptor_utils import walk_vector
 from descriptors.matrixes import distance_matrix, adjacency_matrix
-from descriptors.walk import mpc
+from descriptors.walk import mpc, path_sequence_matrix
 from descriptors.ring_descriptor import cyclomatic_number
 from utils.functional import cached
 
