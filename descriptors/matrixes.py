@@ -14,6 +14,7 @@ Modified edge zagreb matrix
 
 """
 import math
+import operator
 
 from calc.matrixes.matrix import Matrix
 from utils.functional import cached
@@ -50,14 +51,27 @@ def edge_adjacency_matrix(molecule):
     return Matrix(matrix)
 
 
-@cached
-def vertex_degree_matrix(molecule):
+def generalized_vertex_degree_matrix(molecule, func):
     size = molecule.hydrogen_suppressed.size
     matrix = [[0 for x in range(size)] for y in range(size)]
     for i, atom in enumerate(molecule.hydrogen_suppressed.atoms):
-        matrix[i][i] = vertex_degree(atom)
+        matrix[i][i] = func(vertex_degree(atom))
     return Matrix(matrix)
 
+
+@cached
+def vertex_degree_matrix(molecule):
+    return generalized_vertex_degree_matrix(molecule, lambda x: x)
+
+
+@cached
+def vertex_zagreb_matrix(molecule):
+    return generalized_vertex_degree_matrix(molecule, lambda x: x**2)
+
+
+@cached
+def modified_vertex_zagreb_matrix(molecule):
+    return generalized_vertex_degree_matrix(molecule, lambda x: 1.0/(x**2))
 
 @cached
 def atom_connectivity_matrix(molecule):
