@@ -25,3 +25,12 @@ class Vertex_descriptor_Test():
 
     def test_number_of_bonded_hydrogen(self):
         assert_equals(number_of_bonded_hydrogen(self.dimethylpentane.atoms[1]), 1)
+
+    def test_valence_degree(self):
+        assert_equals(valence_degree(self.ethanol.atoms[-1]), 5)
+
+    def test_bond_vertex_degree(self):
+        assert_equals(bond_vertex_degree(self.ethanol.atoms[0]), 1)
+
+    def test_atomic_multigraph_factor(self):
+        assert_almost_equals(atomic_multigraph_factor(self.ethynylbenzoicacid.atoms[3]), 1, places=1)

@@ -7,8 +7,10 @@ Extended connectivity
 Dual degree
 Number of sigma electrones
 Number of bonded hydrogens
+Valence degree (Kier and Hall, 1986)
+Weighted vertex degree
+Bond vertex degree
 
-TODO !!! VAlence electron kier hall exact calculation
 """
 import math
 import operator
@@ -45,6 +47,32 @@ def valence_degree(atom):
     if atom.Z > 10:
         denominator = atom.Z - periodic_table[atom.Z]['valence_electrone'] - 1
     return float(numerator)/denominator
+
+
+def weighted_vertex_degree(atom, weighted_func):
+    """
+    Weighted function - any function that you want argument = bond
+    :param atom:
+    :param weighted_func:
+    :return:
+    """
+    return sum([weighted_func(bond) for bond in atom.bonds])
+
+
+def bond_vertex_degree(atom):
+    return atom.bond_vertex_degree
+
+
+def atomic_multigraph_factor(atom):
+    descriptor = 0
+    for bond in atom.bonds:
+        atoms = [atom for atom in bond]
+        if all([atom.Z != 1 for atom in atoms]):
+            if all(atom.aromatic for atom in bond):
+                descriptor += (1.5 - 1)
+            else:
+                descriptor += (bond.order - 1)
+    return descriptor
 
 
 def kier_hall_electronegativity(atom):

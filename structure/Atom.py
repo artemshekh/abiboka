@@ -33,10 +33,12 @@ class Atom(object):
     def bond_vertex_degree(self):
         s = 0
         for bond in self.bonds:
-            if all(atom.aromatic for atom in bond):
-                s += 1.5
-            else:
-                s += bond.order
+            atoms = [atom for atom in bond]
+            if all([atom.Z != 1 for atom in atoms]):
+                if all(atom.aromatic for atom in bond):
+                    s += 1.5
+                else:
+                    s += bond.order
         return s
 
 
