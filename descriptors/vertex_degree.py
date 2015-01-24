@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Invariants of atom in molecule
+
 Vertex degree
 Extended connectivity
 Dual degree
+Number of sigma electrones
+Number of bonded hydrogens
 
 
 """
@@ -15,14 +19,26 @@ from utils.periodic_table import periodic_table
 sqrt_2 = math.sqrt(2)
 close_shell = [0, 2, 10, 18, 36, 54, 86]
 
+
 def vertex_degree(atom):
     return sum([atom.Z != 1 for atom in atom.connected_with()])
 
+
 def extended_connectivity(atom):
-    return sum([vertex_degree(atom) for atom in atom.connected_with()])
+    return sum([vertex_degree(atom) for atom in atom.connected_with() if atom.Z != 1])
+
 
 def dual_degree(atom):
     return float(extended_connectivity(atom))/vertex_degree(atom)
+
+
+def number_of_sigma_electrones(atom):
+    return len([atom for atom in atom.connected_with()])
+
+
+def number_of_bonded_hydrogen(atom):
+    return number_of_sigma_electrones(atom) - vertex_degree(atom)
+
 
 
 def valence_electrones(atom):

@@ -623,7 +623,7 @@ def sh_index(molecule):
     return nc + math.sqrt(nc)*sh1
 
 
-def csi(molecule):
+def eccentric_connectivity_index(molecule):
     molecule = molecule.hydrogen_suppressed
     vertex_degree = [len(atom.bonds) for atom in molecule.atoms]
     m = distance_matrix(molecule)

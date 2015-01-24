@@ -3,6 +3,7 @@
 All type of matrices which can be helpful for calculation of descriptor
 Adjacency matrix
 Edge adjacency matrix
+Vertex degree matrix
 Atom connectivity matrix
 Augmented adjacency matrix
 Degree adjacency matrix
@@ -46,6 +47,15 @@ def edge_adjacency_matrix(molecule):
             if bond1 is not bond2:
                 if bond1 & bond2:
                     matrix[i][j] = 1
+    return Matrix(matrix)
+
+
+@cached
+def vertex_degree_matrix(molecule):
+    size = molecule.hydrogen_suppressed.size
+    matrix = [[0 for x in range(size)] for y in range(size)]
+    for i, atom in enumerate(molecule.hydrogen_suppressed.atoms):
+        matrix[i][i] = vertex_degree(atom)
     return Matrix(matrix)
 
 

@@ -23,7 +23,6 @@ class Molecule():
 
     _hydrogen_suppressed = None
     _edge_adjacency_matrix = None
-    _vertex_degree_matrix = None
     _vertex_zagreb_matrix = None
     _modified_vertex_zagreb_matrix = None
     _additive_adjacency_matrix = None
@@ -93,18 +92,6 @@ class Molecule():
     @property
     def size(self):
         return len(self.atoms)
-
-    @property
-    def vertex_degree_matrix(self):
-        if self._vertex_degree_matrix:
-            return self._vertex_degree_matrix
-        else:
-            n = self.hydrogen_suppressed.size
-            m = [[0 for x in range(n)] for y in range(n)]
-            for index,atom in enumerate(self.hydrogen_suppressed.atoms):
-                m[index][index] = atom.vertex_degree
-            self._vertex_degree_matrix = m
-            return self._vertex_degree_matrix
 
     @property
     def vertex_zagreb_matrix(self):
