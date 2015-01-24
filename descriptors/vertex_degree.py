@@ -10,6 +10,10 @@ Number of bonded hydrogens
 Valence degree (Kier and Hall, 1986)
 Weighted vertex degree
 Bond vertex degree
+Atomic multigrtaph factor
+Kier-Hall electronegativity
+Valence state indicator
+Intrinsic state
 
 """
 import math
@@ -83,19 +87,21 @@ def valence_state_indicator(atom):
     return vertex_degree(atom) + valence_degree(atom)
 
 
+def intrinsic_state(atom):
+    a = (2.0/periodic_table[atom.Z]["principal_quantum_number"]) ** 2
+    b = a * valence_degree(atom) + 1
+    c = vertex_degree(atom)
+    return b/c
+
+
 def kupchik_vertex_degree(atom):
     a = float(periodic_table[6]['covalent_radius'])/periodic_table[atom.Z]['covalent_radius']
     b = periodic_table[atom.Z]['valence_electrone'] - sum([atom.Z == 1 for atom in atom.connected_with()])
     return a*b
 
+
 def perturbation_delta_value(atom, perturbation_func):
     return valence_degree(atom) + sum([perturbation_func(atom, atom_n)*valence_degree(atom_n) for atom_n in atom.connected_with() if atom_n.Z != 1])
-
-def intrinsic_state(atom):
-    a = (2.0/periodic_table[atom.Z]["principal_quantum_number"]) **2
-    b = a * valence_degree(atom) + 1
-    c = vertex_degree(atom)
-    return b/c
 
 
 def madan_chemical_degree(atom):

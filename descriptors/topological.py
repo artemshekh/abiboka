@@ -22,7 +22,7 @@ import math
 from collections import Counter
 from descriptors.vertex_degree import intrinsic_state, valence_degree, cluster_coefficient_vertex
 from descriptors.vertex_degree import kupchik_vertex_degree, madan_chemical_degree, perturbation_delta_value
-from descriptors.vertex_degree import z_delta_number
+from descriptors.vertex_degree import z_delta_number, kier_hall_electronegativity
 from descriptors.connectivity import valence_connectivity_index_1
 from descriptors.constitutional import number_of_carbon_atoms
 from utils.periodic_table import periodic_table
@@ -674,11 +674,39 @@ def pw(molecule, order):
 
 
 def intrinsic_state_sum(molecule):
-    s = 0
+    descriptor = 0
     for atom in molecule.atoms:
         if atom.Z != 1:
-            s += intrinsic_state(atom)
-    return s
+            descriptor += intrinsic_state(atom)
+    return descriptor
+
+
+@cached
+def intrinsic_state_vector(molecule):
+    vector = []
+    for atom in molecule.atoms:
+        if atom.Z != 1:
+            vector.append(intrinsic_state(atom))
+    return vector
+
+
+def electrotopological_state_index_vector(molecule):
+    dist_matrix = distance_matrix(molecule)
+    descriptor = []
+    is_vector = intrinsic_state_vector(molecule)
+    for i, atom in enumerate(molecule.hydrogen_suppressed.atoms):
+        numerator = map(lambda x: x - is_vector[i], is_vector)
+        denominator = map(lambda x: (x+1)**2,  dist_matrix[i])
+        descriptor.append(is_vector[i] + sum(map(lambda x, y: float(x)/y, numerator, denominator)))
+    return descriptor
+
+
+def kier_hall_electronegativity_vector(molecule):
+    vector = []
+    for atom in molecule.atoms:
+        if atom.Z != 1:
+            vector.append(kier_hall_electronegativity(atom))
+    return vector
 
 def partition(molecule):
     if cyclomatic_number(molecule) > 0:

@@ -34,3 +34,12 @@ class Vertex_descriptor_Test():
 
     def test_atomic_multigraph_factor(self):
         assert_almost_equals(atomic_multigraph_factor(self.ethynylbenzoicacid.atoms[3]), 1, places=1)
+
+    def test_kier_hall_electronegativity(self):
+        assert_almost_equals(kier_hall_electronegativity(self.ethynylbenzoicacid.atoms[3]), 0.25, places=3)
+
+    def test_valence_state_indicator(self):
+        assert_equals(valence_state_indicator(self.ethanol.atoms[0]), 2)
+
+    def test_intrinsic_state(self):
+        assert_almost_equals(intrinsic_state(self.dimethylpentane.atoms[1]), 1.333, places=3)
