@@ -13,6 +13,9 @@ Second Zagreb index by valence vertex degrees
 Second Zagreb index by Kupchik vertex degrees
 Second Zagreb index by Madan vertex degrees
 
+
+TODO Sh index 10 eigenvalue for unsymmetric matrix
+
 """
 import operator
 import math
@@ -21,6 +24,7 @@ from descriptors.vertex_degree import intrinsic_state, valence_electrones, valen
 from descriptors.vertex_degree import kupchik_vertex_degree, madan_chemical_degree, perturbation_delta_value
 from descriptors.vertex_degree import z_delta_number
 from descriptors.connectivity import valence_connectivity_index_1
+from descriptors.constitutional import number_of_carbon_atoms
 from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
 from descriptors.descriptor_utils import path_sequence_matrix, walk_vector
@@ -59,17 +63,18 @@ def connection_number(molecule):
     """
     return first_zagreb_index(molecule)/2 - molecule.hydrogen_suppressed.size + 1
 
-close_shell = [1, 3, 11, 19, 37, 55, 87]
 
-
+@cached
 def first_zagreb_index_by_valence_degree(molecule):
     return sum([valence_degree(atom)**2 for atom in molecule.atoms if atom.Z != 1])
 
 
+@cached
 def first_zagreb_index_by_kupchik_degree(molecule):
     return sum([kupchik_vertex_degree(atom)**2 for atom in molecule.atoms if atom.Z != 1])
 
 
+@cached
 def first_zagreb_index_by_madan_degree(molecule):
     return sum([madan_chemical_degree(atom) ** 2 for atom in molecule.atoms if atom.Z != 1])
 
@@ -422,17 +427,201 @@ def gutman_topological_index_by_valence_degree(molecule):
             descriptor += value * vertex_degree[i]*vertex_degree[j]
     return descriptor/2.0
 
-def xu(molecule):
-    molecule = molecule.hydrogen_suppressed
-    a = math.sqrt(molecule.size)
-    vertex_degree = [len(atom.bonds) for atom in molecule.atoms]
+
+@cached
+def xu_index(molecule):
+    a = math.sqrt(molecule.hydrogen_suppressed.size)
+    vertex_degree = [len(atom.bonds) for atom in molecule.hydrogen_suppressed.atoms]
     m = distance_matrix(molecule)
     distance_degree = [sum(row) for row in m]
     numerator, denumerator = 0, 0
     for i, v in enumerate(vertex_degree):
         numerator += v * distance_degree[i]**2
         denumerator += v * distance_degree[i]
-    return a *  math.log(float(numerator)/denumerator)
+    return a * math.log(float(numerator)/denumerator)
+
+
+@cached
+def mti_index(molecule):
+    """
+    MTI' index [Muller, Szymanski et al., 1990b; Mihalic, Nikolic et al., 1992]
+    S index
+    """
+    descriptor = 0
+    for row in adjacency_matrix(molecule) * distance_matrix(molecule):
+        descriptor += sum(row)
+    return descriptor
+
+
+@cached
+def sh_index_1(molecule):
+    dist_matrix = distance_matrix(molecule)
+    vertex_distance_degrees = [sum(row) for row in dist_matrix]
+    atoms = molecule.hydrogen_suppressed.atoms
+    descriptor = 0
+    for bond in molecule.hydrogen_suppressed.bonds:
+        atom1, atom2 = [atom for atom in bond]
+        atom1_v = valence_degree(atom1)
+        atom2_v = valence_degree(atom2)
+        i1 = atoms.index(atom1)
+        i2 = atoms.index(atom2)
+        vdd_1 = vertex_distance_degrees[i1]
+        vdd_2 = vertex_distance_degrees[i2]
+        descriptor += float(vdd_1 * vdd_2)/(atom1_v * atom2_v)
+    return math.log(descriptor)
+
+
+@cached
+def sh_index_2(molecule):
+    dist_matrix = distance_matrix(molecule)
+    vertex_distance_degrees = [sum(row) for row in dist_matrix]
+    atoms = molecule.hydrogen_suppressed.atoms
+    descriptor = 0
+    for bond in molecule.hydrogen_suppressed.bonds:
+        atom1, atom2 = [atom for atom in bond]
+        atom1_v = valence_degree(atom1)
+        atom2_v = valence_degree(atom2)
+        i1 = atoms.index(atom1)
+        i2 = atoms.index(atom2)
+        vdd_1 = vertex_distance_degrees[i1]
+        vdd_2 = vertex_distance_degrees[i2]
+        descriptor += float(atom1_v * atom2_v)/(vdd_1 * vdd_2)
+    return math.log(descriptor)
+
+
+@cached
+def sh_index_3(molecule):
+    dist_matrix = distance_matrix(molecule)
+    vertex_distance_degrees = [sum(row) for row in dist_matrix]
+    atoms = molecule.hydrogen_suppressed.atoms
+    descriptor = 0
+    for bond in molecule.hydrogen_suppressed.bonds:
+        atom1, atom2 = [atom for atom in bond]
+        atom1_v = valence_degree(atom1)
+        atom2_v = valence_degree(atom2)
+        i1 = atoms.index(atom1)
+        i2 = atoms.index(atom2)
+        vdd_1 = vertex_distance_degrees[i1]
+        vdd_2 = vertex_distance_degrees[i2]
+        descriptor += 1/math.sqrt(atom1_v * atom2_v * vdd_1 * vdd_2)
+    return math.log(descriptor)
+
+
+@cached
+def sh_index_4(molecule):
+    dist_matrix = distance_matrix(molecule)
+    vertex_distance_degrees = [sum(row) for row in dist_matrix]
+    atoms = molecule.hydrogen_suppressed.atoms
+    descriptor = 0
+    for bond in molecule.hydrogen_suppressed.bonds:
+        atom1, atom2 = [atom for atom in bond]
+        atom1_v = valence_degree(atom1)
+        atom2_v = valence_degree(atom2)
+        i1 = atoms.index(atom1)
+        i2 = atoms.index(atom2)
+        vdd_1 = vertex_distance_degrees[i1]
+        vdd_2 = vertex_distance_degrees[i2]
+        descriptor += 1/math.sqrt(float(atom1_v * atom2_v)/(vdd_1 * vdd_2))
+    return math.log(descriptor)
+
+
+@cached
+def sh_index_5(molecule):
+    dist_matrix = distance_matrix(molecule)
+    vertex_distance_degrees = [sum(row) for row in dist_matrix]
+    atoms = molecule.hydrogen_suppressed.atoms
+    descriptor = 0
+    for bond in molecule.hydrogen_suppressed.bonds:
+        atom1, atom2 = [atom for atom in bond]
+        atom1_v = valence_degree(atom1)
+        atom2_v = valence_degree(atom2)
+        i1 = atoms.index(atom1)
+        i2 = atoms.index(atom2)
+        vdd_1 = vertex_distance_degrees[i1]
+        vdd_2 = vertex_distance_degrees[i2]
+        descriptor += 1/math.sqrt(atom1_v * atom2_v + vdd_1 * vdd_2)
+    return math.log(descriptor)
+
+
+@cached
+def sh_index_6(molecule):
+    dist_matrix = distance_matrix(molecule)
+    vertex_distance_degrees = [sum(row) for row in dist_matrix]
+    atoms = molecule.hydrogen_suppressed.atoms
+    descriptor = 0
+    for bond in molecule.hydrogen_suppressed.bonds:
+        atom1, atom2 = [atom for atom in bond]
+        atom1_v = valence_degree(atom1)
+        atom2_v = valence_degree(atom2)
+        i1 = atoms.index(atom1)
+        i2 = atoms.index(atom2)
+        vdd_1 = vertex_distance_degrees[i1]
+        vdd_2 = vertex_distance_degrees[i2]
+        descriptor += (atom1_v * atom2_v + vdd_1 * vdd_2)
+    return math.log(descriptor)
+
+
+@cached
+def sh_index_7(molecule):
+    dist_matrix = distance_matrix(molecule)
+    vertex_distance_degrees = [sum(row) for row in dist_matrix]
+    atoms = molecule.hydrogen_suppressed.atoms
+    descriptor = 0
+    for bond in molecule.hydrogen_suppressed.bonds:
+        atom1, atom2 = [atom for atom in bond]
+        atom1_v = valence_degree(atom1)
+        atom2_v = valence_degree(atom2)
+        i1 = atoms.index(atom1)
+        i2 = atoms.index(atom2)
+        vdd_1 = vertex_distance_degrees[i1]
+        vdd_2 = vertex_distance_degrees[i2]
+        descriptor += (atom1_v * atom2_v + math.log(vdd_1 * vdd_2))
+    return math.log(descriptor)
+
+
+@cached
+def sh_index_8(molecule):
+    dist_matrix = distance_matrix(molecule)
+    vertex_distance_degrees = Matrix([[sum(row)] for row in dist_matrix])
+    atoms = molecule.hydrogen_suppressed.atoms
+    valence_degrees = Matrix([[valence_degree(atom)] for atom in atoms])
+    descriptor = vertex_distance_degrees.transpose() * valence_degrees
+    return math.log(descriptor[0][0])
+
+
+@cached
+def sh_index_9(molecule):
+    dist_matrix = distance_matrix(molecule)
+    vertex_distance_degrees = Matrix([[sum(row)] for row in dist_matrix])
+    atoms = molecule.hydrogen_suppressed.atoms
+    valence_degrees = Matrix([[valence_degree(atom)] for atom in atoms])
+    sd = vertex_distance_degrees * valence_degrees.transpose()
+    descriptor = 0
+    for row in sd:
+        descriptor += sum(row)
+    return math.log(descriptor)
+
+
+@cached
+def sh_index_10(molecule):
+    dist_matrix = distance_matrix(molecule)
+    vertex_distance_degrees = Matrix([[sum(row)] for row in dist_matrix])
+    atoms = molecule.hydrogen_suppressed.atoms
+    valence_degrees = Matrix([[valence_degree(atom)] for atom in atoms])
+    sd = vertex_distance_degrees * valence_degrees.transpose()
+    """
+
+    Eigenvalue of matrix
+    """
+    raise NotImplementedError
+
+
+@cached
+def sh_index(molecule):
+    sh1 = sh_index_1(molecule)
+    nc = number_of_carbon_atoms(molecule)
+    return nc + math.sqrt(nc)*sh1
+
 
 def csi(molecule):
     molecule = molecule.hydrogen_suppressed

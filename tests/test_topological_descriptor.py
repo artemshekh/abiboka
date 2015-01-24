@@ -143,3 +143,39 @@ class Topological_descriptor_Test():
 
     def test_gutman_topological_index_by_valence_degree(self):
         assert_equals(gutman_topological_index_by_valence_degree(self.ethanol), 22)
+
+    def test_xu_index(self):
+        assert_almost_equals(xu_index(self.dimethylpentane), 6.786, places=3)
+
+    def test_mti_index(self):
+        assert_equals(mti_index(self.dimethylpentane), 150)
+
+    def test_sh_index_1(self):
+        assert_almost_equals(sh_index_1(self.ethanol), -0.470, places=3)
+
+    def test_sh_index_2(self):
+        assert_almost_equals(sh_index_2(self.ethanol), 1.897, places=3)
+
+    def test_sh_index_3(self):
+        assert_almost_equals(sh_index_3(self.ethanol), -1.685, places=3)
+
+    def test_sh_index_4(self):
+        assert_almost_equals(sh_index_4(self.ethanol), 0.106, places=3)
+
+    def test_sh_index_5(self):
+        assert_almost_equals(sh_index_5(self.ethanol), -0.927, places=3)
+
+    def test_sh_index_6(self):
+        assert_almost_equals(sh_index_6(self.ethanol), 3.951, places=3)
+
+    def test_sh_index_7(self):
+        assert_almost_equals(sh_index_7(self.ethanol), 3.775, places=3)
+
+    def test_sh_index_8(self):
+        assert_almost_equals(sh_index_8(self.ethanol), 3.638, places=3)
+
+    def test_sh_index_9(self):
+        assert_almost_equals(sh_index_9(self.ethanol), 4.718, places=3)
+
+    def test_sh_index(self):
+        assert_almost_equals(sh_index(self.ethanol), 1.335, places=3)
