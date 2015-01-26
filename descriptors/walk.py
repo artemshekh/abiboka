@@ -3,6 +3,8 @@
 Walk and path counts
 """
 
+import math
+
 from collections import defaultdict, Counter
 
 from calc.matrixes.matrix import Matrix
@@ -19,7 +21,7 @@ def path_vector(molecule):
     """
     molecule = molecule.hydrogen_suppressed
     if cyclomatic_number(molecule) > 5:
-        return "Big problem molecule"
+        raise Exception  # to big molecule
 
     def dfs(atom):
         for index, atom_from_stack in enumerate(atom_stack):
@@ -103,10 +105,50 @@ def molecular_path_count(molecule, order=1):
 @cached
 def molecular_path_code(molecule):
     m = path_sequence_matrix(molecule)
-    print [sum(row) for row in m.transpose()]
+    return [sum(row) for row in m.transpose()]
 
 
 @cached
 def total_path_count(molecule):
     m = path_sequence_matrix(molecule)
     return len(molecule.atoms) + sum([sum(row) for row in m.matrix])/2.0
+
+
+@cached
+def count_based_index(molecule, func):
+    """
+    J. Chem. Inf. Model. 2007, 47, 716-731
+    :param molecule:
+    :param func:
+    :return:
+    """
+    descriptor = 0
+    c_number = cyclomatic_number(molecule)
+    for index, x in enumerate(molecular_path_code(molecule)):
+        descriptor += func(x, c_number, index + 1)
+    return descriptor
+
+
+@cached
+def count_based_index_q(molecule):
+    return count_based_index(molecule, lambda x, y, z: x**2/(y+1))
+
+
+@cached
+def count_based_index_s(molecule):
+    return count_based_index(molecule, lambda x, y, z: math.sqrt(x)/(y+1))
+
+
+@cached
+def count_based_index_d(molecule):
+    return count_based_index(molecule, lambda x, y, z: math.sqrt(x)/(z*(y+1)))
+
+
+@cached
+def count_based_index_a(molecule):
+    return count_based_index(molecule, lambda x, y, z: x/(z*(y+1)))
+
+
+@cached
+def count_based_index_p(molecule):
+    return count_based_index(molecule, lambda x, y, z: math.sqrt(x)/(math.sqrt(z)*(y+1)))
