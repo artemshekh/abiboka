@@ -29,7 +29,7 @@ from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
 from descriptors.descriptor_utils import walk_vector
 from descriptors.matrixes import distance_matrix, adjacency_matrix
-from descriptors.walk import mpc, path_sequence_matrix
+from descriptors.walk import molecular_path_count, path_sequence_matrix
 from descriptors.ring_descriptor import cyclomatic_number
 from utils.functional import cached
 
@@ -649,14 +649,14 @@ def s2k(molecule):
     molecule = molecule.hydrogen_suppressed
     alpha = sum([(float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']) -1 for atom in molecule.atoms])
     a = molecule.size
-    p = mpc(molecule, 2)
+    p = molecular_path_count(molecule, 2)
     return float(((a + alpha -1) * ((a + alpha -2)**2)))/((p + alpha)**2)
 
 def s3k(molecule):
     molecule = molecule.hydrogen_suppressed
     alpha = sum([(float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']) -1 for atom in molecule.atoms])
     a = molecule.size
-    p = mpc(molecule, 3)
+    p = molecular_path_count(molecule, 3)
     if a % 2 == 0:
         return float(((a + alpha -3) * ((a + alpha -2)**2)))/((p + alpha)**2)
     else:
@@ -668,7 +668,7 @@ def phi(molecule):
 
 def pw(molecule, order):
     molecule = molecule.hydrogen_suppressed
-    p = mpc(molecule, order)
+    p = molecular_path_count(molecule, order)
     w =  sum(walk_vector(molecule, order).values())/2
     return (float(p)/w)/molecule.size
 

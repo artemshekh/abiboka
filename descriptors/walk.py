@@ -7,36 +7,51 @@ from collections import defaultdict, Counter
 
 from calc.matrixes.matrix import Matrix
 from utils.functional import cached
+from descriptors.ring_descriptor import cyclomatic_number
 
 
 @cached
 def path_vector(molecule):
     """
-    calculate atomic path number for n
+    Dont do it on the molecules with large connectivity
     :param molecule:
-    :return: dict {Atom: Counter()}
+    :return:
     """
     molecule = molecule.hydrogen_suppressed
+    if cyclomatic_number(molecule) > 5:
+        return "Big problem molecule"
 
     def dfs(atom):
-        used_atom.add(atom)
-        bonds = atom.bonds
-        for bond in bonds:
-            if bond not in bonds_stack:
-                for _ in bond:
-                    if _ is not atom and _ is not atom_[0]:
-                        bonds_stack.append(bond)
-                        dct[atom_[0]][len(bonds_stack)] += 1
-                        dfs(_)
-        if bonds_stack:
-            bonds_stack.pop()
-    dct = defaultdict(lambda: Counter())
+        for index, atom_from_stack in enumerate(atom_stack):
+            key = [atom_from_stack, atom]
+            key.sort()
+            key = tuple(key)
+            value = atom_stack[index:] + [atom]
+            value.sort()
+            value = tuple(value)
+            path_counter[key].add(value)
+
+        atom_stack.append(atom)
+        next_atoms = atom.connected_with()
+        for next_atom in next_atoms:
+            if next_atom not in atom_stack:
+                dfs(next_atom)
+        atom_stack.pop()
+
+    visited_atoms = set()
+    atom_stack = []
+    path_counter = defaultdict(lambda: set())
     for atom in molecule.atoms:
-        atom_ = [atom]
-        used_atom = set()
-        bonds_stack = []
-        dfs(atom)
-    return dct
+        if atom not in visited_atoms:
+            visited_atoms.add(atom)
+            dfs(atom)
+    final_dct = defaultdict(lambda: Counter())
+    for k, path_set in path_counter.items():
+        a1, a2 = k
+        for path in path_set:
+            final_dct[a1][len(path) - 1] += 1
+            final_dct[a2][len(path) - 1] += 1
+    return final_dct
 
 
 @cached
@@ -45,10 +60,13 @@ def atomic_path_count_vector(molecule, m):
     return [pvector[atom][m] for atom in molecule.hydrogen_suppressed.atoms]
 
 
-
-
-
 def path_sequence_matrix(molecule, l=None):
+    """
+    Rows of that matrix - is a vertex path code
+    :param molecule:
+    :param l:
+    :return:
+    """
     molecule = molecule.hydrogen_suppressed
     dct = path_vector(molecule)
     if not l:
@@ -60,7 +78,18 @@ def path_sequence_matrix(molecule, l=None):
                 m.matrix[index][k-1] = v
     return m
 
-def mpc(molecule, order=1):
+
+@cached
+def atomic_path_count_sum(molecule):
+    """
+    For atom in hydrogen suppresed molecule
+    :param molecule:
+    :return:
+    """
+    return [sum(row) for row in path_sequence_matrix(molecule)]
+
+
+def molecular_path_count(molecule, order=1):
     """
     molecular path order
     :param molecule:
@@ -70,6 +99,14 @@ def mpc(molecule, order=1):
     m = path_sequence_matrix(molecule, order)
     return sum([row[-1] for row in m.matrix])/2.0
 
-def tpc(molecule):
+
+@cached
+def molecular_path_code(molecule):
+    m = path_sequence_matrix(molecule)
+    print [sum(row) for row in m.transpose()]
+
+
+@cached
+def total_path_count(molecule):
     m = path_sequence_matrix(molecule)
     return len(molecule.atoms) + sum([sum(row) for row in m.matrix])/2.0
