@@ -29,7 +29,7 @@ from utils.periodic_table import periodic_table
 from calc.matrixes.matrix import AdjacencyMatrix, Matrix
 from descriptors.descriptor_utils import walk_vector
 from descriptors.matrixes import distance_matrix, adjacency_matrix
-from descriptors.walk import molecular_path_count, path_sequence_matrix
+from descriptors.walk import molecular_path_count, path_sequence_matrix, paths_between_atoms
 from descriptors.ring_descriptor import cyclomatic_number
 from utils.functional import cached
 
@@ -630,13 +630,14 @@ def eccentric_connectivity_index(molecule):
     max_distance = [max(row) for row in m]
     return sum([x[0]*x[1] for x in zip(vertex_degree, max_distance)])
 
-def wap(molecule):
-    molecule = molecule.hydrogen_suppressed
+
+@cached
+def all_path_wiener_index(molecule):
+    path_counter = paths_between_atoms(molecule)
     descriptor = 0
-    for row in m.matrix:
-        for i, value in enumerate(row):
-            descriptor += value * (i+1)
-    return descriptor/2 + molecule.size
+    for k, v in path_counter.iteritems():
+        descriptor += min(map(len, v))-1
+    return descriptor
 
 def s1k(molecule):
     molecule = molecule.hydrogen_suppressed

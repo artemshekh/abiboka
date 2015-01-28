@@ -13,7 +13,7 @@ from descriptors.ring_descriptor import cyclomatic_number
 
 
 @cached
-def path_vector(molecule):
+def paths_between_atoms(molecule):
     """
     Dont do it on the molecules with large connectivity
     :param molecule:
@@ -47,6 +47,11 @@ def path_vector(molecule):
         if atom not in visited_atoms:
             visited_atoms.add(atom)
             dfs(atom)
+    return path_counter
+
+@cached
+def path_vector(molecule):
+    path_counter = paths_between_atoms(molecule)
     final_dct = defaultdict(lambda: Counter())
     for k, path_set in path_counter.items():
         a1, a2 = k
@@ -54,6 +59,7 @@ def path_vector(molecule):
             final_dct[a1][len(path) - 1] += 1
             final_dct[a2][len(path) - 1] += 1
     return final_dct
+
 
 
 @cached

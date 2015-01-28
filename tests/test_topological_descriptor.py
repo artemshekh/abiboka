@@ -179,3 +179,6 @@ class Topological_descriptor_Test():
 
     def test_sh_index(self):
         assert_almost_equals(sh_index(self.ethanol), 1.335, places=3)
+
+    def test_all_path_wiener_index(self):
+        assert_equals(all_path_wiener_index(self.ethanol), 4)
