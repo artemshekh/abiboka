@@ -182,3 +182,12 @@ class Topological_descriptor_Test():
 
     def test_all_path_wiener_index(self):
         assert_equals(all_path_wiener_index(self.ethanol), 4)
+
+    def test_kier_alpha_modified_shape_index_1(self):
+        assert_almost_equals(kier_alpha_modified_shape_index_1(self.ethanol), 13.278, places=3)
+
+    def test_kier_alpha_modified_shape_index_2(self):
+        assert_almost_equals(kier_alpha_modified_shape_index_2(self.ethanol), 1.868, places=3)
+
+    def test_kier_alpha_modified_shape_index_3(self):
+        assert_almost_equals(kier_alpha_modified_shape_index_3(self.dimethylpentane), 6.0, places=3)

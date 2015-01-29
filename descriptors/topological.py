@@ -639,33 +639,42 @@ def all_path_wiener_index(molecule):
         descriptor += min(map(len, v))-1
     return descriptor
 
-def s1k(molecule):
+
+@cached
+def kier_alpha_modified_shape_index_1(molecule):
     molecule = molecule.hydrogen_suppressed
-    alpha = sum([(float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']) -1 for atom in molecule.atoms])
+    alpha = sum([(float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']) - 1
+                 for atom in molecule.atoms])
     a = molecule.size
     p = len(molecule.bonds)/2
-    return float(((a + alpha) * ((a + alpha -1)**2)))/((p + alpha)**2)
+    return float(((a + alpha) * ((a + alpha - 1)**2)))/((p + alpha)**2)
 
-def s2k(molecule):
+
+@cached
+def kier_alpha_modified_shape_index_2(molecule):
     molecule = molecule.hydrogen_suppressed
-    alpha = sum([(float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']) -1 for atom in molecule.atoms])
+    alpha = sum([(float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']) - 1
+                 for atom in molecule.atoms])
     a = molecule.size
     p = molecular_path_count(molecule, 2)
-    return float(((a + alpha -1) * ((a + alpha -2)**2)))/((p + alpha)**2)
+    return float(((a + alpha - 1) * ((a + alpha - 2)**2)))/((p + alpha)**2)
 
-def s3k(molecule):
+
+@cached
+def kier_alpha_modified_shape_index_3(molecule):
     molecule = molecule.hydrogen_suppressed
-    alpha = sum([(float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']) -1 for atom in molecule.atoms])
+    alpha = sum([(float(periodic_table[atom.Z]['covalent_radius'])/periodic_table[6]['covalent_radius']) - 1
+                 for atom in molecule.atoms])
     a = molecule.size
     p = molecular_path_count(molecule, 3)
     if a % 2 == 0:
-        return float(((a + alpha -3) * ((a + alpha -2)**2)))/((p + alpha)**2)
+        return float(((a + alpha - 3) * ((a + alpha - 2)**2)))/((p + alpha)**2)
     else:
-        return float(((a + alpha -1) * ((a + alpha -3)**2)))/((p + alpha)**2)
+        return float(((a + alpha - 1) * ((a + alpha - 3)**2)))/((p + alpha)**2)
 
 def phi(molecule):
     molecule = molecule.hydrogen_suppressed
-    return (s1k(molecule) * s2k(molecule)) / molecule.size
+    return (kier_alpha_modified_shape_index_1(molecule) * kier_alpha_modified_shape_index_2(molecule)) / molecule.size
 
 def pw(molecule, order):
     molecule = molecule.hydrogen_suppressed
