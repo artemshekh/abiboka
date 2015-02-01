@@ -26,8 +26,8 @@ from utils.periodic_table import periodic_table_by_symbol, periodic_table
 class SmilesParser(Parser):
     def __init__(self):
         self.SMILES_STING = re.compile('^[A-Za-z0-9\[\]\-=#:\\\\/().\+@%\*]*$')
-        self.RE_STRUCTURE = re.compile('(?P<atom>C|\[[a-zA-Z0-9\-+@]*\]'
-                                       '|C|N|O|Cl|Br|F|I|S|P|B|\*|n|o|c|s|p)'
+        self.RE_STRUCTURE = re.compile('(?P<atom>\[[a-zA-Z0-9\-+@]*\]'
+                                       '|Cl|C|N|O|Br|F|I|S|P|B|\*|n|o|c|s|p)'
                                        '(?P<bonds>[=#%/()0-9\\\\\.]*)')
         self.SQUARE_BRACKET = re.compile('\[(?P<mass>[0-9]{0,3})'
                                          '(?P<symbol>Th|Rh|[a-gi-zA-GI-Z]{1,2}|H|Hf|Ho|Hg)'
@@ -216,6 +216,10 @@ class SmilesParser(Parser):
                 else:
                     free_bond = 6 - sum([bond.order for bond in atom.bonds]) - atom.charge
                 if free_bond:
+                    free_atoms[atom] = free_bond
+            elif periodic_table[atom.Z]['symbol'] == 'B':
+                free_bond = 3 - sum([bond.order for bond in atom.bonds])
+                if free_bond > 0:
                     free_atoms[atom] = free_bond
 
         for atom, h_number in free_atoms.iteritems():
