@@ -672,7 +672,9 @@ def kier_alpha_modified_shape_index_3(molecule):
     else:
         return float(((a + alpha - 1) * ((a + alpha - 3)**2)))/((p + alpha)**2)
 
-def phi(molecule):
+
+@cached
+def kier_molecular_flexibility_index(molecule):
     molecule = molecule.hydrogen_suppressed
     return (kier_alpha_modified_shape_index_1(molecule) * kier_alpha_modified_shape_index_2(molecule)) / molecule.size
 

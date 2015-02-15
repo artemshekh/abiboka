@@ -191,3 +191,6 @@ class Topological_descriptor_Test():
 
     def test_kier_alpha_modified_shape_index_3(self):
         assert_almost_equals(kier_alpha_modified_shape_index_3(self.dimethylpentane), 6.0, places=3)
+
+    def test_kier_molecular_flexibility_index(self):
+        assert_almost_equals(kier_molecular_flexibility_index(self.ethanol), 8.270, places=3)
