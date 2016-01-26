@@ -21,6 +21,7 @@ class MaeParser(Parser):
         block = ''
         level = 0
         for line in open(file, 'r'):
+            #print line, level
             if 'f_m_ct' in line:
                 # start of block
                 level += 1
@@ -85,7 +86,7 @@ class MaeParser(Parser):
             elif c== 'i_m_atomic_number':
                 Z = i
         for line in atoms:
-            line = line.split(' ')[2:]
+            line = line.replace('"', '').replace('    ', '   ').replace('   ', ' ').replace('  ', ' ').split(' ')[1:]
             atom_Z = int(line[Z+1])
             atom_x = float(line[x+1])
             atom_y = float(line[y+1])
