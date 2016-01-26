@@ -44,7 +44,7 @@ class Molecule():
             self.add_atom(atom)
 
     def add_bond(self, bond):
-        self.bonds.add(bond)
+        self.bonds.append(bond)
 
     def add_bonds(self, bonds):
         for bond in bonds:

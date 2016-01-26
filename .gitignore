@@ -61,3 +61,6 @@ test.py
 calculations.py
 construct_xed.py
 fixtures/xed_examples
+
+# Chemistry format files
+*.mae
