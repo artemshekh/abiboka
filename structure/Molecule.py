@@ -5,8 +5,6 @@ Internal representation of molecule in code
 Molecule represent list of atom and bonds between atoms
 """
 
-import operator
-import itertools
 import math
 
 from core.exception.exception import MoleculeRestrictedAction

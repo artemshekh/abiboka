@@ -79,4 +79,3 @@ def rotate(axis, angle, molecule):
         v = Quaternion(0, atom.x, atom.y, atom.z)
         result_quaternion = q1.mult(v).mult(qc)
         x, y, z = result_quaternion.b, result_quaternion.c, result_quaternion.d
-        print atom, x, y, z

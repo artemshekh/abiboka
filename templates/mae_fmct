@@ -1,0 +1,31 @@
+
+f_m_ct {{
+ s_m_title
+ :::
+ "New Entry"
+  m_atom[{}] {{
+  i_m_mmod_type
+  r_m_x_coord
+  r_m_y_coord
+  r_m_z_coord
+  i_m_residue_number
+  i_m_color
+  i_m_atomic_number
+  s_m_color_rgb
+  b_st_NoSrcChirality
+  :::
+  {}
+  :::
+ }}
+ m_bond[{}] {{
+  # First column is bond index #
+  i_m_from
+  i_m_to
+  i_m_order
+  :::
+  {}
+  :::
+ }}
+}}
+
+

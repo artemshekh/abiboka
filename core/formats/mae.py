@@ -3,8 +3,7 @@
 Schrodinger mae format
 
 """
-import json
-from collections import defaultdict
+import os
 
 from parser import Parser
 from structure.Molecule import Molecule
@@ -15,7 +14,8 @@ from structure.Bond import Bond
 class MaeParser(Parser):
 
     def __init__(self):
-        pass
+        self.header = open('templates/mae_header', 'r').read()
+
 
     def decode(self, file):
         block = ''
@@ -145,3 +145,46 @@ class MaeParser(Parser):
         mol.add_atoms(abi_atoms.values())
         mol.add_bonds(abi_bonds)
         return mol
+
+    def encode(self, molecules, path):
+        output_file = open(path, 'w')
+        output_file.write(self.header)
+
+        if isinstance(molecules, Molecule):
+            fmct = self.build_fmct(molecules)
+            output_file.write(fmct)
+        else:
+            for molecule in molecules:
+                fmct = self.build_fmct(molecule)
+                output_file.write(fmct)
+        output_file.close()
+
+
+    def build_fmct(self, molecule):
+        fmct_template = open('templates/mae_fmct', 'r').read()
+        atom_row_template = '{} 3 {} {} {} 900 2 {} A0A0A0  <>\n'
+        bond_row_template = '{} {} {} {}\n'
+        natoms = str(len(molecule.atoms))
+        nbonds = str(len(molecule.bonds))
+        atom_rows_block = []
+        cnt = 0
+        atom_indexes = {}
+        for atom in molecule.atoms:
+            cnt += 1
+            atom_indexes[atom] = cnt
+            s = atom_row_template.format(cnt, atom.x, atom.y, atom.z, atom.Z)
+            atom_rows_block.append(s)
+
+        bond_rows_block = []
+        cnt = 0
+        for bond in molecule.bonds:
+            cnt += 1
+            atom1, atom2 = (atom for atom in bond)
+            index1 = atom_indexes[atom1]
+            index2 = atom_indexes[atom2]
+
+            s = bond_row_template.format(cnt, index1, index2, bond.order)
+            bond_rows_block.append(s)
+
+        return fmct_template.format(natoms, ''.join(atom_rows_block), nbonds, ''.join(bond_rows_block))
+
