@@ -25,6 +25,10 @@ from utils.periodic_table import periodic_table_by_symbol, periodic_table
 
 class SmilesParser(Parser):
     def __init__(self):
+        # TODO: Explain all regular expression. Simplify it if possible
+        """
+        :return:
+        """
         self.SMILES_STING = re.compile('^[A-Za-z0-9\[\]\-=#:\\\\/().\+@%\*]*$')
         self.RE_STRUCTURE = re.compile('(?P<atom>\[[a-zA-Z0-9\-+@]*\]'
                                        '|Cl|C|N|O|Br|F|I|S|P|B|\*|n|o|c|s|p)'

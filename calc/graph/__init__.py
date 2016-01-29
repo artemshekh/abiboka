@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-__author__ = 'a.shehovtsov'
 """
-
+TODO: move function to other files
 """
 
 def check_cycle(molecule):
