@@ -13,11 +13,15 @@ from calc.matrixes.matrix import Matrix
 from utils.periodic_table import periodic_table
 from descriptors.vertex_degree import vertex_degree
 # TODO! Think about consistency of atom, molecule, and bond class
+# TODO! add index to atom This index
+
+
 class Molecule():
     def __init__(self):
         self.atoms = []
         self.bonds = []
         self.descriptor_cache = {}
+        self.lock_flag = False  # When True, molecule is not editable
 
     _hydrogen_suppressed = None
     _edge_adjacency_matrix = None
@@ -31,8 +35,13 @@ class Molecule():
     _reciprocal_square_distance_matrix = None
 
     def add_atom(self, atom):
+        if self.lock_flag == True:
+            msg = "Molecule is not editable"
+            raise MoleculeRestrictedAction(msg)
         if atom not in self.atoms:
+            indx = len(self.atoms)
             self.atoms.append(atom)
+            atom.index = indx
         else:
             msg = 'Trying to add atom to molecule. Atom {} already in molecule'.format(atom)
             raise MoleculeRestrictedAction(msg)
